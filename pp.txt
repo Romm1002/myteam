@@ -1,0 +1,206 @@
+ <div class="dashboard-header">
+                    <a href="index.php">Retour</a>
+                    <form action="#" method="post">
+                        <input type="text" name="rechercher" id="rechercher" placeholder="Rechercher...">
+                        <button type="submit">&#10004;</button>
+                    </form>
+                </div>
+                <?php
+                foreach($contacts as $contact){
+                    ?>
+                    <a href="messagerie.php?avec=<?=$contact["prenom"];?>">
+                        <div class="contact">
+                            <div class="informations-contact">
+                                <img src="<?=$contact["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
+                                <p><?=$contact["prenom"] . " " . $contact["nom"];?></p>
+                            </div>
+                        </div>
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+
+            <div class="reseau">
+                <?php
+                if(!empty($_GET)){
+                ?>
+                    <div class="header-message">
+                        <b>Discussion avec : </b><?=$_GET["avec"];?>
+                    </div>
+                <div class="messages">
+                <?php
+                    foreach(recuperationMessage($_SESSION["prenom"], $_GET["avec"]) as $message){
+                        ?>
+                        <div class="message <?=$_SESSION["prenom"] == $message["envoyeur"] ? "ml-auto" : "mr-auto";?>">
+                            <p><?=$message["contenu"];?></p>
+                        </div>
+                        <?php
+                    }
+                ?>
+                </div>
+                <div class="newMessage">
+                    <div class="formulaire">
+                        <form action="#" method="post">
+                            <input type="text" name="newMessage" id="newMessage" placeholder="Nouveau message...">
+                            <button type="submit">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+                <?php
+                }else{
+                ?>
+                <h3>Cliquez sur un contact pour démarrer une discussion !</h3>
+                <?php
+                }
+                ?>
+
+
+
+
+
+
+
+                STYLE AJOUTÉ
+.dashboard a{
+    text-decoration: none;
+    color: #111;
+}
+.dashboard .contact{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 85%;
+    height: 70px;
+    margin: 0 auto;
+    transition: background 0.3s ease;
+    border-bottom: 1px solid #111;
+    /* border-top: 1px solid #111; */
+}
+.dashboard .contact:hover{
+    background: var(--blue2);
+}
+/* .dashboard hr{
+    margin: 10px auto;
+    opacity: 0.7;
+} */
+.dashboard .contact img{
+    object-fit: cover;
+    border-radius: 50%;
+}
+.dashboard .contact p{
+    margin: 0;
+}
+.dashboard .contact .informations-contact{
+    display: flex;
+}
+.dashboard .contact .informations-contact p{
+    display: flex;
+    align-self: center;
+    margin-left: 10px;
+    font-weight: 600;
+}
+.dashboard .dashboard-header form{
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+.dashboard .dashboard-header form input{
+    width: 60%;
+    height: 35px;
+    background: rgb(247, 247, 247);
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 20px;
+    padding: 15px;
+    outline: none;
+    margin-right: 10px;
+}
+.dashboard .dashboard-header form button{
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 50%;
+    background-color: var(--blue1);
+    color: white;
+    outline: none;
+}
+
+
+
+.reseau .formulaire{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.reseau form{
+    height: 20%;
+}
+.reseau p{
+    margin-bottom: 0;
+    word-break: break-all;
+}
+.ml-auto{
+    margin-right: 15px!important;
+}
+.mr-auto{
+    margin-left: 15px!important;
+    background: rgba(255, 255, 255, 0.7)!important;
+}
+
+
+.reseau .messages{
+    /* height: 80%; */
+    margin-top: 6%;
+    margin-bottom: 6%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    /* margin: auto 0; */
+}
+.reseau .header-message{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 66.65%;
+    background: rgb(230, 230, 230);
+    text-align: left;
+    padding-left: 20px;
+    border-radius: 20px 20px 0 0;
+}
+.reseau .newMessage{
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 66.65%;
+    background: rgb(230, 230, 230);
+    bottom: 0;
+    border-radius: 0 0 20px 20px;
+}
+.reseau .newMessage input{
+    width: 450px;
+    height: 35px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 20px;
+    padding: 5px 20px;
+    outline: none;
+    background: #fff;
+}
+.reseau .messages .message{
+    background: #fff;
+    padding: 5px 20px;
+    width: auto;
+    max-width: 35%;
+    margin: 2px 0;
+    border-radius: 10px;
+}
+.reseau .newMessage button{
+    width: 150px;
+    height: 35px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 20px;
+    outline: none;
+    background: #fff;
+}
