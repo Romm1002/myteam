@@ -13,7 +13,7 @@ if(empty($_SESSION["grade"]) || $_SESSION["grade"] < 5){
 
 extract($_POST);
 setlocale(LC_TIME, "fr_FR.utf-8", "fra");
-$date = strftime("%d-%m-%G %H:%M:%S");
+$date = strftime("%A-%d-%B %H:%M");
 
 
 if(!empty($_POST["nouvellePublication"])){
