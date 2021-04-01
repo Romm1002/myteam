@@ -16,3 +16,8 @@ function detailsProjets($idProjet){
     $requete->execute([$idProjet]);
     return $requete->fetch(PDO::FETCH_ASSOC);
 }
+function projetsUtilisateur($idUtilisateur){
+    $requete = getBdd()->prepare("SELECT * FROM participationProjet WHERE idProjet = ?");
+    $requete->execute([$idUtilisateur]);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}

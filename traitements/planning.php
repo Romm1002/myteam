@@ -44,7 +44,7 @@ for($i=1; $i<=$days ; $i++){
     $calendrier[] = ['date' => $annee."-".$mois."-".$jour, 'jourDeSemaine' => dayOfWeek($annee."-".$mois."-".$i), 'jour' => $i, 'nbr' => "", 'projet' => false];
 }
 $nbrEvenements = nbrEvenements(substr($date,0,7),$_SESSION["idUtilisateur"]);
-// $projets = projetsUtilisateur($_SESSION["idUtilisateur"]);
+$projets = projetsUtilisateur($_SESSION["idUtilisateur"]);
 foreach($nbrEvenements as $evenement){
     foreach($calendrier as $jour){
         if($evenement["date"] == $jour["date"]){
