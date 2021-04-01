@@ -56,7 +56,7 @@ if(!empty($_GET)){
                         <a href="accueil.php">
                             <li class="mb-3">Accueil</li>
                         </a>
-                        <a href="calendrier.php">
+                        <a href="planning.php">
                             <li class="mb-3">Emploi du temps</li>
                         </a>
                         <a href="listeProjets.php">
