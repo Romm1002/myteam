@@ -1,6 +1,6 @@
 <?php
-if(!empty($_POST["rechercher"])){
-    $contacts = recherche($_POST["rechercher"]);
+if(!empty($_POST["filtreRecherche"])){
+    $contacts = recherche($_POST["filtreRecherche"]);
 }else{
     $contacts = recuperationContacts();
 }
