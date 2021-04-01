@@ -1,8 +1,8 @@
 <?php
 if(!empty($_POST["filtreRecherche"])){
-    $contacts = recherche($_POST["filtreRecherche"]);
+    $contacts = recherche($_POST["filtreRecherche"], $_SESSION["idUtilisateur"]);
 }else{
-    $contacts = recuperationContacts();
+    $contacts = recuperationContacts($_SESSION["idUtilisateur"]);
 }
 
 if(!empty($_POST["nouveauMessage"])){

@@ -1,13 +1,13 @@
 <?php
-function recuperationContacts(){
+function recuperationContacts($idUtilisateur){
     $requete = getBdd()->prepare("SELECT nom, prenom, photoProfil FROM utilisateurs WHERE idUtilisateur != ?");
-    $requete->execute([$_SESSION["idUtilisateur"]]);
+    $requete->execute([$idUtilisateur]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function recuperationInformationsContact(){
+function recuperationInformationsContact($getAvec){
     $requete = getBdd()->prepare("SELECT * FROM utilisateurs WHERE prenom = ?");
-    $requete->execute([$_GET["avec"]]);
+    $requete->execute([$getAvec]);
     return $requete->fetch(PDO::FETCH_ASSOC);
 }
 

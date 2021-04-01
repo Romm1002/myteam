@@ -58,8 +58,8 @@ require_once "../traitements/messagerie.php";
                     ?>
                     <div class="get">
                         <div class="reseau-header">
-                            <img src="<?=recuperationInformationsContact()["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
-                            <p><?=recuperationInformationsContact()["prenom"] . " " . recuperationInformationsContact()["nom"];?></p>
+                            <img src="<?=recuperationInformationsContact($_GET["avec"])["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
+                            <p><?=recuperationInformationsContact($_GET["avec"])["prenom"] . " " . recuperationInformationsContact($_GET["avec"])["nom"];?></p>
                         </div>
 
                         <div class="reseau-content">
