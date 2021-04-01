@@ -1,32 +1,118 @@
 <?php
 require_once "../traitements/header.php";
 require_once "../traitements/planning.php";
-if(!empty($_GET["ajout"])){
-    switch($_GET["ajout"]){
-        case "OK":
-            echo "<div class='alert alert-success'>L'évènement a bien été enregistré</div>";
-            break;
-        case "HS":
-            echo "<div class='alert alert-danger'>ERREUR : L'évènement n'a pas été enregistré</div>";
-            break;
-        case 1:
-            echo "<div class='alert alert-danger'>ERREUR : Un évenement ne peut commencer avant de finir</div>";
-            break;
-        case 2 :
-            echo "<div class='alert alert-danger'>ERREUR : Un évenement ne peut être créé en dehors des horeurs de travail</div>";
-            break;
+?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet">
+</head>
+<body>
+    <?php
+    if(!empty($_GET["ajout"])){
+        if($_GET["ajout"] == "OK"){
+            ?>
+            <div class="alert alert-success alert-dismissible fade show mt-3 p-1 index-50 position-absolute w-50 d-flex justify-content-center" role="alert">
+                <p class="m-0 my-auto">L'évènement a bien été ajouté.</p>
+                <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"> X</button>
+            </div>
+            <?php
+        }elseif($_GET["ajout"] == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-3 p-1 index-50 position-absolute w-50 d-flex justify-content-center" role="alert">
+                <p class="m-0 my-auto">L'évènement ne peut être définit en dehors des horaires de travail.</p>
+                <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"> X</button>
+            </div>
+            <?php
+        }elseif($_GET["ajout"] == 1){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-3 p-1 index-50 position-absolute w-50 d-flex justify-content-center" role="alert">
+                <p class="m-0 my-auto">L'évènement ne peut finir avant de commencer.</p>
+                <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"> X</button>
+            </div>
+            <?php
+        }
+        
     }
-}
     ?>
-<div class="container d-flex">
-    <a href="calendrier.php" class="mr-3">Retour</a>
-    <div class="list-group my-3 mx-3" style="min-width:300px">
+    <main>
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <section class="glass">
+        <div class="dashboard">
+            <a href="index.php" class="btnDeconnexion d-flex"> <img src="../pages/images/flecheRetour.png" alt="retour a l'accueil" width="25px"> <p class="my-0 ml-1">Retour</p></a>
+            <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group mt-5">
+                <input type='date' name='date' id='date' value="<?=!empty($_GET["date"]) ? $_GET["date"] : "";?>" class="form-control"/>
+            <table class="calendrier">
+                <thead>
+                    <th colspan="7" class="text-left"><?=dateMois($date);?></th>
+                </thead>
+                <tbody>
+                    <tr>
+                    <?php
+                    $a = 1;
+                    while ($a != $calendrier[0]['jourDeSemaine']) {
+                        $a++;
+                    ?>
+                        <th></th>
+                    <?php
+                    }
+                    foreach($calendrier as $jour){
+                    ?>
+                        <th style="border-top: solid red 2px;">
+                            <button name="date" value="<?=$jour["date"];?>" class="btn jourCalendrier <?=$jour["date"] == $date ? "btn-info" : "";?>" onclick="btnCalendrier(event,'<?=$jour['date'];?>')">
+                                <div class="nbrEvenements<?=(!empty($jour["nbr"]))?" nbrEvenementsUnselected":"";?><?=($jour["date"] == $date && !empty($jour["nbr"])) ? " nbrEvenementsSelected" : "";?>">
+                                    <?=(!empty($jour["nbr"]))?$jour["nbr"]:"";?>
+                                </div>
+                                <?=$jour['jour'];?>
+                            </button>
+                            
+                        </th>
+                    <?php
+                        if($jour['jourDeSemaine'] == 0){
+                            ?>
+                            </tr><tr>
+                            <?php
+
+                        }
+                    }
+                    ?>
+                    </tr>
+                </tbody>
+            </table>
+            </form >
+
+
+            <form action="../traitements/planning" method="post" class="form-group d-flex flex-column align-items-start" id="ajoutEvenement">
+                <h5 class=" titre mb-3">Ajouter un évenement</h5>
+                <label for="designation" class="form-label">Titre</label>
+                <input type="text" id="designation" name="designation" placeholder="Saisir un titre" class="form-control" required>
+                <div class="d-flex">
+                    <div class="mr-2 d-flex flex-column align-items-start">
+                        <label for="heureDebut" class="form-label">Début</label>
+                        <input type="time" id="heureDebut" name="heureDebut" class="form-control" required>
+                    </div>
+                    <div class="d-flex flex-column align-items-start">
+                        <label for="heureFin" class="form-label">Fin</label>
+                        <input type="time" id="heureFin" name="heureFin" class="form-control">
+                        <small class="text-secondary">Optionel</small>
+                    </div>
+                </div>
+                <button name="date" value="<?=$date;?>" class="btn btn-primary" >Enregistrer</button>
+            </form>
+        </div>
+
+
+        <div id="jour">
         <?php
         for($i=8;$i<18;$i++){
         ?>
-            <div class="list-group-item" style="min-height : 50px">
-                <div style="margin-left:-50px;margin-top : -30px">
-                    <?=$i;?>
+            <div class="list-group-item creneau">
+                <div class="heure">
+                    <?=$i;?>h
                 </div>
                 <?php
                 foreach($evenements as $evenement){
@@ -38,21 +124,38 @@ if(!empty($_GET["ajout"])){
                     }
                     if($debut <= $i && $fin >= $i){
                         ?>
-                        <div class="alert alert-primary">
-                            <div class="float-right"><a href="../traitements/supprEvenement.php?id=<?=$evenement["idEvenement"];?>&jour=<?=$_GET["jour"];?>" class="text-info">X</a></div>
-                                <p class="float-right mr-3">
+                        <div class="evenement <?php
+                            if($debut < $i && $fin > $i){
+                                echo "evenement-mid";
+                            }elseif($debut < $i){
+                                echo "evenement-bot";
+                            }elseif($fin > $i){
+                                echo "evenement-top";
+                            }
+                        ?>">
+                            <div class="float-right d-flex">
+                                <p class="mr-2">
                                     <?php
                                     if($debut == $i){
                                         echo substr($evenement["heureDebut"],0,5);
+                                        ?>
+                                        <form method="post">
+                                        <input type="hidden" name="date" value="<?=$date;?>">
+                                        <button name="supprEvenement" class="supprEvenement" value="<?=$evenement["idEvenement"];?>">X</button>
+                                        </form>
+                                        <?php
                                     }
                                     if($debut != $fin && $fin == $i){
                                         echo substr($evenement["heureFin"],0,5);
                                     }
                                     ?>
                                 </p>
-                                <h5><?=$evenement["designation"];?></h5>
-                            
-                            <p><?=$evenement["contenu"];?></p>
+                            </div>
+                            <?php
+                            if($debut == $i){
+                                echo "<h5>" . $evenement["designation"] . "</h5>";
+                            }
+                            ?>
                         </div>
                         <?php
                     }
@@ -62,31 +165,12 @@ if(!empty($_GET["ajout"])){
         <?php
         }
         ?>
-    </div>
-    
-    <div>
-        <form action="../traitements/planning.php?jour=<?=$_GET["jour"];?>" method="post">
-            <div>
-                <h5>Titre</h5>
-                <input type="text" name="designation" id="designation" placeholder="Titre" required class="form-control">
-            </div>
-            <div>
-                <h5>Détails</h5>
-                <input type="text" name="contenu" id="contenu" placeholder="détails" class="form-control">
-                <samll class="form-text text-secondary">Optionel</samll>
-            </div>
-            <div class="d-flex">
-                <div>
-                    <h5>Heure de début</h5>
-                    <input type="time" id="heureDebut" name="heureDebut" required>
-                </div>
-                <div class="ml-2">
-                    <h5>Heure de fin</h5>
-                    <input type="time" id="heureFin" name="heureFin">
-                <samll id="contenuHelp" class="form-text text-secondary">Optionel</samll>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary text-white">Valider</button>
-        </form>
-    </div>
-</div>
+        </div>
+            
+        </section>
+    </main>
+</body>
+
+<script src="fonctionPlanning.js"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
