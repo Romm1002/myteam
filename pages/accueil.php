@@ -2,13 +2,6 @@
 require_once "../traitements/header.php";
 require_once "../traitements/accueil.php";
 
-if(empty($_POST["classement"])){
-    $filtre = "asc";
-}else{
-    $filtre = $_POST["classement"];
-    echo "trse";
-}
-
 $publications = publications($filtre);
 $informationsProfil = profil($_SESSION["idUtilisateur"]);
 ?>

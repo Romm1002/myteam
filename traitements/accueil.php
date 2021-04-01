@@ -1,4 +1,11 @@
 <?php
+if(empty($_POST["classement"])){
+    $filtre = "asc";
+}else{
+    $filtre = $_POST["classement"];
+    echo "trse";
+}
+
 // Redirection si le grade est inférieur à Employé
 if(empty($_SESSION["grade"]) || $_SESSION["grade"] < 5){
     header("location:visiteurs.php");
