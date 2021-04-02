@@ -111,7 +111,7 @@ $informationsProfil = profil($_SESSION["idUtilisateur"]);
         
                                 <p class="contenuPublication"><?=$publication["contenuPublication"];?></p>
                             
-                                <small class="text-muted float-right mr-4"><?=$publication["datePublication"];?></small>
+                                <small class="text-muted mr-4"><?=$publication["datePublication"];?></small>
                             </div>
                             <?php
                 }

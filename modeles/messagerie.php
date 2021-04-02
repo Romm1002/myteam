@@ -22,9 +22,9 @@ function recuperationMessage($personne1, $personne2){
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function recherche($s1){
-    $requete = getBdd()->prepare("SELECT * FROM utilisateurs WHERE prenom LIKE ? OR nom LIKE ?");
-    $requete->execute(["%" . $s1 . "%", "%" . $s1 . "%"]);
+function recherche($s1, $idUtilisateur){
+    $requete = getBdd()->prepare("SELECT * FROM utilisateurs WHERE (prenom LIKE ? OR nom LIKE ?) AND idUtilisateur != ?");
+    $requete->execute(["%" . $s1 . "%", "%" . $s1 . "%", $idUtilisateur]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
