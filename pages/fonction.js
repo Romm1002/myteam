@@ -27,4 +27,3 @@ function filtreDecroissant(){
 function filtreCroissant(){
     document.getElementById("main-section").style.flexDirection = "column";
 }
-
