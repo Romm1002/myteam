@@ -217,6 +217,10 @@ a.rocket:hover span {
     display: flex;
     flex-direction: column;
 }
+.main-section .carte small{
+    font-size: 11px;
+    float: right;
+}
 
 
 .clickPublications{
