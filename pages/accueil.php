@@ -95,7 +95,7 @@ $informationsProfil = profil($_SESSION["idUtilisateur"]);
                 <?php
                 foreach($publications as $publication){
                 ?>
-                            <div class="carte"> 
+                            <div class="carte <?=$publication["typePublication"] == "annonce" ? "bg-warning" : "";?>" id="carte"> 
                                 <div>
                                     <img src="<?=$publication["photoProfil"];?>" class="photoDeProfil" alt="Photo de profil" width="40" height="40">
                                     <strong>
@@ -148,10 +148,10 @@ $informationsProfil = profil($_SESSION["idUtilisateur"]);
                     </div>
 
                     <div class="interactionsUtilisateur">
-                        <input type="radio" name="typePost" class="typePost" id="annonce" value="1">
+                        <input type="radio" name="typePost" class="typePost" id="annonce" value="annonce">
                         <label for="annonce">Créer une annonce</label>
 
-                        <input type="radio" name="typePost" class="typePost" id="projet" checked value="2">
+                        <input type="radio" name="typePost" class="typePost" id="projet" checked value="simple">
                         <label for="projet">Créer une post simple</label>
                         </form>
                     </div>

@@ -376,6 +376,11 @@ a.rocket:hover span {
     padding-left: 10px;
     padding-top: 7px;
 }
+.carte p.annonce{
+    display: inline;
+    color: rgb(187, 2, 2);
+}
+
 .contenuPublication{
     font-size: 13pt;
     text-align: left;
