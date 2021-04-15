@@ -17,7 +17,7 @@ function detailsProjets($idProjet){
     return $requete->fetch(PDO::FETCH_ASSOC);
 }
 function projetsUtilisateur($idUtilisateur){
-    $requete = getBdd()->prepare("SELECT * FROM participationProjet WHERE idProjet = ?");
+    $requete = getBdd()->prepare("SELECT * FROM participationProjet RIGHT JOIN projets USING(idProjet) WHERE idUtilisateur = ? ");
     $requete->execute([$idUtilisateur]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }

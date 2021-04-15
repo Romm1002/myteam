@@ -56,7 +56,7 @@ require_once "../traitements/planning.php";
                     }
                     foreach($calendrier as $jour){
                     ?>
-                        <th style="">
+                        <th style="<?=$jour["projet"] == true ? 'border-top:solid red 1px' : 'border-top:solid black 1px';?>">
                             <button name="date" value="<?=$jour["date"];?>" class="btn jourCalendrier <?=$jour["date"] == $date ? "btn-info" : "";?>" onclick="btnCalendrier(event,'<?=$jour['date'];?>')">
                                 <div class="nbrEvenements<?=(!empty($jour["nbr"]))?" nbrEvenementsUnselected":"";?><?=($jour["date"] == $date && !empty($jour["nbr"])) ? " nbrEvenementsSelected" : "";?>">
                                     <?=(!empty($jour["nbr"]))?$jour["nbr"]:"";?>

@@ -36,13 +36,13 @@ table#calendrier{
 #ajoutEvenement{
     max-height: 40px;
     overflow: hidden;
-    transition: 3.2s;
+    transition: 2.8s;
 }
 #ajoutEvenement:hover{
-    max-height: 2000px;
+    max-height: 1500px;
 }
 #ajoutEvenement:focus-within{
-    max-height: 2000px;
+    max-height: 1500px;
 }
 #jour{
     flex: 2;

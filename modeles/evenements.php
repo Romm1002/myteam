@@ -13,7 +13,7 @@ function supprEvenement($idEvenement){
     $requete ->execute([$idEvenement]);
 }
 function nbrEvenements($date,$idUtilisateur){
-    $requete = getBdd()->prepare("SELECT date, COUNT(idEvenement) AS 'nbr' FROM `evenements` WHERE date LIKE ? AND idUtilisateur = ? GROUP BY date");
+    $requete = getBdd()->prepare("SELECT date, COUNT(idEvenement) AS 'nbr' FROM `evenements` WHERE date LIKE ? AND idUtilisateur = ? GROUP BY date ORDER BY date ASC");
     $requete->execute([$date . "%",$idUtilisateur]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
