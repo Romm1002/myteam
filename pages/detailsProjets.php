@@ -1,7 +1,10 @@
 <?php
 require_once "../traitements/header.php";
-$details = detailsProjets($_GET["idProjet"]);
-$informationsProfil = profil($_SESSION["idUtilisateur"]);
+$InfosProfil = new InfoProfils();
+$Projets = new Projets();
+
+$details = $Projets->detailsProjets($_GET["idProjet"]);
+$informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
 
 ?>
 

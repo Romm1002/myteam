@@ -2,7 +2,9 @@
 require_once "../traitements/header.php";
 require_once "../traitements/ajoutUtilisateur.php";
 
-recuperationPostes();
+$Administration = new Administration();
+
+$Administration->recuperationPostes();
 
 ?>
 

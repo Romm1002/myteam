@@ -2,7 +2,9 @@
 require_once "../traitements/header.php";
 require_once "../traitements/profil.php";
 
-$informationsProfil = profil($_SESSION["idUtilisateur"]);
+$InfosProfil = new InfoProfils();
+
+$informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
 ?>
 
 <body>

@@ -1,17 +1,18 @@
 <?php
+$Messagerie = new Messagerie();
 if(!empty($_POST["filtreRecherche"])){
-    $contacts = recherche($_POST["filtreRecherche"], $_SESSION["idUtilisateur"]);
+    $contacts = $Messagerie->recherche($_POST["filtreRecherche"], $_SESSION["idUtilisateur"]);
 }else{
-    $contacts = recuperationContacts($_SESSION["idUtilisateur"]);
+    $contacts = $Messagerie->recuperationContacts($_SESSION["idUtilisateur"]);
 }
 
 if(!empty($_POST["nouveauMessage"])){
-    newMessage($_SESSION["prenom"], $_GET["avec"], $_POST["nouveauMessage"]);
+    $Messagerie->newMessage($_SESSION["prenom"], $_GET["avec"], $_POST["nouveauMessage"]);
 }
 
 if(!empty($_POST["newMessage"])){
     extract($_POST);
-    newMessage($_SESSION["prenom"], $_GET["avec"], $newMessage);
+    $Messagerie->newMessage($_SESSION["prenom"], $_GET["avec"], $newMessage);
     ?>
     <script>
         document.location.href="messagerie.php?avec=<?=$_GET["avec"];?>"

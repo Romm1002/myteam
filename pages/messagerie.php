@@ -58,14 +58,14 @@ require_once "../traitements/messagerie.php";
                     ?>
                     <div class="get">
                         <div class="reseau-header">
-                            <img src="<?=recuperationInformationsContact($_GET["avec"])["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
-                            <p><?=recuperationInformationsContact($_GET["avec"])["prenom"] . " " . recuperationInformationsContact($_GET["avec"])["nom"];?></p>
+                            <img src="<?=$Messagerie->recuperationInformationsContact($_GET["avec"])["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
+                            <p><?=$Messagerie->recuperationInformationsContact($_GET["avec"])["prenom"] . " " . $Messagerie->recuperationInformationsContact($_GET["avec"])["nom"];?></p>
                         </div>
 
                         <div class="reseau-content">
                             <div class="messages">
                             <?php
-                            foreach(recuperationMessage($_SESSION["prenom"], $_GET["avec"]) as $message){
+                            foreach($Messagerie->recuperationMessage($_SESSION["prenom"], $_GET["avec"]) as $message){
                                 ?>
                                 <div class="message <?=$_SESSION["prenom"] == $message["envoyeur"] ? "ml-auto" : "mr-auto";?>">
                                     <p><?=$message["contenu"];?></p>

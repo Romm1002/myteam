@@ -1,4 +1,5 @@
 <?php
+$Publication = new Publication();
 if(empty($_POST["classement"])){
     $filtre = "asc";
 }else{
@@ -18,6 +19,6 @@ $date = strftime("%A %d %B à %H:%M:%S");
 
 if(!empty($_POST["nouvellePublication"])){
     extract($_POST);
-    newPublication($nouvellePublication, $date, $_SESSION["idUtilisateur"], $typePost);
+    $Publication->newPublication($nouvellePublication, $date, $_SESSION["idUtilisateur"], $typePost);
     header("location:../pages/accueil.php");
 }

@@ -2,8 +2,11 @@
 require_once "../traitements/header.php";
 require_once "../traitements/accueil.php";
 
-$publications = publications($filtre);
-$informationsProfil = profil($_SESSION["idUtilisateur"]);
+$Publication = new Publication();
+$InfosProfil = new InfoProfils();
+
+$publications = $Publication->publications($filtre);
+$informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
 ?>
 
 <head>

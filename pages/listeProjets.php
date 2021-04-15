@@ -1,9 +1,11 @@
 <?php
 require_once "../traitements/header.php";
 require_once "../traitements/listeProjets.php";
+$InfosProfil = new InfoProfils();
+$Projets = new Projets();
 
-$informationsProfil = profil($_SESSION["idUtilisateur"]);
-selectionProjets();
+$informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
+$Projets->selectionProjets();
 ?>
 
 <body>
@@ -63,7 +65,7 @@ selectionProjets();
 
                 <div class="projets">
                         <?php
-                        foreach(selectionProjets() as $projet){
+                        foreach($Projets->selectionProjets() as $projet){
                         ?>
                         <div class="card">
                             <div class="card-image">

@@ -1,6 +1,7 @@
 <?php
 // Tableau d'erreurs lors de la connexion.
 $erreurs = [];
+$Utilisateurs = new Utilisateurs();
 
 if(!empty($_POST["envoi"])){
     // On vérifie que les champs du formulaire ne sont pas vides et existent.
@@ -12,9 +13,9 @@ if(!empty($_POST["envoi"])){
             $erreurs[]="L'addresse email saisie n'est pas valide";
         }
         // Récupération des informations de la BDD pour savoir si les infos transmises sont uniques
-        inscription($email);
+        $Utilisateurs->inscription($email);
         // Si l'adresse email existe en BDD = erreur
-        if(inscription($email) > 0){
+        if($Utilisateurs->inscription($email) > 0){
             $erreurs[]="L'addresse email saisie existe deja";
         }
         // Vérification du mot de passe (identique et longueur)
@@ -34,7 +35,7 @@ if(!empty($_POST["envoi"])){
         try{
             extract($_POST);
             $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-            insertionInscription($_POST["nom"], $_POST["prenom"],$_POST["datenaiss"], $_POST["email"], $mdp, 1, "../pages/images/avatar/photoProfil.jpg");
+            $Utilisateurs->insertionInscription($_POST["nom"], $_POST["prenom"],$_POST["datenaiss"], $_POST["email"], $mdp, 1, "../pages/images/avatar/photoProfil.jpg");
                 ?>
                 <div class="alert alert-success mt-3 index-50">
                     L'inscription a bien été enregistré

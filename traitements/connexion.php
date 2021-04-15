@@ -1,4 +1,5 @@
 <?php
+$Utilisateurs = new Utilisateurs();
 // Redirection en fonction du grade du membre connecté.
 if(!empty($_SESSION["poste"])){
     $grade = $_SESSION["grade"];
@@ -27,13 +28,13 @@ if(isset($_POST["envoi"]) && !empty($_POST["envoi"] && $_POST["envoi"]==1)){
         //     $erreurs[]="Le mot de passe doit faire au moins 8 caractères";
         // }
 
-        $connexion = connexion($email);
+        $connexion = $Utilisateurs->connexion($email);
         //on verifie qu'il n'y a aucune erreur pour optimiser les requetes
         if(count($erreurs) == 0){
-            connexion($email);
+            $connexion;
             // Vérification si l'email existe en BDD
-            if(connexion($email) > 0){
-                $utilisateur = connexion($email);
+            if($connexion > 0){
+                $utilisateur = $connexion;
                 // Vérification si le mdp entrer correspond au mdp dans la BDD.
                 if(!password_verify($mdp,$utilisateur["mdp"])){
                     $erreurs[]="Le mot de passe saisi est icorrect";
