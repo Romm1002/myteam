@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 class Projets extends Modele{
     public function newProjet($nomProjet, $membresProjet, $descriptionProjet, $dateDebut, $dateFin){
         $requete = $this->getBdd()->prepare("INSERT INTO projets(nomProjet, membresProjet, descriptionProjet, dateDebut, dateFin, image) VALUES(?, ?, ?, ?, ?, ?)");
@@ -17,27 +16,4 @@ class Projets extends Modele{
         $requete->execute([$idProjet]);
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
-=======
-
-function newProjet($nomProjet, $membresProjet, $descriptionProjet, $dateDebut, $dateFin){
-    $requete = getBdd()->prepare("INSERT INTO projets(nomProjet, membresProjet, descriptionProjet, dateDebut, dateFin, image) VALUES(?, ?, ?, ?, ?, ?)");
-    $requete->execute([$nomProjet, $membresProjet, $descriptionProjet, $dateDebut, $dateFin, "../pages/images/projets/projet" . rand(1, 7) . ".jpg"]);
-}
-
-function selectionProjets(){
-    $requete = getBdd()->prepare("SELECT * FROM projets");
-    $requete->execute();
-    return $requete->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function detailsProjets($idProjet){
-    $requete = getBdd()->prepare("SELECT * FROM projets WHERE idProjet = ?");
-    $requete->execute([$idProjet]);
-    return $requete->fetch(PDO::FETCH_ASSOC);
-}
-function projetsUtilisateur($idUtilisateur){
-    $requete = getBdd()->prepare("SELECT * FROM participationProjet RIGHT JOIN projets USING(idProjet) WHERE idUtilisateur = ? ");
-    $requete->execute([$idUtilisateur]);
-    return $requete->fetchAll(PDO::FETCH_ASSOC);
->>>>>>> planning
 }
