@@ -26,5 +26,4 @@ class InfoProfils extends Modele{
         $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET mdp = ? WHERE idUtilisateur = ?");
         $requete->execute([$mdp, $idUtilisateur]);
     }
-
 }

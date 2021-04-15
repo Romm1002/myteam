@@ -56,6 +56,12 @@ a{
     border-radius: 3px;
 }
 
+@media screen and (max-width: 768px){
+    #formConnexion form input[placeholder]{
+        font-size: 15px;
+    }
+}
+
 /* Style inscription.php */
 #BgInscription{
     position: fixed;

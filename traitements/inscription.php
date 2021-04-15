@@ -16,7 +16,7 @@ if(!empty($_POST["envoi"])){
         $Utilisateurs->inscription($email);
         // Si l'adresse email existe en BDD = erreur
         if($Utilisateurs->inscription($email) > 0){
-            $erreurs[]="L'addresse email saisie existe deja";
+            $erreurs[]="L'adresse email saisie existe deja";
         }
         // Vérification du mot de passe (identique et longueur)
         if($mdp !== $Cmdp){
