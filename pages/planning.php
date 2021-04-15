@@ -3,13 +3,7 @@ require_once "../traitements/header.php";
 require_once "../traitements/planning.php";
 ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet">
-</head>
+<link rel="stylesheet" href="stylePlanning.css">
 <body>
     <?php
     if(!empty($_GET["ajout"])){
@@ -43,7 +37,7 @@ require_once "../traitements/planning.php";
         <div class="circle2"></div>
         <section class="glass">
         <div class="dashboard">
-            <a href="index.php" class="btnDeconnexion d-flex"> <img src="../pages/images/flecheRetour.png" alt="retour a l'accueil" width="25px"> <p class="my-0 ml-1">Retour</p></a>
+            <a href="index.php" class="btnDeconnexion d-flex"> <img src="../pages/images/flecheRetour.png" width="25px"> <p class="my-0 ml-1">Retour</p></a>
             <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group mt-5">
                 <input type='date' name='date' id='date' value="<?=!empty($_GET["date"]) ? $_GET["date"] : "";?>" class="form-control"/>
             <table class="calendrier">
@@ -62,7 +56,7 @@ require_once "../traitements/planning.php";
                     }
                     foreach($calendrier as $jour){
                     ?>
-                        <th style="border-top: solid red 2px;">
+                        <th style="<?=$jour["projet"] == true ? 'border-top:solid red 1px' : 'border-top:solid black 1px';?>">
                             <button name="date" value="<?=$jour["date"];?>" class="btn jourCalendrier <?=$jour["date"] == $date ? "btn-info" : "";?>" onclick="btnCalendrier(event,'<?=$jour['date'];?>')">
                                 <div class="nbrEvenements<?=(!empty($jour["nbr"]))?" nbrEvenementsUnselected":"";?><?=($jour["date"] == $date && !empty($jour["nbr"])) ? " nbrEvenementsSelected" : "";?>">
                                     <?=(!empty($jour["nbr"]))?$jour["nbr"]:"";?>
@@ -86,7 +80,7 @@ require_once "../traitements/planning.php";
             </form >
 
 
-            <form action="../traitements/planning" method="post" class="form-group d-flex flex-column align-items-start" id="ajoutEvenement">
+            <form action="../traitements/planning" method="post" class="form-group d-flex flex-column align-items-start px-1 w-75" id="ajoutEvenement">
                 <h5 class=" titre mb-3">Ajouter un évenement</h5>
                 <label for="designation" class="form-label">Titre</label>
                 <input type="text" id="designation" name="designation" placeholder="Saisir un titre" class="form-control" required>

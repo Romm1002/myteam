@@ -1,0 +1,84 @@
+
+/* STYLE PLANNING */
+table#calendrier{
+    width: 80%;
+}
+.jourCalendrier{
+    margin: 2px 0 5px 0;
+    padding-top: 0;
+    padding-bottom: 1px;
+    line-height: 1rem;
+
+}
+.nbrEvenements{
+    color: white;
+    position: relative;
+    top: 1px;
+    right: -12px;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    overflow: hidden;
+}
+.nbrEvenementsUnselected{
+    background-color: rgba(255, 0, 0, 0.6);
+}
+.nbrEvenementsSelected{
+    background-color: red;
+}
+.titre{
+    background-color: var(--blue2);
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+}
+#ajoutEvenement{
+    max-height: 40px;
+    overflow: hidden;
+    transition: 2.8s;
+}
+#ajoutEvenement:hover{
+    max-height: 1500px;
+}
+#ajoutEvenement:focus-within{
+    max-height: 1500px;
+}
+#jour{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+    text-align: left;
+    overflow: auto;
+    max-height: 80vh;
+    padding: 25px 80px;
+}
+#jour::-webkit-scrollbar{
+    display: none;
+}
+.creneau{
+    height : 100%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 1px;
+}
+.heure{
+    position :absolute;
+    left: -25px;
+    top : -10px;
+}
+.evenement{
+    width: auto;
+    min-width: 150px;
+    height: 45px;
+    background-color: var(--blue1);
+    color: black;
+    padding: 5px 10px;
+    margin: 3px 10px;
+    border: solid rgba(0, 0, 255, 0.7) 1px;
+    border-radius: 5px;
+    overflow-y: hidden;
+}
