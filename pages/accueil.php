@@ -98,7 +98,7 @@ $informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
                 <?php
                 foreach($publications as $publication){
                 ?>
-                            <div class="carte <?=$publication["typePublication"] == "annonce" ? "bg-warning" : "";?>" id="carte"> 
+                            <div class="carte <?=$publication["typePublication"] == "annonce" ? "bg-primary" : "";?>" id="carte"> 
                                 <div>
                                     <img src="<?=$publication["photoProfil"];?>" class="photoDeProfil" alt="Photo de profil" width="40" height="40">
                                     <strong>
