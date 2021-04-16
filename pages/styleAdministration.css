@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* STYLE DE LA PAGE */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+body .navigation{
+    width: 20%;
+    height: 100%;
+    background-color: var(--blue1);
+}
+
+body .informations{
+    width: 80%;
+    height: 25%;
+    background-color: #eee;
+}
+body .informations .cards{
+    width: 100%;
+    height: 100%;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+body .informations .cards .infos{
+    width: 20%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+body .informations .cards .infos .info-header{
+    width: 100%;
+    height: 35%;
+    display: flex;
+    align-items: center;
+}
+body .informations .cards .infos .info-header i{
+    font-size: 23px;
+}
+body .informations .cards .infos .info-header h5#h5card1{
+    font-size: 17px;
+    margin: 0;
+    margin-left: 8px;
+}
+body .informations .cards .infos .info-header h5#h5card2{
+    font-size: 17px;
+    margin: 0;
+    margin-left: 15px;
+}
+body .informations .cards .infos .info-content{
+    width: 100%;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+body .informations .cards .infos .info-content p#test{
+    margin: 0;
+    font-size: 80%;
+}

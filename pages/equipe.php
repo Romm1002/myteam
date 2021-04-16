@@ -2,47 +2,31 @@
 require_once "../traitements/header.php";
 require_once "../traitements/equipe.php";
 ?>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+<link rel="stylesheet" href="../pages/styleAdministration.css">
 
-<div class="container">
-    <h1 class="mb-3">Liste des utilisateurs </h1>
-    <div class="d-flex">
-        <!-- ajouter un utilisateur -->
-        <a href="ajoutUtilisateur.php" class="nav-item btn btn-info mx-2">Ajouter un utilisateur</a>
-        <!-- recherche d'utilisateur -->
-        <form method="post">
-            <input type="text" class="form-control rounded" name="recherche" id="recherche" placeholder="Recherche" value="<?=(!empty($search) ? $search : "");?>">
-        </form>
-        <form method="post">
-            <input type="text" hidden name="recherche" value="">
-            <input type="submit" class="form-control" value="X">
-        </form>
+<body>
+    <div class="navigation"></div>
+
+    <div class="informations">
+        <div class="cards">
+            <div class="infos">
+                <div class="info-header">
+                    <i class="fas fa-user-friends"></i>
+                    <h5 id="h5card1">Utilisateurs inscrits</h5>
+                </div>
+                <div class="info-content">
+                    <p>11</p>
+                </div>
+            </div>
+            <div class="infos">
+                <div class="info-header">
+                    <i class="fas fa-project-diagram"></i>
+                    <h5 id="h5card2">Projets en cours</h5>
+                </div>
+            </div>
+            <div class="infos"></div>
+            <div class="infos"></div>
+        </div>
     </div>
-
-
-
-<!-- affichage des données -->
-    <ul class="list-group mt-3">
-    <?php
-    if(empty($erreur)){
-        foreach($utilisateurs as $utilisateur){
-
-        ?>
-        <a class="list-group-item list-group-item-action d-flex" href="ficheUtilisateur.php?id=<?=$utilisateur["idUtilisateur"];?>">
-        <div>
-            <?=$utilisateur["nom"];?>
-            <?=$utilisateur["prenom"];?>
-        </div>
-        <div class="ml-auto">
-            <?=$utilisateur["poste"];?>
-        </div>
-        </a>
-        <?php
-        }
-        
-    }else{
-        ?>
-        <div class="alert alert-danger mx-auto mt-2"><?=$erreur;?></div>
-        <?php
-    }
-?>
-</div>
+</body>
