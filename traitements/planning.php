@@ -48,7 +48,7 @@ for($i=1; $i<=$days ; $i++){
 $nbrEvenements = $Evenements->nbrEvenements(substr($date,0,7),$_SESSION["idUtilisateur"]);
 // $projets = projetsUtilisateur($_SESSION["idUtilisateur"]);
 foreach($nbrEvenements as $evenement){
-    foreach($calendrier as $jour){
+    foreach($calendrier as $key => $jour){
         if($evenement["date"] == $jour["date"]){
             $calendrier[$jour["jour"]-1]["nbr"] = $evenement["nbr"];
             unset($nbrEvenements[$key]);
@@ -100,16 +100,16 @@ function dateMois($date){
             return "Décembre";
     }
 }
-// function dateIntervalle($debut,$fin,$test){
-//     $dateDebut = new DateTime($debut);
-//     $dateFin = new DateTime($fin);
-//     $dateTest = new DateTime($test);
+function dateIntervalle($debut,$fin,$test){
+    $dateDebut = new DateTime($debut);
+    $dateFin = new DateTime($fin);
+    $dateTest = new DateTime($test);
     
 
-//     if ($dateDebut >= $dateTest and $dateFin >= $dateTest){
-//         return true;
-//     }else{
-//         return false;
-//     }
+    if ($dateDebut >= $dateTest and $dateFin >= $dateTest){
+        return true;
+    }else{
+        return false;
+    }
     
-// }
+}
