@@ -1,8 +1,10 @@
 <?php
+
 $Administration = new Administration();
+
 //verif du grade
-if($_SESSION["grade"]!=10){
-    header("location:index");
+if($_SESSION["grade"] != 10){
+    header("location:../pages/accueil.php");
 }
 //recupération des données avec filtre
 if(!empty($_POST["recherche"])){
@@ -22,4 +24,10 @@ if(!empty($_POST["recherche"])){
     }else{
         $Administration->rechercheOK();
     }
+}
+
+if(!empty($_POST["chercherMembre"])){
+    $contacts = $Administration->recherche($_POST["chercherMembre"]);
+}else{
+    $contacts = $Administration->recuperationContacts();
 }

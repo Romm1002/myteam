@@ -23,10 +23,194 @@ body .navigation{
     width: 20%;
     height: 100%;
     background-color: var(--blue1);
+    color: #fff;
+    padding: 10px 20px;
+}
+body .navigation .navigation-header{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .navigation .navigation-header i{
+    font-size: 20px;
+}
+body .navigation .navigation-header h1{
+    margin: 0 0 0 10px;
+    font-size: 28px;
+}
+body .navigation .navigation-content{
+    width: 100%;
+    height: 80%;
+}
+body .navigation .navigation-content ul{
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px;
+    margin-bottom: 0;
+}
+body .navigation .navigation-content ul li{
+    color: #fff;
+    margin: 10px 0;
+    font-size: 18px;
+}
+body .navigation .navigation-footer{
+    width: 100%;
+    height: 10%;
+    font-size: 20px;
+}
+body .navigation .navigation-footer a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #11a1e4;
+    width: 75%;
+    height: 75%;
+    margin: auto;
+    border-radius: 20px;
+    transition: 0.5s ease all;
+}
+body .navigation .navigation-footer a:hover{
+    background-color: var(--blue2);
+}
+body .navigation .navigation-footer a p{
+    margin: 0 0 0 10px;
 }
 
-body .informations{
+body .flex-column{
+    display: flex;
+    flex-direction: column;
     width: 80%;
+}
+
+
+body .gestion{
+    width: 100%;
+    height: 75%;
+    padding: 20px 30px;
+}
+body .gestion .gestion-header{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+body .gestion .gestion-header .titre-header{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+body .gestion .gestion-header .titre-header h1{
+    margin-bottom: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+body .gestion .gestion-header .search-header{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+body .gestion .gestion-header .search-header input{
+    margin-right: 15px;
+    background-color: #ddd;
+    border-radius: 20px;
+    outline: none;
+    padding: 5px 15px;
+    border: none;
+}
+body .gestion .gestion-header .search-header button{
+    border: none;
+    background: none;
+    outline: none;
+}
+body .gestion .gestion-header .search-header button i{
+    font-size: 20px;
+    margin-right: 10px;
+    background-color: #ddd;
+    padding: 7px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+body .gestion .gestion-content{
+    width: 100%;
+    height: 80%;
+    margin-top: 20px;
+    display: block;
+    height: 400px;
+    overflow: auto;
+}
+body .gestion .gestion-content::-webkit-scrollbar{
+    background: none;
+    width: 10px;
+}
+body .gestion .gestion-content::-webkit-scrollbar-thumb{
+    background-color: #bbb;
+    border-radius: 20px;
+}
+body .gestion .gestion-content::-webkit-scrollbar-track-piece{
+    background: #ddd;
+    border-radius: 20px;
+}
+body .gestion .gestion-content table, body .gestion .gestion-content tr, body .gestion .gestion-content td, body .gestion .gestion-content th{
+    border: 2px solid #111;
+    border-collapse: collapse;
+}
+body .gestion .gestion-content table{
+    width: 100%;
+}
+body .gestion .gestion-content th{
+    padding: 5px 10px;
+}
+body .gestion .gestion-content th:nth-child(1){
+    text-align: center;
+}
+body .gestion .gestion-content td{
+    padding: 10px;
+}
+body .gestion .gestion-content td:nth-child(1){
+    text-align: center;
+    font-weight: 600;
+}
+body .gestion .gestion-content td:nth-last-child(-n+1){
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+body .gestion .gestion-content input{
+    width: 100px;
+}
+body .gestion .gestion-content button{
+    background: #11a1e4;
+    border: none;
+    border-radius: 5px;
+    width: 75%;
+    height: 100%;
+    padding: 2px;
+    color: #fff;
+    transition: 0.5s ease all;
+}
+body .gestion .gestion-content button:hover{
+    background-color: var(--blue2);
+}
+
+body .gestion .gestion-footer{
+    width: 100%;
+    height: 10%;
+}
+
+
+body .informations{
+    width: 100%;
     height: 25%;
     background-color: #eee;
 }
@@ -54,23 +238,54 @@ body .informations .cards .infos .info-header i{
     font-size: 23px;
 }
 body .informations .cards .infos .info-header h5#h5card1{
-    font-size: 17px;
+    font-size: 19px;
     margin: 0;
     margin-left: 8px;
 }
 body .informations .cards .infos .info-header h5#h5card2{
-    font-size: 17px;
+    font-size: 19px;
     margin: 0;
     margin-left: 15px;
 }
+body .informations .cards .infos .info-header h5#h5card3{
+    font-size: 16px;
+    margin: 0;
+    margin-left: 10px;
+}
+body .informations .cards .infos .info-header h5#h5card4{
+    font-size: 14px;
+    margin: 0;
+    margin-left: 6px;
+}
 body .informations .cards .infos .info-content{
     width: 100%;
-    height: 65%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-body .informations .cards .infos .info-content p#test{
+body .informations .cards .infos .info-content p{
     margin: 0;
-    font-size: 80%;
+    font-size: 46px;
+}
+
+
+body .informations .cards .infos .info-footer{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+body .informations .cards .infos .info-footer .green-round{
+    width: 12px;
+    height: 12px;
+    background-color: rgb(2, 173, 2);
+    border-radius: 50%;
+    margin-right: 3px;
+}
+body .informations .cards .infos .info-footer p{
+    margin-bottom: 0;
+    font-size: 13px;
+    color: rgb(116, 116, 116);
 }

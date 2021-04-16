@@ -38,4 +38,74 @@ class Administration extends Modele{
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function membresInscrits(){
+        $requete = $this->getBdd()->prepare("SELECT COUNT(idUtilisateur) FROM utilisateurs");
+        $requete->execute();
+        return implode($requete->fetch(PDO::FETCH_ASSOC));
+    }
+
+    public function ProjetsEnCours(){
+        $requete = $this->getBdd()->prepare("SELECT COUNT(idProjet) FROM projets");
+        $requete->execute();
+        return implode($requete->fetch(PDO::FETCH_ASSOC));
+    }
+
+    public function MessagesEchanges(){
+        $requete = $this->getBdd()->prepare("SELECT COUNT(idMessage) FROM messagerie");
+        $requete->execute();
+        return implode($requete->fetch(PDO::FETCH_ASSOC));
+    }
+
+    public function publicationEnvoyees(){
+        $requete = $this->getBdd()->prepare("SELECT COUNT(idPublication) FROM publications");
+        $requete->execute();
+        return implode($requete->fetch(PDO::FETCH_ASSOC));
+    }
+
+    public function membres(){
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs");
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function dateMois($month){
+        switch($month){
+            case "01" : 
+                return "Janvier";
+            case "02" : 
+                return "Février";
+            case "03" : 
+                return "Mars";
+            case "04" : 
+                return "Avril";
+            case "05" : 
+                return "Mai";
+            case "06" : 
+                return "Juin";
+            case "07" : 
+                return "Juillet";
+            case "08" : 
+                return "Août";
+            case "09" : 
+                return "Septembre";
+            case "10" : 
+                return "Octobre";
+            case "11" : 
+                return "Novembre";
+            case "12" : 
+                return "Décembre";
+        }
+    }
+
+    public function recherche($s1){
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs WHERE prenom LIKE ? OR nom LIKE ?");
+        $requete->execute(["%" . $s1 . "%", "%" . $s1 . "%"]);
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function recuperationContacts(){
+        $requete = $this->getBdd()->prepare("SELECT nom, prenom, photoProfil FROM utilisateurs");
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

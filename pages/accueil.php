@@ -30,7 +30,7 @@ $informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
                 <?php
                 if(($informationsProfil["idposte"]) == 3){
                     ?>
-                    <a href="equipe.php">
+                    <a href="equipe.php?pages=membre">
                         <img src="images/admin.png" class="btnAdmin" alt="Bouton accès administration" width="35">
                     </a>
                     <?php
