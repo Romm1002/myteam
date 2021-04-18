@@ -39,34 +39,34 @@ require_once "../traitements/planning.php";
         <div class="dashboard">
             <a href="index.php" class="btnDeconnexion d-flex"> <img src="../pages/images/flecheRetour.png" width="25px"> <p class="my-0 ml-1">Retour</p></a>
             <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group mt-5">
-                <input type='date' name='date' id='date' value="<?=!empty($_GET["date"]) ? $_GET["date"] : "";?>" class="form-control"/>
+                <input type='date' name='date' id='date' value="<?=$date;?>" class="form-control"/>
             <table class="calendrier">
                 <thead>
-                    <th colspan="7" class="text-left"><?=dateMois($date);?></th>
+                    <th colspan="7" class="text-left"><?=$calendrier->getMois();?></th>
                 </thead>
                 <tbody>
                     <tr>
                     <?php
                     $a = 1;
-                    while ($a != $calendrier[0]['jourDeSemaine']) {
+                    while ($a != $calendrier->getJours()[0]->getJourSemaine()) {
                         $a++;
                     ?>
                         <th></th>
                     <?php
                     }
-                    foreach($calendrier as $jour){
+                    foreach($calendrier->getJours() as $jour){
                     ?>
-                        <th style="<?=$jour["projet"] == true ? 'border-top:solid red 1px' : 'border-top:solid black 1px';?>">
-                            <button name="date" value="<?=$jour["date"];?>" class="btn jourCalendrier <?=$jour["date"] == $date ? "btn-info" : "";?>" onclick="btnCalendrier(event,'<?=$jour['date'];?>')">
-                                <div class="nbrEvenements<?=(!empty($jour["nbr"]))?" nbrEvenementsUnselected":"";?><?=($jour["date"] == $date && !empty($jour["nbr"])) ? " nbrEvenementsSelected" : "";?>">
-                                    <?=(!empty($jour["nbr"]))?$jour["nbr"]:"";?>
+                        <th style="<?=$jour->getProjet() == true ? 'border-top:solid red 1px' : 'border-top:solid black 1px';?>">
+                            <button name="date" value="<?=$jour->getDate();?>" class="btn jourCalendrier <?=$jour->getDate() == $date ? "btn-info" : "";?>" onclick="btnCalendrier(event,'<?=$jour->getDate();?>')">
+                                <div class="nbrEvenements<?=(!empty($jour->getNbrEvenements()))?" nbrEvenementsUnselected":"";?><?=($jour->getDate() == $date && !empty($jour->getNbrEvenements())) ? " nbrEvenementsSelected" : "";?>">
+                                    <?=(!empty($jour->getNbrEvenements()))?$jour->getNbrEvenements():"";?>
                                 </div>
-                                <?=$jour['jour'];?>
+                                <?=$jour->getJour();?>
                             </button>
                             
                         </th>
                     <?php
-                        if($jour['jourDeSemaine'] == 0){
+                        if($jour->getJourSemaine() == 0){
                             ?>
                             </tr><tr>
                             <?php
@@ -98,67 +98,16 @@ require_once "../traitements/planning.php";
                 <button name="date" value="<?=$date;?>" class="btn btn-primary" >Enregistrer</button>
             </form>
         </div>
-
-
-        <div id="jour">
-        <?php
-        for($i=8;$i<18;$i++){
-        ?>
-            <div class="list-group-item creneau">
-                <div class="heure">
-                    <?=$i;?>h
-                </div>
-                <?php
-                foreach($evenements as $evenement){
-                    $debut = substr($evenement["heureDebut"],0,2);
-                    $arrondi = substr($evenement["heureFin"],3,2);
-                    $fin = substr($evenement["heureFin"],0,2);
-                    if($arrondi == 0 && $debut != $fin){
-                        $fin -= 1;
-                    }
-                    if($debut <= $i && $fin >= $i){
-                        ?>
-                        <div class="evenement <?php
-                            if($debut < $i && $fin > $i){
-                                echo "evenement-mid";
-                            }elseif($debut < $i){
-                                echo "evenement-bot";
-                            }elseif($fin > $i){
-                                echo "evenement-top";
-                            }
-                        ?>">
-                            <div class="float-right d-flex">
-                                <p class="mr-2">
-                                    <?php
-                                    if($debut == $i){
-                                        echo substr($evenement["heureDebut"],0,5);
-                                        ?>
-                                        <form method="post">
-                                        <input type="hidden" name="date" value="<?=$date;?>">
-                                        <button name="supprEvenement" class="supprEvenement" value="<?=$evenement["idEvenement"];?>">X</button>
-                                        </form>
-                                        <?php
-                                    }
-                                    if($debut != $fin && $fin == $i){
-                                        echo substr($evenement["heureFin"],0,5);
-                                    }
-                                    ?>
-                                </p>
-                            </div>
-                            <?php
-                            if($debut == $i){
-                                echo "<h5>" . $evenement["designation"] . "</h5>";
-                            }
-                            ?>
-                        </div>
-                        <?php
-                    }
-                }
-                ?>
-            </div>
-        <?php
-        }
-        ?>
+                    
+        <div id="planning">
+            <?php
+            $j=0;
+            for($i=8;$i<=18;$i++){
+                echo "<div class='horaire' style='top:". $j*10 ."%;'>".$i."</div>";
+                $j+= 1;
+            }
+            ?>
+            
         </div>
             
         </section>

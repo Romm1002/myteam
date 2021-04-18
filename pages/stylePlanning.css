@@ -44,7 +44,25 @@ table#calendrier{
 #ajoutEvenement:focus-within{
     max-height: 1500px;
 }
-#jour{
+#planning{
+    width: 65%;
+    height: 400px;
+    margin: 40px 20px 40px 40px;
+    display: flex;
+}
+.horaire{
+    position: relative;
+    left: -10px;
+}
+.evenement{
+    width: 100px;
+    height: 50px;
+    position: relative;
+    top: 50%;
+    background-color: white;
+    border: solid black 1px;
+}
+/*#jour{
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -81,4 +99,4 @@ table#calendrier{
     border: solid rgba(0, 0, 255, 0.7) 1px;
     border-radius: 5px;
     overflow-y: hidden;
-}
+} */
