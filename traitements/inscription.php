@@ -1,69 +1,66 @@
 <?php
-// Tableau d'erreurs lors de la connexion.
-$erreurs = [];
+require_once "../modeles/modele.php";
+
 $Utilisateurs = new Utilisateurs();
 
-if(!empty($_POST["envoi"])){
-    // On vérifie que les champs du formulaire ne sont pas vides et existent.
+// Redirection si le membre est déjà connecté
+if(!empty($_SESSION)){
+    header("location:../pages/index.php");
+}
+
+$erreurs = 0;
+
+// Vérifications pour envoyer le formulaire de connexion // Si les champs ne sont pas vides
+if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
     if(!empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST["Cmdp"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["datenaiss"])){
         extract($_POST);
 
         // Vérification si l'email est valide
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $erreurs[]="L'addresse email saisie n'est pas valide";
+            $erreurs++;
+            header("location:../pages/inscription.php?error=invalideEmail");
+            // mail invalide
         }
+
         // Récupération des informations de la BDD pour savoir si les infos transmises sont uniques
-        $Utilisateurs->inscription($email);
-        // Si l'adresse email existe en BDD = erreur
-        if($Utilisateurs->inscription($email) > 0){
-            $erreurs[]="L'adresse email saisie existe deja";
+        $inscription = $Utilisateurs->inscription($email);
+        if($inscription > 0){
+            $erreurs++;
+            header("location:../pages/inscription.php?error=emailExistant");
+            //mail existant
         }
+
         // Vérification du mot de passe (identique et longueur)
         if($mdp !== $Cmdp){
-            $erreurs[]="Les mots de passes saisis ne sont pas identiques";
+            $erreurs++;
+            header("location:../pages/inscription.php?error=notSamePasswords");
+            //mdp pas identiques
         }
-    
-    if(strlen($mdp) < 8){
-            $erreurs[]="Le mot de passe doit faire au moins 8 caractères";
+
+        // Vérification de la longueur du mdp
+        if(strlen($mdp) < 8){
+            $erreurs++;
+            header("location:../pages/inscription.php?error=passwordLen");
+            //mdp pas assez long
         }
     }else{
-        $erreurs[]="Au moins un champs n'a pas été saisi";
+        $erreurs++;
+        header("location:../pages/inscription.php?error=empty");
+        //champs vides
     }
 
-    if(count($erreurs) === 0){
-        //aucune erreur, envoie du formulaire
+    // Si il n'y a aucune erreur
+    if($erreurs == 0){
         try{
             extract($_POST);
+            // Hashage du mdp
             $mdp = password_hash($mdp, PASSWORD_BCRYPT);
-            $Utilisateurs->insertionInscription($_POST["nom"], $_POST["prenom"],$_POST["datenaiss"], $_POST["email"], $mdp, 1, "../pages/images/avatar/photoProfil.jpg");
-                ?>
-                <div class="alert alert-success mt-3 index-50">
-                    L'inscription a bien été enregistré
-                </div>
-                <?php
-        }catch(Exception $e){
-            ?>
-            <div class="alert alert-danger mt-3 index-50">
-                Erreur : L'inscritpion n'a pas été enregistré <br>
-            </div>
-            <?php
-        }
 
-    }else{
-        //affichage des erreurs
-        ?>
-        <div class="alert alert-danger mt-3 index-50">
-            Erreur : 
-            <?php
-            foreach($erreurs as $erreur){
-                echo($erreur);
-            ?>
-            <br>
-             <?php
-            }       
-            ?>
-        </div>
-        <?php
+            // On insère les données du formulaire en BDD
+            $Utilisateurs->insertionInscription($_POST["nom"], $_POST["prenom"], $_POST["datenaiss"], $_POST["email"], $mdp, 2, "../pages/images/avatar/photoProfil.jpg");
+            header("location:../pages/inscription.php?error=no");
+        }catch(Exception $e){
+            header("location:../pages/inscription.php=error=yes");
+        }
     }
 }
-?>

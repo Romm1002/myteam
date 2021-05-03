@@ -6,28 +6,9 @@ $Administration = new Administration();
 if($_SESSION["grade"] != 10){
     header("location:../pages/accueil.php");
 }
-//recupération des données avec filtre
-if(!empty($_POST["recherche"])){
-    $Administration->rechercheEmploye($search);
-    // verfication que la recherche existe
-    // $search = $_POST["recherche"];
-    if($Administration->rechercheEmploye($_POST["recherche"]) < 1){
-        $erreur = "La recherche effectuée ne correspond à aucune donnée";
-    }else{
-        $Administration->rechercheEmploye($search);
-    }
-//recupération des données sans filtre
-}else{
-
-    if($Administration->rechercheOK() < 1){
-        $erreur = "La base de donnée est vide";
-    }else{
-        $Administration->rechercheOK();
-    }
-}
 
 if(!empty($_POST["chercherMembre"])){
-    $contacts = $Administration->recherche($_POST["chercherMembre"]);
+    $membres = $Administration->recherche($_POST["chercherMembre"]);
 }else{
-    $contacts = $Administration->recuperationContacts();
+    $membres = $Administration->recuperationContacts();
 }

@@ -7,11 +7,6 @@ if(empty($_POST["classement"])){
     echo "trse";
 }
 
-// Redirection si le grade est inférieur à Employé
-if(empty($_SESSION["grade"]) || $_SESSION["grade"] < 5){
-    header("location:visiteurs.php");
-}
-
 extract($_POST);
 setlocale(LC_TIME, "fr_FR.utf-8", "fra");
 $date = strftime("%A %d %B à %H:%M");

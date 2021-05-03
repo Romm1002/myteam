@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Définition des couleurs principales de MyTeam */
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* Définition du style global */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Définition du style de inscription.php */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body video{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -999;
+}
+body img#logoInscription{
+    position: absolute;
+    top: 4%;
+    left: 3%;
+}
+
+body .container-inscription{
+    width: auto;
+    height: auto;
+    background-color: rgba(97, 97, 97, 0.7);
+    padding: 30px;
+    border-radius: 3px;
+}
+body .container-inscription .inscription-header{
+    width: 100%;
+    height: auto;
+}
+body .container-inscription .inscription-content{
+    width: 100%;
+    height: auto;
+}
+body .container-inscription .inscription-content form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+body .container-inscription .inscription-content form .form-ligne{
+    width: 100%;
+    display: flex;
+}
+body .container-inscription .inscription-content form .form-ligne img#mdp1{
+    position: relative;
+    left: 85%;
+    margin-top: -30px;
+}
+body .container-inscription .inscription-content form .form-ligne img#mdp2{
+    position: relative;
+    left: 85%;
+    margin-top: -60px;
+}
+body .container-inscription .inscription-content form .form-ligne-solo{
+    display: flex;
+    flex-direction: column;
+}
+body .container-inscription .inscription-content form .form-ligne label, body .container-inscription .inscription-content form .form-ligne-solo label{
+    margin: 10px 0 5px 0;
+    font-size: 17px;
+}
+body .container-inscription .inscription-content form .form-ligne input, body .container-inscription .inscription-content form .form-ligne-solo input{
+    min-width: 200px;
+    width: 100%;
+    max-width: 100%;
+    height: 38px;
+    border: none;
+    border-radius: 3px;
+    padding: 0 10px;
+    outline: none;
+}
+body .container-inscription .inscription-content form .form-ligne .ligne-left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+body .container-inscription .inscription-content form .form-ligne .ligne-left input{
+    width: 98%;
+}
+body .container-inscription .inscription-content form .form-ligne .ligne-right{
+    width: 50%;
+}
+body .container-inscription .inscription-content a{
+    color: #111;
+    text-align: center;
+    margin-top: 15px;
+}
+body .container-inscription .inscription-footer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-inscription .inscription-footer button{
+    margin-top: 15px;
+    width: 100%;
+    height: 38px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--blue1);
+    color: #fff;
+    text-transform: uppercase;
+}
+
+/* Style de l'alert de problème en fonction du GET */
+.alert{
+    position: absolute;
+    top: 5%;
+}

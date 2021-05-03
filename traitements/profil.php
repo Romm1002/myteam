@@ -30,9 +30,9 @@ if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]))
                 
                 $InfosProfil->updatePhotoProfil($target_file, $_SESSION["idUtilisateur"]);
             }
-            header("location:../pages/profil.php?validate=OK");
+            header("location:../pages/accueil.php?page=profil&validate=OK");
         }catch(Exception $e){
-            header("location:../pages/profil.php?validate=NO");
+            header("location:../pages/accueil.php?page=profil&validate=NO");
         }
     }else{
         //affichage des erreurs

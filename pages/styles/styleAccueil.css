@@ -1,0 +1,760 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Définition des couleurs principales de MyTeam */
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* Définition du style global */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+/* Définition du style de accueil.php */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
+}
+
+.circle1, .circle2{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .3));
+    height: 10rem;
+    width: 10rem;
+    position: absolute;
+    border-radius: 50%;
+}
+.circle1{
+    top: 5%;
+    right: 7%;
+}
+.circle2{
+    bottom: 5%;
+    left: 6%;
+}
+
+body .container-accueil{
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    display: flex;
+    backdrop-filter: blur(1rem);
+}
+body .container-accueil .accueil-left{
+    width: 30%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+body .container-accueil .accueil-left .left-actions{
+    width: 100%;
+    height: 7%;
+}
+body .container-accueil .accueil-left .left-actions a{
+    text-decoration: none;
+    margin: 0 2px;
+}
+body .container-accueil .accueil-left .left-header{
+    width: 100%;
+    height: 27%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+body .container-accueil .accueil-left .left-header img{
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 3px;
+}
+body .container-accueil .accueil-left .left-header p{
+    margin-bottom: 0;
+}
+body .container-accueil .accueil-left .left-header p#nomAndPrenom{
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+body .container-accueil .accueil-left .left-header p#poste{
+    font-size: 14px;
+    color: rgb(83, 83, 83);
+    font-weight: 400;
+}
+body .container-accueil .accueil-left .left-content{
+    width: 100%;
+    height: 51%;
+}
+body .container-accueil .accueil-left .left-content ul{
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-left .left-content ul a{
+    text-decoration: none;
+    color: #111;
+}
+body .container-accueil .accueil-left .left-content ul a li{
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px 0;
+    transition: 0.5s ease color;
+}
+body .container-accueil .accueil-left .left-content ul a li:hover{
+    color: rgb(110, 110, 110);
+}
+body .container-accueil .accueil-left .left-footer{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-left .left-footer a{
+    text-decoration: none;
+    width: 75%;
+    height: 55%;
+    color: #fff;
+    background-color: var(--blue1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 17px;
+    letter-spacing: 1px;
+    transition: 0.5s ease background;
+}
+body .container-accueil .accueil-left .left-footer a:hover{
+    background: rgb(2, 141, 255);
+}
+
+body .container-accueil .accueil-right{
+    width: 70%;
+    height: 100%;
+    padding: 20px 60px;
+}
+body .container-accueil .accueil-right a.rocket{
+    position: fixed;
+    bottom: 4%;
+    left: 32%;
+    animation: bounce 0.35s ease infinite alternate;
+}
+@keyframes bounce{
+    from{transform: translateY(0);}
+    to{transform: translateY(-8px);}
+}
+body .container-accueil .accueil-right a.rocket:hover {
+    cursor: help;
+}
+body .container-accueil .accueil-right a.rocket span {
+    display: none
+}
+body .container-accueil .accueil-right a.rocket:hover span {
+    border: #c0c0c0 1px dotted;
+    padding: 5px 20px 5px 5px;
+    display: block;
+    z-index: 100;
+    background: url(../images/status-info.png) #f0f0f0 no-repeat 100% 5%;
+    left: 0px;
+    margin: 10px;
+    width: 250px;
+    position: absolute;
+    top: 10px;
+    text-decoration: none
+}
+body .container-accueil .accueil-right .right-header{
+    width: 100%;
+    height: 23%;
+    display: flex;
+    flex-direction: column;
+}
+body .container-accueil .accueil-right .right-header form{
+    width: 90%;
+    height: 65%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-right .right-header form img{
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+body .container-accueil .accueil-right .right-header form input{
+    border: 1px solid gray;
+    border-radius: 30px;
+    background: #fff;
+    font-size: 15px;
+    width: 70%;
+    height: 45px;
+    padding: 0 15px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s ease background;
+}
+body .container-accueil .accueil-right .right-header form input:hover{
+    background: #EBEBEB;
+}
+body .container-accueil .accueil-right .right-header .filtres{
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-right .right-header .filtres hr{
+    width: 65%;
+    margin-right: 10px;
+}
+body .container-accueil .accueil-right .right-header .filtres p{
+    margin: 0;
+    font-size: 12px;
+    color: rgb(66, 66, 66);
+    margin-right: 5px;
+}
+body .container-accueil .accueil-right .right-header .filtres button{
+    background: none;
+    border: none;
+    color: rgb(66, 66, 66);
+    font-size: 12px;
+    margin: 0 5px;
+    outline: none;
+    transition: 0.5s ease color;
+}
+body .container-accueil .accueil-right .right-header .filtres button:hover{
+    color: #111;
+}
+body .container-accueil .accueil-right .right-content{
+    width: 100%;
+    height: 77%;
+    max-height: 77%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+body .container-accueil .accueil-right .right-content::-webkit-scrollbar{
+    display: none;
+}
+body .container-accueil .accueil-right .right-content .carte-publication{
+    width: 95%;
+    min-height: 40%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 15px auto;
+    border-radius: 5px;
+    padding: 5px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-header{
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 5px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-right{
+    width: 25%;
+    height: 100%;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left img{
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left p{
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-right p{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 11px;
+    color: rgb(56, 56, 56);
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content{
+    width: 100%;
+    height: 70%;
+    padding: 8px 10px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content p{
+    word-break: break-all;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+
+body .container-accueil .accueil-right .profil-header{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-right .profil-header h1{
+    font-weight: 400;
+}
+body .container-accueil .accueil-right .profil-content{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-right .profil-content input{
+    width: 49%;
+    height: 35px;
+    margin: 10px 0;
+    padding: 0 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+body .container-accueil .accueil-right .profil-content img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+body .container-accueil .accueil-right .profil-footer{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-right .profil-footer button{
+    width: 50%;
+    height: 40%;
+    border: none;
+    border-radius: 5px;
+    background: var(--blue1);
+    color: #fff;
+    outline: none;
+}
+
+body .container-accueil .accueil-right .projets-header{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-accueil .accueil-right .projets-header h1{
+    font-weight: 400;
+}
+body .container-accueil .accueil-right .projets-content{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+body .container-accueil .accueil-right .projets-content .carte{
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-image img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-title{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 5px;
+    margin-bottom: 0;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-title h2{
+    font-size: 25px;
+    margin-bottom: 0;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-title p{
+    margin-bottom: 0;
+    font-size: 12px;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-actions{
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: rgb(241, 241, 241);
+    transition: all 0.3s ease;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-actions:hover{
+    background: rgba(115, 115, 255, 0.151);
+}
+
+/* Pop-up de publication */
+body .clickPublications{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 17, 17, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+body .clickPublications .newPub{
+    background-color: #fff;
+    width: 40%;
+    height: 70vh;
+    padding: 20px;
+    border-radius: 5px;
+}
+body .clickPublications .newPub .header{
+    display: flex;
+    justify-content: space-between;
+}
+body .clickPublications .newPub .header h1{
+    margin: 20px 0 0 30px;
+    font-size: 20px;
+    font-weight: 400;
+}
+body .clickPublications .newPub .header p{
+    margin: 20px 30px 0 0;
+    font-size: 20px;
+    text-align: right;
+    cursor: pointer;
+}
+body .clickPublications .newPub .profil{
+    height: 10%;
+    width: 100%;
+    padding: 0 30px 0 30px;
+    display: flex;
+}
+body .clickPublications .newPub .profil img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+body .clickPublications .newPub .profil p{
+    margin: 0;
+    font-weight: 600;
+    line-height: 20px;
+}
+body .clickPublications .newPub .profil small{
+    color: #000000ad;
+}
+body .clickPublications .newPub .profil .npp{
+    margin-left: 20px;
+}
+body .clickPublications .newPub .contenu{
+    height: 50%;
+    width: 100%;
+    padding: 10px 30px 0 30px;
+}
+body .clickPublications .newPub .contenu form{
+    height: 95%;
+}
+body .clickPublications .newPub .contenu textarea{
+    resize: none;
+    width: 100%;
+    height: 80%;
+    border: none;
+    outline: none;
+}
+body .clickPublications .newPub .contenu button[type = 'button']{
+    border: none;
+    background: none;
+    color: rgb(0, 47, 202);
+    font-weight: 400;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+body .clickPublications .newPub .contenu button[type = 'button']:hover{
+    background: rgba(0, 54, 233, 0.1);
+}
+body .clickPublications .newPub .contenu button[type = 'submit']{
+    float: right;
+    border: none;
+    background: rgba(223, 215, 215, 0.4);
+    cursor: pointer;
+    border-radius: 20px;
+    width: 20%;
+    outline: none;
+    height: 15%;
+    background: rgb(0, 50, 214);
+    color: #fff;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+body .clickPublications .newPub .contenu button[type = 'submit']:hover{
+    background: rgb(0, 40, 172);
+}
+body .clickPublications .newPub .interactionsUtilisateur{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(223, 215, 215, 0.4);
+    padding: 10px 30px 0 30px;
+    height: 23.7%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+body .clickPublications .newPub .interactionsUtilisateur input{
+    display: none;
+}
+body .clickPublications .newPub .interactionsUtilisateur label{
+    cursor: pointer;
+    background: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-top: 5px;
+    transition: background 0.5s ease;
+}
+body .clickPublications .newPub .interactionsUtilisateur input:hover + label{
+    background: rgba(223, 215, 215, 0.4);
+}
+body .clickPublications .newPub .interactionsUtilisateur input:checked + label{
+    background: rgba(0, 54, 233, 0.2);
+}
+
+/* Reponsivité */
+@media screen and (max-width: 1500px){
+    body .container-accueil .accueil-right .right-header .filtres p, body .container-accueil .accueil-right .right-header .filtres button{
+        font-size: 9px;
+    }
+    body .container-accueil .accueil-right .right-header .filtres hr{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    body .container-accueil .accueil-left .left-actions .btnDeconnexion, body .container-accueil .accueil-left .left-actions .btnAdmin{
+        width: 25px;
+    }
+    body .container-accueil .accueil-right .right-header .filtres hr{
+        width: 50%;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-right p{
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 1010px){
+    body .container-accueil .accueil-left .left-header img{
+        width: 50px;
+        height: 50px;
+    }
+    body .container-accueil .accueil-left .left-header p#nomAndPrenom{
+        font-size: 17px;
+    }
+    body .container-accueil .accueil-left .left-header p#poste{
+        font-size: 12px;
+        color: rgb(83, 83, 83);
+        font-weight: 400;
+    }
+    body .container-accueil .accueil-left .left-content ul a li{
+        font-size: 14px;
+    }
+    body .container-accueil .accueil-left .left-footer a{
+        font-size: 15px;
+    }
+    body .container-accueil .accueil-right .right-header form img{
+        width: 40px;
+        height: 40px;
+    }
+    body .container-accueil .accueil-right .right-header form input{
+        font-size: 13px;
+        width: 70%;
+        height: 35px;
+    }
+    body .container-accueil .accueil-right .right-header .filtres hr{
+        width: 40%;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-right p{
+        font-size: 8px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left img{
+        width: 30px;
+        height: 30px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left p{
+        font-size: 14px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-content p{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 960px){
+    body .container-accueil{
+        background: none;
+        display: block;
+    }
+    body .container-accueil .accueil-left{
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    body .container-accueil .accueil-right{
+        border-radius: 5px;
+    }
+    body .container-accueil .accueil-right{
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 100%;
+    }
+    body .container-accueil .accueil-right a.rocket{
+        position: fixed;
+        top: 188%;
+        left: 92%;
+    }
+    body .container-accueil .accueil-left .left-actions .btnDeconnexion, body .container-accueil .accueil-left .left-actions .btnAdmin{
+        width: 35px;
+    }
+    body .container-accueil .accueil-left .left-header img{
+        width: 90px;
+        height: 90px;
+    }
+    body .container-accueil .accueil-left .left-header p#nomAndPrenom{
+        font-size: 25px;
+    }
+    body .container-accueil .accueil-left .left-header{
+        height: auto;
+    }
+    body .container-accueil .accueil-left .left-header p#poste{
+        font-size: 18px;
+        color: rgb(83, 83, 83);
+        font-weight: 400;
+    }
+    body .container-accueil .accueil-left .left-content ul a li{
+        font-size: 20px;
+    }
+    body .container-accueil .accueil-left .left-footer a{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    body .container-accueil .accueil-right .right-header form img{
+        width: 55px;
+        height: 55px;
+    }
+    body .container-accueil .accueil-right .right-header form input{
+        font-size: 16px;
+        height: 45px;
+    }
+    body .container-accueil .accueil-right .right-header .filtres hr{
+        width: 60%;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-right p{
+        font-size: 11px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left img{
+        width: 40px;
+        height: 40px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left p{
+        font-size: 18px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-content p{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    body .container-accueil .accueil-right{
+        padding: 10px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication{
+        width: 100%;
+        min-height: 40%;
+        height: auto;
+    }
+    body .container-accueil .accueil-right a.rocket{
+        top: 188%;
+        left: 103%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    body .container-accueil .accueil-left .left-actions .btnDeconnexion, body .container-accueil .accueil-left .left-actions .btnAdmin{
+        width: 25px;
+    }
+    body .container-accueil .accueil-left .left-header img{
+        width: 50px;
+        height: 50px;
+    }
+    body .container-accueil .accueil-left .left-header p#nomAndPrenom{
+        font-size: 16px;
+    }
+    body .container-accueil .accueil-left .left-header p#poste{
+        font-size: 13px;
+        color: rgb(83, 83, 83);
+        font-weight: 400;
+    }
+    body .container-accueil .accueil-left .left-content ul a li{
+        font-size: 14px;
+    }
+    body .container-accueil .accueil-left .left-footer a{
+        font-size: 14px;
+        margin-bottom: 0px;
+    }
+
+    body .container-accueil .accueil-right .right-header form img{
+        width: 35px;
+        height: 35px;
+    }
+    body .container-accueil .accueil-right .right-header form input{
+        font-size: 13px;
+        height: 30px;
+    }
+    body .container-accueil .accueil-right .right-header .filtres hr{
+        width: 10%;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-right p{
+        font-size: 8px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left img{
+        width: 30px;
+        height: 30px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-header .header-left p{
+        font-size: 12px;
+    }
+    body .container-accueil .accueil-right .right-content .carte-publication .publication-content p{
+        font-size: 11px;
+    }
+    .circle1, .circle2{
+        display: none;
+    }
+}

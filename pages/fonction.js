@@ -9,7 +9,7 @@ function togglePassword(id){
 }
 
 function openPublications(){
-    document.getElementById("clickPublications").style.display = "block";
+    document.getElementById("clickPublications").style.display = "flex";
 }
 
 function closePublications(){
@@ -21,9 +21,9 @@ function ajoutHashtag(){
 }
 
 function filtreDecroissant(){
-    document.getElementById("main-section").style.flexDirection = "column-reverse";
+    document.getElementById("right-content").style.flexDirection = "column-reverse";
 }
 
 function filtreCroissant(){
-    document.getElementById("main-section").style.flexDirection = "column";
+    document.getElementById("right-content").style.flexDirection = "column";
 }

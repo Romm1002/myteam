@@ -104,7 +104,13 @@ class Administration extends Modele{
     }
 
     public function recuperationContacts(){
-        $requete = $this->getBdd()->prepare("SELECT nom, prenom, photoProfil FROM utilisateurs");
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs");
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function recuperationMessages(){
+        $requete = $this->getBdd()->prepare("SELECT * FROM messagerie ORDER BY idMessage DESC");
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }

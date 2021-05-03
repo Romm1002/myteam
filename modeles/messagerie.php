@@ -13,7 +13,7 @@ class Messagerie extends Modele{
     }
     
     public function newMessage($envoyeur, $receveur, $contenu){
-        $requete = $this->getBdd()->prepare("INSERT INTO messagerie(envoyeur, receveur, contenu) VALUES(?, ?, ?)");
+        $requete = $this->getBdd()->prepare("INSERT INTO messagerie(envoyeur, receveur, contenu, heure) VALUES(?, ?, ?, NOW())");
         $requete->execute([$envoyeur, $receveur, $contenu]);
     }
     

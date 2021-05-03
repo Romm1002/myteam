@@ -108,6 +108,11 @@ body .gestion .gestion-header .titre-header{
     display: flex;
     align-items: center;
 }
+body .gestion .gestion-header h1{
+    margin-bottom: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
 body .gestion .gestion-header .titre-header h1{
     margin-bottom: 0;
     font-size: 30px;
@@ -190,17 +195,12 @@ body .gestion .gestion-content input{
     width: 100px;
 }
 body .gestion .gestion-content button{
-    background: #11a1e4;
     border: none;
     border-radius: 5px;
-    width: 75%;
-    height: 100%;
-    padding: 2px;
-    color: #fff;
-    transition: 0.5s ease all;
-}
-body .gestion .gestion-content button:hover{
-    background-color: var(--blue2);
+    padding: 5px;
+    color: #999;
+    float: right;
+    font-size: 10px;
 }
 
 body .gestion .gestion-footer{

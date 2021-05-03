@@ -117,7 +117,7 @@ $Administration = new Administration();
                             <h1>Gestion des membres</h1>
                         </div>
                         <div class="search-header">
-                            <form action="#" method="post">
+                            <form method="post">
                                 <input type="text" name="chercherMembre" id="chercherMembre" placeholder="Filtre...">
                                 <button type="submit">
                                     <i class="fas fa-search"></i>
@@ -135,21 +135,35 @@ $Administration = new Administration();
                                 <th>Prénom</th>
                                 <th>Adresse e-mail</th>
                                 <th>Date de naissance</th>
-                                <th>Action</th>
                             </thead>
                             <tbody>
                                 <?php
-                                foreach($Administration->membres() as $membre){
+                                foreach($membres as $membre){
                                     ?>
                                     <tr id="<?=$membre["idUtilisateur"];?>">
                                         <td><?=$membre["idUtilisateur"];?></td>
-                                        <td><?=$membre["nom"];?></td>
-                                        <td><?=$membre["prenom"];?></td>
-                                        <td><?=$membre["email"];?></td>
-                                        <td><?=substr($membre["dateNaiss"], 8, 2) . " " . $Administration->dateMois(substr($membre["dateNaiss"], 5, 2)) . " " . substr($membre["dateNaiss"], 0, 4);?></td>
                                         <td>
-                                            <button type="button" onclick="modifierMembres()">Modifier</button>
+                                            <?=$membre["nom"];?>
+                                            <button onclick="changeInputType('nom<?=$membre['idUtilisateur'];?>', event)">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <input type="hidden" id="nom<?=$membre["idUtilisateur"];?>" name="nom<?=$membre["idUtilisateur"];?>" value="<?=$membre["nom"];?>">
                                         </td>
+                                        <td>
+                                            <?=$membre["prenom"];?>
+                                            <button onclick="changeInputType('prenom<?=$membre['idUtilisateur'];?>', event)">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <input type="hidden" id="prenom<?=$membre["idUtilisateur"];?>" name="prenom<?=$membre["idUtilisateur"];?>" value="<?=$membre["prenom"];?>">
+                                        </td>
+                                        <td>
+                                            <?=$membre["email"];?>
+                                            <button onclick="changeInputType('email<?=$membre['idUtilisateur'];?>', event)">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <input type="hidden" id="email<?=$membre["idUtilisateur"];?>" name="email<?=$membre["idUtilisateur"];?>" value="<?=$membre["email"];?>">
+                                        </td>
+                                        <td><?=substr($membre["dateNaiss"], 8, 2) . " " . $Administration->dateMois(substr($membre["dateNaiss"], 5, 2)) . " " . substr($membre["dateNaiss"], 0, 4);?></td>
                                     </tr>
                                     <?php
                                 }
@@ -160,8 +174,46 @@ $Administration = new Administration();
                     <div class="gestion-footer"></div>
                 </div>
                 <?php
+            }else if($_GET["pages"] == "messagerie"){
+                ?>
+                <div class="gestion">
+                    <div class="gestion-header">
+                        <h1>Historique des derniers message échangés</h1>
+                    </div>
+                    <div class="gestion-content">
+                        <table>
+                            <thead>
+                                <th>N°</th>
+                                <th>Envoyeur</th>
+                                <th>Receveur</th>
+                                <th>Contenu</th>
+                                <th>Heure</th>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach($Administration->recuperationMessages() as $message){
+                                    ?>
+                                    <tr>
+                                        <td><?=$message["idMessage"];?></td>
+                                        <td><?=$message["envoyeur"];?></td>
+                                        <td><?=$message["receveur"];?></td>
+                                        <td><?=$message["contenu"];?></td>
+                                        <td><?=$message["heure"];?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php
             }
         }
+
             ?>
     </div>
+
+
+    <script src="scriptAdministration.js"></script>
 </body>

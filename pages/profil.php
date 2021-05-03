@@ -7,7 +7,116 @@ $InfosProfil = new InfoProfils();
 $informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
 ?>
 
+<head>
+    <link rel="stylesheet" href="../pages/styles/styleProfil.css">
+</head>
+
 <body>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <div class="container-profil">
+        <div class="profil-left">
+            <div class="left-actions">
+                <!-- Bouton de déconnexion -->
+                <a href="../pages/deconnexion.php" title="Se déconnecter">
+                    <img src="images/power.png" class="btnDeconnexion" alt="Bouton de déconnexion" width="35">
+                </a>
+                <!-- Bouton accès à l'administration si le idPoste est à 3 qui correspond à ADMIN -->
+                <?php
+                if($informationsProfil["idposte"] == 3){
+                    ?>
+                    <a href="../pages/equipe.php?pages=membre" title="Accéder à l'administration">
+                        <img src="images/admin.png" class="btnAdmin" alt="Bouton accès administration" width="35">
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+            <div class="left-header">
+                <img src="<?=$informationsProfil["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="65" height="65">
+                <p id="nomAndPrenom"><?=$informationsProfil["prenom"] . " " . $informationsProfil["nom"];?></p>
+                <p id="poste"><?=$informationsProfil["poste"];?></p>
+            </div>
+            <div class="left-content">
+                <ul>
+                    <a href="../pages/accueil.php">
+                        <li>Accueil</li>
+                    </a>
+                    <a href="../pages/planning.php">
+                        <li>Planning</li>
+                    </a>
+                    <a href="../pages/listeProjets.php">
+                        <li>Projets</li>
+                    </a>
+                    <a href="../pages/profil.php">
+                        <li>Profil</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="left-footer">
+                <a href="#">MESSAGERIE</a>
+            </div>
+        </div>
+
+        <div class="profil-right">
+            <?php
+            if(empty($_GET)){
+            ?>
+                <!-- Fusée qui permet de revenir au début de publications -->
+                <a name="top"></a>
+                <a href="#top" class="rocket">
+                    <img src="images/rocket.png" alt="Retour top" width="35">
+                    <span>La fusée permet de revenir au début des publications !</span>
+                </a>
+
+                <div class="right-header">
+                    <form action="#" method="post">
+                        <img src="<?=$informationsProfil["photoProfil"];?>" width="50" height="50">
+                        <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
+                    </form>
+
+                    <div class="filtres">
+                        <hr>
+                        <p>Classer par : </p>
+                        <button type="submit" onclick="filtreCroissant()">Plus récent</button>
+                        <button type="submit" onclick="filtreDecroissant()">Moins récent</button>
+                    </div>
+                </div>
+                <div class="right-content" id="right-content">
+                    <?php
+                    foreach($publications as $publication){
+                        ?>
+                        <div class="carte-publication <?=$publication["typePublication"] == "annonce" ? "bg-primary" : "";?>">
+                            <div class="publication-header">
+                                <div class="header-left">
+                                    <img src="<?=$publication["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="40" height="40">
+                                    <p><?=$publication["nom"] . " " . $publication["prenom"];?></p>
+                                </div>
+                                <div class="header-right">
+                                    <p><?=$publication["datePublication"];?></p>
+                                </div>
+                            </div>
+                            <div class="publication-content">
+                                <p><?=$publication["contenuPublication"];?></p>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+<!-- <body>
 <?php
 if(!empty($_GET)){
     if(!empty($_GET["validate"] == "OK")){
@@ -136,4 +245,4 @@ if(!empty($_GET)){
         </section>
         
     </main>
-</body>
+</body> -->

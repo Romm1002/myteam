@@ -3,7 +3,7 @@ require_once "../traitements/header.php";
 require_once "../traitements/planning.php";
 ?>
 
-<link rel="stylesheet" href="stylePlanning.css">
+<link rel="stylesheet" href="../pages/stylePlanning.css">
 <body>
     <?php
     if(!empty($_GET["ajout"])){

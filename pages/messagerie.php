@@ -20,7 +20,7 @@ require_once "../traitements/messagerie.php";
         <section class="glass">
             <div class="dashboard">
                 <div class="dashboard-header">
-                    <a href="index.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
+                    <a href="accueil.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
                     <form method="POST">
                         <div class="column">
                             <label for="filtreRecherche">Filtre</label>

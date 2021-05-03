@@ -3,62 +3,106 @@ require_once "../traitements/header.php";
 ?>
 
 <head>
-    <link rel="stylesheet" href="css/styleInscription&Connexion.css">
+    <link rel="stylesheet" href="../pages/styles/styleInscription.css">
 </head>
 
-<body class="d-flex justify-content-center">
-<a href="index.php">
-    <img src="images/logoMYTEAM/logo.svg" id="logoIndex">
-</a>
+<body>
+    <!-- Background de fond -->
+    <video src="../pages/images/bgConnexion.mp4" muted autoplay loop></video>
 
-<video muted autoplay loop id="BgInscription">
-    <source src="images/Bg.mp4" type="video/mp4">
-</video>
+    <img id="logoInscription" src="images/logoMYTEAM/logo.svg" alt="Logo de MyTeam" width="200">
 
-<div id="formInscription">
-    <h1>Inscription</h1>
-    <form method="POST">
-        <div class="form-group d-flex">
-            <div class="mr-2">
-                <label for="nom" class="form-control-lg mb-0">Nom</label>
-                <input type="text" class="form-control form-control-lg" id="nom" name="nom" placeholder="Entrer votre nom" value="<?=(isset($nom) ? $nom : "")?>" required>    
-            </div>
-            <div>
-                <label for="prenom" class="form-control-lg mb-0">Prénom</label>
-                <input type="text" class="form-control form-control-lg" id="prenom" name="prenom" placeholder="Entrer votre prénom" value="<?=(isset($prenom) ? $prenom : "")?>" required>
-            </div>
+
+    <div class="container-inscription">
+        <div class="inscription-header">
+            <h1>Inscription</h1>
         </div>
+        <div class="inscription-content">
+            <form action="../traitements/inscription.php" method="post">
+                <div class="form-ligne">
+                    <div class="ligne-left">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" value="<?=(isset($nom) ? $nom : "")?>" required>
+                    </div>
+                    <div class="ligne-right">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" value="<?=(isset($prenom) ? $prenom : "")?>" required>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="email" class="form-control-lg mb-0">Adresse email</label>
-            <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Adresse email" value="<?=(isset($email) ? $email : "")?>" required>
-        </div>
+                <div class="form-ligne-solo">
+                    <label for="email">Adresse email</label>
+                    <input type="email" id="email" name="email" placeholder="Adresse e-mail" value="<?=(isset($email) ? $email : "")?>" required>
+                </div>
 
-        <div class="form-group">
-            <label for="datenaiss" class="form-control-lg mb-0">Date de naissance</label>
-            <input type="date" class="form-control form-control-lg" id="datenaiss" name="datenaiss" value="<?=(isset($datenaiss) ? $datenaiss : "")?>" required>
-        </div>
+                <div class="form-ligne-solo">
+                    <label for="datenaiss">Date de naissance</label>
+                    <input type="date" id="datenaiss" name="datenaiss" value="<?=(isset($datenaiss) ? $datenaiss : "")?>" required>
+                </div>
 
-        <div class="form-group d-flex">
-            <div class="mr-2">
-                <label for="mdp" class="form-control-lg mb-0">Mot de passe</label>
-                <input type="password" class="form-control form-control-lg" id="mdp" name="mdp" placeholder="mot de passe"> 
-                <img src="images/eye.png" onclick="togglePassword('mdp')" class="field-icon">
-            </div>
-            <div>
-                <label for="Cmdp" class="form-control-lg mb-0">Confirmation</label>
-                <input type="password" class="form-control form-control-lg" id="Cmdp" name="Cmdp" placeholder="Confirmer">
-                <img src="images/eye.png" onclick="togglePassword('Cmdp')" class="field-icon">
-            </div>
-        </div>
+                <div class="form-ligne">
+                    <div class="ligne-left">
+                        <label for="mdp">Mot de passe</label>
+                        <input type="password" id="mdp" name="mdp" placeholder="Mot de passe"> 
+                        <img src="images/eye.png" onclick="togglePassword('mdp')" id="mdp1" width="25">
+                    </div>
 
-        <div class="text-center d-flex justify-content-center flex-column mt-4">
-        <a href="index.php" class="mb-3 lien">Tu as déjà un compte ?</a>
-            <button type="submit" class="btn btn-info btn-lg" name="envoi" value="1">Envoyer</button>
+                    <div class="ligne-right">
+                        <label for="Cmdp">Confirmation</label>
+                        <input type="password" id="Cmdp" name="Cmdp" placeholder="Confirmez">
+                        <img src="images/eye.png" onclick="togglePassword('Cmdp')" id="mdp2" width="25">
+                    </div>
+                </div>
+
+                <a href="../pages/index.php">Tu as déjà un compte ? C'est ICI !</a>
         </div>
-    </form>
-</div>
+        <div class="inscription-footer">
+                <button type="submit" name="envoi" value="1">S'inscrire</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 <?php
-require_once "../traitements/inscription.php";
+if(!empty($_GET)){
+    if($_GET["error"] == "invalideEmail"){
+        ?>
+        <div class="alert alert-danger">
+            L'adresse e-mail saisi n'est pas valide !
+        </div>
+        <?php
+    }else if($_GET["error"] == "notSamePasswords"){
+        ?>
+        <div class="alert alert-danger">
+            Les mots de passe ne sont pas identiques !
+        </div>
+        <?php
+    }else if($_GET["error"] == "passwordLen"){
+        ?>
+        <div class="alert alert-danger">
+            Votre mot de passe fait moins de 8 caractères !
+        </div>
+        <?php
+    }else if($_GET["error"] == "empty"){
+        ?>
+        <div class="alert alert-danger">
+            Les champs ci-dessous ne peuvent pas être vides !
+        </div>
+        <?php
+    }else if($_GET["error"] == "yes"){
+        ?>
+        <div class="alert alert-danger">
+            Votre inscription à échouée ! Veuillez réessayer.
+        </div>
+        <?php
+    }
+    else if($_GET["error"] == "no"){
+        ?>
+        <div class="alert alert-success">
+            L'inscription à été réalisée ! Vous pouvez désormais vous connectez !
+        </div>
+        <?php
+    }
+    
+}
+?>

@@ -1,41 +1,68 @@
 <?php
 require_once "../traitements/header.php";
-require_once "../traitements/connexion.php";
 ?>
 
 <head>
-    <link rel="stylesheet" href="css/styleInscription&Connexion.css">
+    <link rel="stylesheet" href="../pages/styles/styleConnexion.css">
 </head>
 
-<body class="d-flex justify-content-center">
-<a href="index.php" id="logoIndex">
-    <img src="images/logoMYTEAM/logo.svg">
-</a>
+<body>
+    <!-- Background de fond -->
+    <video src="../pages/images/bgConnexion.mp4" muted autoplay loop></video>
 
-<video muted autoplay loop id="BgConnexion">
-    <source src="images/Bg.mp4" type="video/mp4">
-</video>
+    <img id="logoConnexion" src="images/logoMYTEAM/logo.svg" alt="Logo de MyTeam" width="200">
 
-<div id="formConnexion">
-    <h1>Connexion</h1>
-    <form method="post">
-        <div class="form-group">
-            <label for="email" class="form-control-lg mb-0">Adresse email </label>
-            <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Entrer votre adresse email" value="<?=(isset($email) ? $email : "")?>" required>
+
+    <div class="container-connexion">
+        <div class="connexion-header">
+            <h1>Connexion</h1>
         </div>
-        <div class="form-group">
-            <label for="mdp" class="form-control-lg mb-0">Mot de passe</label>
-            <input type="password" class="form-control form-control-lg" id="mdp" name="mdp" placeholder="Mot de passe"  required>
-            <img src="images/eye.png" onclick="togglePassword('mdp')" class="field-icon">
+        <div class="connexion-content">
+            <form action="../traitements/connexion.php" method="post">
+                <label for="email">Adresse email </label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" value="<?=(isset($email) ? $email : "")?>" required>
+
+                <label for="mdp">Mot de passe</label>
+                <input type="password" id="mdp" name="mdp" placeholder="Mot de passe"  required>
+                <img src="../pages/images/eye.png" onclick="togglePassword('mdp')" class="field-icon" width="25">
+
+                <a href="../pages/inscription.php">Vous n'êtes pas encore inscrit ? C'est ICI !</a>
+            </div>
+        <div class="connexion-footer">
+                <button type="submit" name="envoi" value="1">Se connecter</button>
+            </form>
         </div>
-        <div class="text-center d-flex justify-content-center flex-column">
-            <a href="inscription.php" class="mb-3 lien">Vous n'êtes pas encore inscrit ?</a>
-            <button type="submit" class="btn btn-info btn-lg" name="envoi" value="1">Se connecter</button>
-        </div>
-    </form>
-</div>
+    </div>
 </body>
 
 <?php
-require_once "../traitements/connexion.php";
+// Affichage des erreurs en fonction du GET
+if(!empty($_GET)){
+    if($_GET["error"] == "invalideEmail"){
+        ?>
+        <div class="alert alert-danger">
+            L'adresse e-mail saisi est invalide !
+        </div>
+        <?php
+    }else if($_GET["error"] == "mdp"){
+        ?>
+        <div class="alert alert-danger">
+            Le mot de passe saisi est incorrect !
+        </div>
+        <?php
+    }else if($_GET["error"] == "emailInexistant"){
+        ?>
+        <div class="alert alert-danger">
+            L'adresse e-mail saisi n'existe pas !
+        </div>
+        <?php
+    }else if($_GET["error"] == "empty"){
+        ?>
+        <div class="alert alert-danger">
+            Tous les champs ci-dessous sont obligatoires !
+        </div>
+        <?php
+    }
+}
+
 ?>

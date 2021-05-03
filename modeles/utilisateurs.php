@@ -17,4 +17,10 @@ class Utilisateurs extends Modele{
         return $requete->fetch(PDO::FETCH_ASSOC);
         return $requete->rowCount();
     }
+
+    public function profil($idUtilisateur){
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs INNER JOIN postes USING(idposte) WHERE idUtilisateur = ?");
+        $requete->execute([$idUtilisateur]);
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
 }
