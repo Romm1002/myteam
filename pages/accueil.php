@@ -109,6 +109,48 @@ $Projets->selectionProjets();
                             </div>
                             <div class="publication-content">
                                 <p><?=$publication["contenuPublication"];?></p>
+
+
+                                <div class="content-actions">
+                                    <div class="actions">
+                                        <a href="../traitements/like.php">
+                                            <button type="submit">J'aime</button>
+                                        </a>
+                                        <a id="<?=$publication["idPublication"];?>" href="#">
+                                            <button type="button" onclick="showRepondre('publication-reponse<?=$publication['idPublication'];?>')">Répondre</button>
+                                        </a>
+                                    </div>
+                                    <div class="jaime">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <?=$publication["jaime"];?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="publication-reponses" id="publication-reponse<?=$publication["idPublication"];?>">
+                                <label for="reponse">Répondre : </label>
+                                <form action="../traitements/repondre.php" method="POST">
+                                    <input type="text" name="reponse">
+                                    <button type="submit" name="id" value="<?=$publication["idPublication"];?>">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </form>
+                                    <?php
+                                    $reponses = $Publication->reponses($publication["idPublication"]);
+                                    foreach($reponses as $reponse){
+                                        ?>
+                                        <div class="reponse">
+                                            <div class="reponse-header">
+                                                <img src="<?=$reponse["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
+                                                <h6><?=$reponse["nom"] . " " . $reponse["prenom"];?></h6>
+                                            </div>
+                                            <div class="reponse-content">
+                                                <p><?=$reponse["reponse"];?></p>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                             </div>
                         </div>
                         <?php

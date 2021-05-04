@@ -27,3 +27,12 @@ function filtreDecroissant(){
 function filtreCroissant(){
     document.getElementById("right-content").style.flexDirection = "column";
 }
+
+function showRepondre(id){
+    var div = document.getElementById(id);
+    if(div.style.display == "none"){
+        document.getElementById(id).style.display = "block";
+    }else{
+        document.getElementById(id).style.display = "none";
+    }
+}

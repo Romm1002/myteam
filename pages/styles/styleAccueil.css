@@ -259,7 +259,6 @@ body .container-accueil .accueil-right .right-content::-webkit-scrollbar{
 }
 body .container-accueil .accueil-right .right-content .carte-publication{
     width: 95%;
-    min-height: 40%;
     height: auto;
     background-color: rgba(255, 255, 255, 0.5);
     margin: 15px auto;
@@ -302,13 +301,69 @@ body .container-accueil .accueil-right .right-content .carte-publication .public
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content{
     width: 100%;
-    height: 70%;
     padding: 8px 10px;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content p{
     word-break: break-all;
     margin-bottom: 0;
     font-size: 14px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions{
+    width: 100%;
+    display: flex;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .actions{
+    display: flex;
+    width: 50%;
+    align-items: flex-end;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .actions button{
+    color: #111;
+    font-size: 11px;
+    background: none;
+    border: none;
+    outline: none;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .jaime{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions p{
+    font-size: 11px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions p:hover{
+    text-decoration: underline;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions a:nth-child(2){
+    margin-left: 5px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses{
+    display: none;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse{
+    width: 90%;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 15px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse .reponse-header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse .reponse-header img{
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse .reponse-header h6{
+    margin-bottom: 0;
 }
 
 /* Pop-up de publication */
