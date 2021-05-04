@@ -28,5 +28,10 @@ class Messagerie extends Modele{
         $requete->execute(["%" . $s1 . "%", "%" . $s1 . "%", $idUtilisateur]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function deleteMessage($idMessage){
+        $requete = $this->getBdd()->prepare("DELETE FROM messagerie WHERE idMessage = ?");
+        $requete->execute([$idMessage]);
+    }
 }
 ?>

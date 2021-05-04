@@ -182,6 +182,14 @@ body .gestion .gestion-content th:nth-child(1){
 body .gestion .gestion-content td{
     padding: 10px;
 }
+body .gestion .gestion-content td a.deleteMessage{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    background: rgb(243, 53, 53);
+    color: #fff;
+    text-decoration: none;
+}
 body .gestion .gestion-content td:nth-child(1){
     text-align: center;
     font-weight: 600;

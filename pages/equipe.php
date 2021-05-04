@@ -188,6 +188,7 @@ $Administration = new Administration();
                                 <th>Receveur</th>
                                 <th>Contenu</th>
                                 <th>Heure</th>
+                                <th>Actions</th>
                             </thead>
                             <tbody>
                                 <?php
@@ -198,7 +199,10 @@ $Administration = new Administration();
                                         <td><?=$message["envoyeur"];?></td>
                                         <td><?=$message["receveur"];?></td>
                                         <td><?=$message["contenu"];?></td>
-                                        <td><?=$message["heure"];?></td>
+                                        <td><?=substr($message["heure"], 8, 2) . " " . $Administration->dateMois(substr($message["heure"], 5, 2)) . " " . substr($message["heure"], 0, 4) . " à " . substr($message["heure"], 11, 5);?></td>
+                                        <td>
+                                            <a class="deleteMessage" href="../traitements/deleteMessage.php?idMessage=<?=$message["idMessage"];?>">SUPPRIMER</a>
+                                        </td>
                                     </tr>
                                     <?php
                                 }

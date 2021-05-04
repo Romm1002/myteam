@@ -1,5 +1,6 @@
 <?php
 
+
 $Administration = new Administration();
 
 //verif du grade
