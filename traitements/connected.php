@@ -1,7 +1,5 @@
 <?php
-if(empty($_SESSION)){
-    header("location:../pages/index.php");
-}else{
+if(!empty($_SESSION)){
     header("location:../pages/accueil.php");
 }
 ?>

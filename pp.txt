@@ -1,18 +1,46 @@
-<div class="carte <?=$publication["typePublication"] == "annonce" ? "bg-primary" : "";?>" id="carte"> 
-                                <div>
-                                    <img src="<?=$publication["photoProfil"];?>" class="photoDeProfil" alt="Photo de profil" width="40" height="40">
-                                    <strong>
-                                        <span class="h5 mt-1">
-                                            <?=$publication["nom"] . " " . $publication["prenom"];?>
-                                        </span>
-                                    </strong> 
-                                </div>
-        
-                                <br>
-                                <br>
-                                <br>
-        
-                                <p class="contenuPublication"><?=$publication["contenuPublication"];?></p>
-                            
-                                <small class="text-muted mr-4"><?=$publication["datePublication"];?></small>
-                            </div>
+if(!empty($_GET["validate"])){
+                    if(!empty($_GET["validate"] == "OK")){
+                    ?>
+                    <div class="alert alert-success mt-3 position-absolute w-50 text-center">
+                        Vos modifications ont bien été enregistrées !
+                    </div>
+                    <?php
+                    }else if(!empty($_GET["validate"] == "NO")){
+                    ?>
+                    <div class="alert alert-danger mt-3 position-absolute w-50 text-center">
+                        Erreur : Vos modifications n'ont pas été enregistrées !
+                    </div>
+                    <?php
+                    }
+                }
+                ?>
+                <div class="profil-header">
+                    <h1>Paramètres de votre compte</h1>
+                </div>
+                <div class="profil-content">
+                    <form action="../traitements/profil.php" method="post" enctype="multipart/form-data">
+                        <div class="infosNomPrenom">
+                            <input type="text" placeholder="Nom" name="nom" value="<?=$informationsProfil["nom"];?>">
+                            <input type="text" placeholder="Prénom" name="prenom" value="<?=$informationsProfil["prenom"];?>">
+                        </div>
+
+                        <div class="infosPdp">
+                            <img src="<?=$informationsProfil["photoProfil"];?>" alt="test" width="50" height="50" style="object-fit: cover">
+                            <label for="file" class="label-file ml-3">Choisir une image</label>
+                            <input id="file" class="input-file" type="file" name="pdp">
+                        </div>
+
+                        <div class="infosEmail">
+                            <input type="email" placeholder="Adresse email" name="email" value="<?=$informationsProfil["email"];?>">
+                        </div>
+
+                        <div class="infosMdp">
+                            <a href="modificationMdp.php">Modifier le mot de passe</a>
+                        </div>
+
+                </div>
+                <div class="profil-footer">
+                        <button type="submit" id="btnProfil">Enregistrer les modifications</button>
+                    </form>
+                </div>
+                <?php

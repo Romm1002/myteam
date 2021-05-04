@@ -1,5 +1,6 @@
 <?php
 require_once "../traitements/header.php";
+require_once "../traitements/connected.php";
 ?>
 
 <head>

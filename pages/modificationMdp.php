@@ -1,95 +1,67 @@
 <?php
 require_once "../traitements/header.php";
 
-$informationsProfil = profil($_SESSION["idUtilisateur"]);
+$Utilisateur = new Utilisateurs;
+
+$informationsProfil = $Utilisateur->profil($_SESSION["idUtilisateur"]);
 
 if(!empty($_GET)){
-    if(!empty($_GET["validate"]) == "NOsame"){
+    if($_GET["validate"] == "no"){
         ?>
-        <div class="alert alert-danger mt-3 index-50 position-absolute w-50 text-center">
-            Vos mots de passe ne sont pas identiques !
+        <div class="alert alert-danger">
+            Les mots de passe ne correspondent pas ou sont inférieurs à 8 caractères !
         </div>
         <?php
-    }else if(!empty($_GET["validate"]) == "NOlength"){
+    }else if($_GET["validate"] == "error"){
         ?>
-        <div class="alert alert-danger mt-3 index-50 position-absolute w-50 text-center">
-            Vos mots de passe font moins de 8 caractères !
+        <div class="alert alert-danger">
+            Une erreur à eu lieu. Veuillez réessayer !
+        </div>
+        <?php
+    }else if($_GET["validate"] == "yes"){
+        ?>
+        <div class="alert alert-success">
+            Votre mot de passe à bien été modifié !
         </div>
         <?php
     }
 }
-
 ?>
+
+<head>
+    <link rel="stylesheet" href="../pages/styles/styleModificationMdp.css">
+</head>
+
 <body>
+    <!-- Logo MyTeam -->
+    <img src="../pages/images/logoMYTEAM/logo.svg" alt="Logo de MyTeam" width="220">
 
-    <main>
-        
-        <div class="circle1"></div>
-        <div class="circle2"></div>
+    <!-- Décorations d'arrière plan -->
+    <div class="circle1"></div>
+    <div class="circle2"></div>
 
-        <section class="glass">
-            <div class="dashboard">
-
-                <a href="deconnexion.php">
-                    <img src="images/power.png" class="btnDeconnexion" alt="Bouton de déconnexion" width="35">
-                </a>
-                <?php
-                if(($informationsProfil["idposte"]) == 3){
-                    ?>
-                    <a href="equipe.php">
-                        <img src="images/admin.png" class="btnAdmin" alt="Bouton accès administration" width="35">
-                    </a>
-                    <?php
-                }
-                ?>
-
-
-                <div class="user">
-                    <img src="<?=$informationsProfil["photoProfil"];?>" class="photoDeProfil mb-1" alt="Photo de profil de <?=$informationsProfil["nom"] . " " . $informationsProfil["prenom"];?>" width="70" height="70">
-                    <h3 class="h2"><?=$informationsProfil["nom"] . " " . $informationsProfil["prenom"];?></h3>
-                    <p class="m-0 text-muted"><?=$informationsProfil["poste"];?></p>
+    <!-- Conteneur de la modification du MDP -->
+    <div class="container-mdp">
+        <div class="container-header">
+            <a href="../pages/accueil.php?page=profil">
+                <i class="fas fa-arrow-circle-left"></i>
+            </a>
+            <h1>Modifier son mot de passe</h1>
+        </div>
+        <div class="container-content">
+            <form action="../traitements/modificationMdp.php" method="post">
+                <div class="mdp">
+                    <label for="newMdp">Nouveau mot de passe</label>
+                    <input type="password" name="newMdp" placeholder="Nouveau mot de passe" required>
                 </div>
-
-                <div class="links">
-                    <ul class="h5">
-                        <a href="accueil.php">
-                            <li class="mb-3">Accueil</li>
-                        </a>
-                        <a href="calendrier.php">
-                            <li class="mb-3">Emploi du temps</li>
-                        </a>
-                        <a href="listeProjets.php">
-                            <li class="mb-3">Projets</li>
-                        </a>
-                        <a href="profil.php">
-                            <li class="mb-3">Profil</li>
-                        </a>
-                    </ul>
+                <div class="mdp">
+                    <label for="repeatMdp">Répétez le nouveau mot de passe</label>
+                    <input type="password" name="repeatMdp" placeholder="Répétez le nouveau mot de passe">
                 </div>
-
-                <div class="messagerie">
-                    <a href="messagerie.php" class="btn">Messagerie</a>
-                </div>
-            </div>
-
-            <div class="reseau">
-                <div class="modificationMotDePasse">
-
-                    <h1 class="mt-4">Modification du mot de passe</h1>
-                    <hr>
-        
-                    <form action="../traitements/modificationMdp.php" method="post">
-                        <label for="mdp">Nouveau mot de passe</label>
-                        <input type="password" name="mdp" id="mdp" placeholder="Nouveau mot de passe...">
-        
-                        <label for="confirmationMdp">Nouveau mot de passe</label>
-                        <input type="password" name="confirmationMdp" id="confirmationMdp" placeholder="Confirmation...">
-
-                        <button type="submit">Modifier</button>
-                    </form>
-                </div>
-
-            </div>
-        </section>
-    </main>
+        </div>
+        <div class="container-footer">
+                <button type="submit">Modifier</button>
+            </form>
+        </div>
+    </div>
 </body>

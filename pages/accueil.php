@@ -1,6 +1,7 @@
 <?php
 require_once "../traitements/header.php";
 require_once "../traitements/accueil.php";
+require_once "../traitements/notConnected.php";
 
 $Utilisateur = new Utilisateurs();
 $Publication = new Publication();
@@ -69,10 +70,11 @@ $Projets->selectionProjets();
 
         <div class="accueil-right">
             <?php
+            // L'accueil
             if(empty($_GET)){
             ?>
                 <!-- Fusée qui permet de revenir au début de publications -->
-                <a name="top"></a>
+                <a name="top" id="top"></a>
                 <a href="#top" class="rocket">
                     <img src="images/rocket.png" alt="Retour top" width="35">
                     <span>La fusée permet de revenir au début des publications !</span>
@@ -114,50 +116,37 @@ $Projets->selectionProjets();
                     ?>
                 </div>
             <?php
+            // Profil
             }else if($_GET["page"] == "profil"){
-                if(!empty($_GET["validate"])){
-                    if(!empty($_GET["validate"] == "OK")){
-                    ?>
-                    <div class="alert alert-success mt-3 position-absolute w-50 text-center">
-                        Vos modifications ont bien été enregistrées !
-                    </div>
-                    <?php
-                    }else if(!empty($_GET["validate"] == "NO")){
-                    ?>
-                    <div class="alert alert-danger mt-3 position-absolute w-50 text-center">
-                        Erreur : Vos modifications n'ont pas été enregistrées !
-                    </div>
-                    <?php
-                    }
-                }
                 ?>
                 <div class="profil-header">
-                    <h1>Paramètres de votre compte</h1>
+                    <h1>Paramètres de votre profil</h1>
                 </div>
                 <div class="profil-content">
                     <form action="../traitements/profil.php" method="post" enctype="multipart/form-data">
-                        <div class="infosNomPrenom">
-                            <input type="text" placeholder="Nom" name="nom" value="<?=$informationsProfil["nom"];?>">
-                            <input type="text" placeholder="Prénom" name="prenom" value="<?=$informationsProfil["prenom"];?>">
+                        <div class="content-nom content-box">
+                            <label for="nom">Nom</label>
+                            <input type="text" name="nom" placeholder="Nom..." value="<?=$informationsProfil["nom"];?>" required>
                         </div>
-
-                        <div class="infosPdp">
-                            <img src="<?=$informationsProfil["photoProfil"];?>" alt="test" width="50" height="50" style="object-fit: cover">
-                            <label for="file" class="label-file ml-3">Choisir une image</label>
-                            <input id="file" class="input-file" type="file" name="pdp">
+                        <div class="content-prenom content-box">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" name="prenom" placeholder="Prénom..." value="<?=$informationsProfil["prenom"];?>" required>
                         </div>
-
-                        <div class="infosEmail">
-                            <input type="email" placeholder="Adresse email" name="email" value="<?=$informationsProfil["email"];?>">
+                        <div class="content-pdp content-box">
+                            <label for="pdp">Photo de profil</label>
+                            <input type="file" name="pdp">
                         </div>
-
-                        <div class="infosMdp">
-                            <a href="modificationMdp.php">Modifier le mot de passe</a>
+                        <div class="content-email content-box">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" name="email" placeholder="Adresse e-mail..." value="<?=$informationsProfil["email"];?>" required>
                         </div>
-
+                        <div class="content-mdp content-box">
+                            <label for="mdp">Mot de passe</label>
+                            <a href="../pages/modificationMdp.php">Modifier votre mot de passe</a>
+                        </div>
                 </div>
                 <div class="profil-footer">
-                        <button type="submit" id="btnProfil">Enregistrer les modifications</button>
+                        <button type="submit">Modifier mon profil</button>
                     </form>
                 </div>
                 <?php
