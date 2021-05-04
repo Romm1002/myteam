@@ -46,19 +46,20 @@ table#calendrier{
 }
 #planning{
     width: 65%;
-    height: 400px;
+    height: 500px;
+    max-height: 80vh;
     margin: 40px 20px 40px 40px;
     display: flex;
 }
 .horaire{
     position: relative;
     left: -10px;
+    height: 20px;
 }
 .evenement{
     width: 100px;
-    height: 50px;
+    min-height: 50px;
     position: relative;
-    top: 50%;
     background-color: white;
     border: solid black 1px;
 }

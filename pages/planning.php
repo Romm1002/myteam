@@ -107,7 +107,10 @@ require_once "../traitements/planning.php";
                 $j+= 1;
             }
             ?>
-            
+            <div class="evenement" style="top:25%;height:20%;"></div>
+            <div class="evenement" style="top:20%;height:10%;"></div>
+            <div class="evenement" style="top:25%;height:20%;"></div>
+            <div class="evenement" style="top:60%;height:20%;"></div>
         </div>
             
         </section>
