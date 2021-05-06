@@ -97,7 +97,7 @@ $Projets->selectionProjets();
                     <?php
                     foreach($publications as $publication){
                         ?>
-                        <div class="carte-publication <?=$publication["typePublication"] == "annonce" ? "bg-primary" : "";?>">
+                        <div class="carte-publication <?=$publication["typePublication"] == "annonce" ? "bg-primary" : "";?>" id="publication<?=$publication["idPublication"];?>">
                             <div class="publication-header">
                                 <div class="header-left">
                                     <img src="<?=$publication["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="40" height="40">
@@ -113,27 +113,26 @@ $Projets->selectionProjets();
 
                                 <div class="content-actions">
                                     <div class="actions">
-                                        <a href="../traitements/like.php">
-                                            <button type="submit">J'aime</button>
-                                        </a>
+                                        <form action="../traitements/like.php" method="post">
+                                            <button type="submit" name="buttonJaime" value="<?=$publication["idPublication"];?>">J'aime</button>
+                                        </form>
+                                        <p>&nbsp;&#8226;&nbsp;</p>
                                         <a id="<?=$publication["idPublication"];?>" href="#">
-                                            <button type="button" onclick="showRepondre('publication-reponse<?=$publication['idPublication'];?>')">Répondre</button>
+                                            <button type="button" onclick="showRepondre('publication-reponse<?=$publication['idPublication'];?>')">Commentaires</button>
                                         </a>
                                     </div>
                                     <div class="jaime">
                                         <i class="far fa-thumbs-up"></i>
-                                        <?=$publication["jaime"];?>
+                                        <p><?=$publication["jaime"];?></p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="publication-reponses" id="publication-reponse<?=$publication["idPublication"];?>">
-                                <label for="reponse">Répondre : </label>
+                            <div class="publication-reponses" id="publication-reponse<?=$publication["idPublication"];?>" style="display: none;">
+                                <label for="reponse">Commentaires : </label>
                                 <form action="../traitements/repondre.php" method="POST">
-                                    <input type="text" name="reponse">
-                                    <button type="submit" name="id" value="<?=$publication["idPublication"];?>">
-                                        <i class="fas fa-check"></i>
-                                    </button>
+                                    <textarea name="reponse" cols="80" rows="5" placeholder="Laissez un commentaire à cette publication !"></textarea>
+                                    <button type="submit" name="id" value="<?=$publication["idPublication"];?>">Répondre</button>
                                 </form>
                                     <?php
                                     $reponses = $Publication->reponses($publication["idPublication"]);

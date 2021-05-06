@@ -311,11 +311,24 @@ body .container-accueil .accueil-right .right-content .carte-publication .public
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions{
     width: 100%;
     display: flex;
+    background: rgba(255, 255, 255, 0.5);
+    align-items: center;
+    height: 25px;
+    padding: 0 10px;
+    margin-top: 15px;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .actions{
     display: flex;
     width: 50%;
-    align-items: flex-end;
+    align-items: center;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .actions form{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .actions form button:hover{
+    text-decoration: underline;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .actions button{
     color: #111;
@@ -328,21 +341,23 @@ body .container-accueil .accueil-right .right-content .carte-publication .public
     width: 50%;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
 }
-body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions p{
-    font-size: 11px;
-    margin-top: 8px;
-    cursor: pointer;
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions .jaime i{
+    font-size: 12px;
+    margin-right: 3px;
 }
-body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions p:hover{
-    text-decoration: underline;
+body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions a{
+    display: flex;
+    align-items: center;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions a:nth-child(2){
     margin-left: 5px;
 }
-body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses{
-    display: none;
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses textarea{
+    resize: none;
+    padding: 5px;
+    font-size: 12px;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse{
     width: 90%;
