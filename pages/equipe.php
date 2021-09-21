@@ -2,6 +2,8 @@
 require_once "../traitements/header.php";
 require_once "../traitements/equipe.php";
 $Administration = new Administration();
+$Projets = new Projets();
+
 ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 <link rel="stylesheet" href="../pages/styleAdministration.css">
@@ -134,7 +136,9 @@ $Administration = new Administration();
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Adresse e-mail</th>
+                                <th>Poste</th>
                                 <th>Date de naissance</th>
+                                <th>Gérer</th>
                             </thead>
                             <tbody>
                                 <?php
@@ -144,7 +148,7 @@ $Administration = new Administration();
                                         <td><?=$membre["idUtilisateur"];?></td>
                                         <td>
                                             <?=$membre["nom"];?>
-                                            <button onclick="changeInputType('nom<?=$membre['idUtilisateur'];?>', event)">
+                                            <button onclick="changeInputType('nom<?=$membre['idUtilisateur'];?>')">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
                                             <input type="hidden" id="nom<?=$membre["idUtilisateur"];?>" name="nom<?=$membre["idUtilisateur"];?>" value="<?=$membre["nom"];?>">
@@ -163,7 +167,12 @@ $Administration = new Administration();
                                             </button>
                                             <input type="hidden" id="email<?=$membre["idUtilisateur"];?>" name="email<?=$membre["idUtilisateur"];?>" value="<?=$membre["email"];?>">
                                         </td>
+                                        <td><?=$membre["poste"];?></td>
                                         <td><?=substr($membre["dateNaiss"], 8, 2) . " " . $Administration->dateMois(substr($membre["dateNaiss"], 5, 2)) . " " . substr($membre["dateNaiss"], 0, 4);?></td>
+                                        <td id="gerer_membre">
+                                            <a href="#">Modifier</a>
+                                            <a href="#">Supprimer</a>
+                                        </td>
                                     </tr>
                                     <?php
                                 }
@@ -210,6 +219,37 @@ $Administration = new Administration();
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <?php
+            }else if($_GET["pages"] == "projets"){
+                ?>
+                <div class="gestion">
+                    <div class="gestion-header">
+                        <h1>Les projets en cours</h1>
+                    </div>
+                    <div class="gestion-content cards">
+                        <?php
+                        foreach($Projets->selectionProjets() as $projet){
+                            ?>
+                            <div class="projet-card">
+                                <div class="card-hero">
+                                    <img src="<?php echo $projet["image"];?>" alt="Image d'illustration" width="100%">
+                                </div>
+                                <div class="card-header">
+                                    <h1><?php echo $projet["nomProjet"];?></h1>
+                                </div>
+                                <div class="card-content">
+                                    <p><?php echo $projet["descriptionProjet"];?></p>
+                                </div>
+                                <div class="card-footer">
+                                    <p><?php echo "Du " . $projet["dateDebut"] . " au " . $projet["dateFin"];?></p>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+
                 </div>
                 <?php
             }

@@ -1,6 +1,6 @@
 <?php
 require_once "../modeles/modele.php";
-$InfosProfil = new InfoProfils();
+$InfosProfil = new Utilisateurs();
 // if(empty($_SESSION["grade"]) || $_SESSION["grade"] < 1){
 //     header("location:index.php");
 // }

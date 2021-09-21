@@ -27,7 +27,7 @@ require_once "../traitements/connected.php";
                 <input type="password" id="mdp" name="mdp" placeholder="Mot de passe"  required>
                 <img src="../pages/images/eye.png" onclick="togglePassword('mdp')" class="field-icon" width="25">
 
-                <a href="../pages/inscription.php">Vous n'êtes pas encore inscrit ? C'est ICI !</a>
+                <a id="goto" href="../pages/inscription.php">Vous n'êtes pas encore inscrit ? C'est ICI !</a>
             </div>
         <div class="connexion-footer">
                 <button type="submit" name="envoi" value="1">Se connecter</button>

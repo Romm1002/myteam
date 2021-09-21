@@ -104,3 +104,17 @@ body .container-connexion .connexion-footer button{
     position: absolute;
     top: 15%;
 }
+
+/* Style version mobile */
+@media screen and (max-width: 400px){
+    body img#logoConnexion{
+        width: 150px;
+    }
+
+    body .container-connexion{
+        width: 75%;
+    }
+    a#goto{
+        font-size: 10px;
+    }
+}

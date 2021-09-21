@@ -1,7 +1,7 @@
 <?php
 require_once "../modeles/modele.php";
 
-$Utilisateur = new InfoProfils;
+$Utilisateur = new Utilisateurs();
 
 $erreurs = 0;
 

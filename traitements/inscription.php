@@ -57,7 +57,7 @@ if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
             $mdp = password_hash($mdp, PASSWORD_BCRYPT);
 
             // On insère les données du formulaire en BDD
-            $Utilisateurs->insertionInscription($_POST["nom"], $_POST["prenom"], $_POST["datenaiss"], $_POST["email"], $mdp, 2, "../pages/images/avatar/photoProfil.jpg");
+            $Utilisateurs->insertionInscription($_POST["nom"], $_POST["prenom"], $_POST["datenaiss"], $_POST["email"], $mdp, 1, "../pages/images/avatar/photoProfil.jpg");
             header("location:../pages/inscription.php?error=no");
         }catch(Exception $e){
             header("location:../pages/inscription.php=error=yes");

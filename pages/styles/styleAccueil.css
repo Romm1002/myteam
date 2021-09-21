@@ -253,6 +253,7 @@ body .container-accueil .accueil-right .right-content{
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    scroll-behavior: smooth;
 }
 body .container-accueil .accueil-right .right-content::-webkit-scrollbar{
     display: none;
@@ -354,16 +355,47 @@ body .container-accueil .accueil-right .right-content .carte-publication .public
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions a:nth-child(2){
     margin-left: 5px;
 }
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses{
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses form{
+    display: flex;
+    flex-direction: column;
+}
 body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses textarea{
     resize: none;
     padding: 5px;
     font-size: 12px;
+    outline: none;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses hr{
+    margin: 3px 0 5px 0;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses hr.hr2{
+    margin-top: 10px;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses button{
+    border: none;
+    padding: 5px;
+    font-size: 13px;
+    width: 25%;
+    margin-top: 8px;
+    background: var(--blue1);
+    color: #fff;
+    letter-spacing: 0.5px;
+    transition: 0.5s ease background;
+}
+body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses button:hover{
+    background: rgb(27, 76, 182);
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse{
-    width: 90%;
+    width: 95%;
     background: rgba(255, 255, 255, 0.5);
     margin: 0 auto;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding: 15px;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-reponses .reponse .reponse-header{

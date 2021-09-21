@@ -98,13 +98,13 @@ class Administration extends Modele{
     }
 
     public function recherche($s1){
-        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs WHERE prenom LIKE ? OR nom LIKE ?");
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs LEFT JOIN postes USING(idposte) WHERE prenom LIKE ? OR nom LIKE ?");
         $requete->execute(["%" . $s1 . "%", "%" . $s1 . "%"]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function recuperationContacts(){
-        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs");
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs LEFT JOIN postes USING(idposte)");
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }

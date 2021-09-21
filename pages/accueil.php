@@ -12,7 +12,6 @@ $publications = $Publication->publications();
 $InfosProfil = new InfoProfils();
 $Projets = new Projets();
 
-$informationsProfil = $InfosProfil->profil($_SESSION["idUtilisateur"]);
 $Projets->selectionProjets();
 ?>
 
@@ -33,7 +32,7 @@ $Projets->selectionProjets();
                 </a>
                 <!-- Bouton accès à l'administration si le idPoste est à 3 qui correspond à ADMIN -->
                 <?php
-                if($informationsProfil["idposte"] == 3){
+                if($informationsProfil["idposte"] == 2){
                     ?>
                     <a href="../pages/equipe.php?pages=membre" title="Accéder à l'administration">
                         <img src="images/admin.png" class="btnAdmin" alt="Bouton accès administration" width="35">
@@ -74,7 +73,6 @@ $Projets->selectionProjets();
             if(empty($_GET)){
             ?>
                 <!-- Fusée qui permet de revenir au début de publications -->
-                <a name="top" id="top"></a>
                 <a href="#top" class="rocket">
                     <img src="images/rocket.png" alt="Retour top" width="35">
                     <span>La fusée permet de revenir au début des publications !</span>
@@ -94,10 +92,11 @@ $Projets->selectionProjets();
                     </div>
                 </div>
                 <div class="right-content" id="right-content">
+                    <a name="top" id="top"></a>
                     <?php
                     foreach($publications as $publication){
                         ?>
-                        <div class="carte-publication <?=$publication["typePublication"] == "annonce" ? "bg-primary" : "";?>" id="publication<?=$publication["idPublication"];?>">
+                        <div class="carte-publication" style="<?=$publication["typePublication"] == "annonce" ? "background: #739bff" : "";?>" id="publication<?=$publication["idPublication"];?>">
                             <div class="publication-header">
                                 <div class="header-left">
                                     <img src="<?=$publication["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="40" height="40">
@@ -129,11 +128,13 @@ $Projets->selectionProjets();
                             </div>
 
                             <div class="publication-reponses" id="publication-reponse<?=$publication["idPublication"];?>" style="display: none;">
+                                <hr>
                                 <label for="reponse">Commentaires : </label>
                                 <form action="../traitements/repondre.php" method="POST">
                                     <textarea name="reponse" cols="80" rows="5" placeholder="Laissez un commentaire à cette publication !"></textarea>
                                     <button type="submit" name="id" value="<?=$publication["idPublication"];?>">Répondre</button>
                                 </form>
+                                <hr class="hr2">
                                     <?php
                                     $reponses = $Publication->reponses($publication["idPublication"]);
                                     foreach($reponses as $reponse){
