@@ -427,7 +427,7 @@ body .clickPublications{
 body .clickPublications .newPub{
     background-color: #fff;
     width: 40%;
-    height: 70vh;
+    /* height: 80vh; */
     padding: 20px;
     border-radius: 5px;
 }
@@ -471,6 +471,7 @@ body .clickPublications .newPub .contenu{
     height: 50%;
     width: 100%;
     padding: 10px 30px 0 30px;
+    margin-bottom: 10px;
 }
 body .clickPublications .newPub .contenu form{
     height: 95%;
@@ -478,7 +479,7 @@ body .clickPublications .newPub .contenu form{
 body .clickPublications .newPub .contenu textarea{
     resize: none;
     width: 100%;
-    height: 80%;
+    height: 200px;
     border: none;
     outline: none;
 }
@@ -503,7 +504,7 @@ body .clickPublications .newPub .contenu button[type = 'submit']{
     border-radius: 20px;
     width: 20%;
     outline: none;
-    height: 15%;
+    height: 25px;
     background: rgb(0, 50, 214);
     color: #fff;
     font-weight: 600;
@@ -539,6 +540,20 @@ body .clickPublications .newPub .interactionsUtilisateur input:hover + label{
 }
 body .clickPublications .newPub .interactionsUtilisateur input:checked + label{
     background: rgba(0, 54, 233, 0.2);
+}
+body .clickPublications .newPub .autres{
+    width: 100%;
+    margin-top: 20px;
+}
+body .clickPublications .newPub .autres i{
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+body .clickPublications .newPub .autres i:hover{
+    background: rgba(0, 54, 233, 0.3);
 }
 
 /* Projet */
@@ -643,14 +658,6 @@ body .container-accueil .accueil-right .profil-footer button{
     color: #fff;
 }
 
-a#mentions_legales{
-    position: absolute;
-    bottom: 2%;
-    right: 1%;
-    color: #333;
-    font-size: 11px;
-    font-weight: bold;
-}
 
 /* Reponsivité */
 @media screen and (max-width: 1500px){
@@ -864,72 +871,66 @@ a#mentions_legales{
 
 
 
-
-/* PLANIFICATION */
-
-body section.main_div{
-    width: 98%;
-    height: 65%;
-    margin: 20px auto;
+body .main_div{
+    width: 100%;
+    height: 100%;
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 250px 1fr;
     grid-template-rows: 50px 1fr;
 }
 
-body section.main_div .top_left{
+body .main_div .top_left{
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    padding: 0 15px;
-    border: 2px solid #111;
+    padding: 0px 15px;
+    border: 2px solid #000;
     border-top-left-radius: 5px;
 }
-body section.main_div .top_left p{
+body .main_div .top_left p{
+    margin-bottom: 0px;
     font-weight: 500;
-    font-size: 15px;
 }
 
-body section.main_div .top_right{
+body .main_div .top_right{
     border-left: none;
     overflow-x: scroll;
     overflow-y: hidden;
     display: flex;
 }
-body section.main_div .top_right::-webkit-scrollbar{
+body .main_div .top_right::-webkit-scrollbar{
     display: none;
 }
-body section.main_div .top_right div.date{
+body .main_div .top_right div.date{
     border: 2px solid #111;
     border-right: none;
     font-size: 11px;
     font-weight: 500;
     height: 100%;
-    min-width: 36px;
-    max-width: 36px;
+    min-width: 40px;
+    max-width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-body section.main_div .top_right div.date:nth-child(1){
+body .main_div .top_right div.date:nth-child(1){
     border-left: none;
 }
-body section.main_div .top_right div.date:nth-last-child(-n+1){
+body .main_div .top_right div.date:nth-last-child(-n+1){
     border-right: 2px solid #111;
 }
 
-
-body section.main_div .bottom_left{
+body .main_div .bottom_left{
     border: 2px solid #111;
     border-top: none;
     max-height: 100%;
     overflow-y: scroll;
     overflow-x: scroll;
 }
-body section.main_div .bottom_left::-webkit-scrollbar{
+body .main_div .bottom_left::-webkit-scrollbar{
     display: none;
 }
-body section.main_div .bottom_left div.bl_ligne{
+body .main_div .bottom_left div.bl_ligne{
     width: 100%;
     height: 35px;
     display: flex;
@@ -943,10 +944,10 @@ body section.main_div .bottom_left div.bl_ligne{
     font-weight: 500;
     padding-left: 10px;
 }
-body section.main_div .bottom_left div.bl_ligne:nth-child(1){
+body .main_div .bottom_left div.bl_ligne:nth-child(1){
     border-top: none;
 }
-body section.main_div .bottom_left div.nom_projet{
+body .main_div .bottom_left div.nom_projet{
     height: 30px;
     border: 2px solid #111;
     border-bottom: none;
@@ -958,12 +959,11 @@ body section.main_div .bottom_left div.nom_projet{
     align-items: center;
     background: rgb(221, 221, 221);
 }
-body section.main_div .bottom_left div.nom_projet:nth-last-child(-n+1){
+body .main_div .bottom_left div.nom_projet:nth-last-child(-n+1){
     border-bottom: none;
 }
 
-
-body section.main_div .bottom_right{
+body .main_div .bottom_right{
     border: 2px solid #111;
     border-top: none;
     border-left: none;
@@ -971,78 +971,92 @@ body section.main_div .bottom_right{
     max-height: 100%;
     overflow-y: scroll;
 }
-body section.main_div .bottom_right .classMain{
+body .main_div .bottom_right .classMain{
     display: flex;
     flex-wrap: wrap;
 }
-body section.main_div .bottom_right .classMain .ligne_total{
+body .main_div .bottom_right .classMain .ligne_total{
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: nowrap;
 }
-body section.main_div .bottom_right .classMain .ligne_total div.total{
+body .main_div .bottom_right{
+    border: 2px solid #111;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+body .main_div .bottom_right .classMain{
+    display: flex;
+    flex-wrap: wrap;
+}
+body .main_div .bottom_right .classMain .ligne_total{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+body .main_div .bottom_right .classMain .ligne_total div.total{
     border: 2px solid #111;
     border-bottom: none;
     border-right: none;
     font-size: 14px;
     font-weight: 500;
     height: 35px;
-    min-width: 36px;
-    max-width: 36px;
+    min-width: 40px;
+    max-width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-body section.main_div .bottom_right .classMain .ligne_total div.total:nth-last-child(-n+1){
+body .main_div .bottom_right .classMain .ligne_total div.total:nth-last-child(-n+1){
     border-right: 2px solid #111;
 }
-body section.main_div .bottom_right .classMain:nth-child(1) .ligne_total div.total{
+body .main_div .bottom_right .classMain:nth-child(1) .ligne_total div.total{
     border-top: none;
 }
-body section.main_div .bottom_right .ligne_total div.total:nth-child(1){
+body .main_div .bottom_right .ligne_total div.total:nth-child(1){
     border-left: none;
 }
-body section.main_div .bottom_right .classMain .ligne_total div.conge{
-    border: 2px solid #111;
-    border-bottom: none;
-    border-right: none;
-    font-size: 14px;
-    font-weight: 500;
-    height: 35px;
-    min-width: 36px;
-    max-width: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-body section.main_div .bottom_right .classMain .ligne_total div.conge:nth-last-child(-n+1){
-    border-right: 2px solid #111;
-}
-body section.main_div .bottom_right .classMain:nth-child(1) .ligne_total div.conge{
-    border-top: none;
-}
-body section.main_div .bottom_right .ligne_total div.conge:nth-child(1){
-    border-left: none;
-}
-body section.main_div .bottom_right .classMain div.ligne{
+body .main_div .bottom_right .classMain div.ligne{
     display: flex;
 }
-body section.main_div .bottom_right .classMain div.ligne div.detail{
+body .main_div .bottom_right .classMain div.ligne div.detail{
     border: 2px solid #111;
     border-right: none;
     border-bottom: none;
     font-size: 12px;
     height: 30px;
-    min-width: 36px;
-    max-width: 36px;
+    min-width: 40px;
+    max-width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-body section.main_div .bottom_right .classMain div.ligne div.detail:nth-child(1){
+body .main_div .bottom_right .classMain div.ligne div.detail:nth-child(1){
     border-left: none;
 }
-body section.main_div .bottom_right .classMain div.ligne div.detail:nth-last-child(-n+1){
+body .main_div .bottom_right .classMain div.ligne div.detail:nth-last-child(-n+1){
     border-right: 2px solid #111;
+}
+
+.divMedia{
+    min-height: 16.8px;
+}
+
+.red{
+    background-color: rgb(255 126 126);
+}
+.yellow{
+    background-color: rgb(236 232 162);
+}
+.green{
+    background-color: rgb(163 236 182);
+}
+.grey{
+    background: repeating-linear-gradient(56deg, rgb(59, 59, 59) 15px, rgb(59, 59, 59) 20px, grey 20px, grey 25px);
+    color: white;
 }
