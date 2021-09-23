@@ -594,6 +594,15 @@ body .container-accueil .accueil-right .profil-footer button{
     color: #fff;
 }
 
+a#mentions_legales{
+    position: absolute;
+    bottom: 2%;
+    right: 1%;
+    color: #333;
+    font-size: 11px;
+    font-weight: bold;
+}
+
 /* Reponsivité */
 @media screen and (max-width: 1500px){
     body .container-accueil .accueil-right .right-header .filtres p, body .container-accueil .accueil-right .right-header .filtres button{

@@ -258,5 +258,7 @@ $Projets->selectionProjets();
         </div>
     </div>
 
+    <a id="mentions_legales" href="mentions_legales.php">Mentions légales</a>
+
     <script src="../pages/fonction.js"></script>
 </body>
