@@ -15,5 +15,7 @@ require_once "../modeles/Administration.php";
 require_once "../modeles/fonctionCalendrier.php";
 require_once "../modeles/fonctionPlanning.php";
 require_once "../modeles/evenements.php";
+require_once "../modeles/Planifications.php";
+require_once "../modeles/Services.php";
 
 require_once "../modeles/informationsProfil.php";

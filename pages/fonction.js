@@ -20,13 +20,13 @@ function ajoutHashtag(){
     document.getElementById("textarea").value += "#";
 }
 
-function filtreDecroissant(){
-    document.getElementById("right-content").style.flexDirection = "column-reverse";
-}
+// function filtreDecroissant(){
+//     document.getElementById("right-content").style.flexDirection = "column-reverse";
+// }
 
-function filtreCroissant(){
-    document.getElementById("right-content").style.flexDirection = "column";
-}
+// function filtreCroissant(){
+//     document.getElementById("right-content").style.flexDirection = "column";
+// }
 
 function showRepondre(id){
     var div = document.getElementById(id);
