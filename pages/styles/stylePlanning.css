@@ -1,0 +1,175 @@
+
+/* STYLE PLANNING */
+table#calendrier{
+    width: 80%;
+}
+.jourCalendrier{
+    margin: 2px 0 5px 0;
+    padding-top: 0;
+    padding-bottom: 1px;
+    line-height: 1rem;
+
+}
+.nbrEvenements{
+    color: white;
+    position: relative;
+    top: 1px;
+    right: -12px;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    overflow: hidden;
+}
+.nbrEvenementsUnselected{
+    background-color: rgba(255, 0, 0, 0.6);
+}
+.nbrEvenementsSelected{
+    background-color: red;
+}
+.titre{
+    background-color: var(--blue2);
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+}
+#ajoutEvenement{
+    max-height: 40px;
+    overflow: hidden;
+    transition: 2.8s;
+}
+#ajoutEvenement:hover{
+    max-height: 1500px;
+}
+#ajoutEvenement:focus-within{
+    max-height: 1500px;
+}
+#planning-jour{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(240, 236, 236, 0.7);
+    border: solid black 1px;
+}
+#planning-jour tr{
+    border-top: solid black 1px;
+    border-bottom: solid black 1px;
+}
+#planning-jour tr td{
+    text-align: center
+}
+.horaire{
+    max-width: 50px;
+    border-right: solid black 1px;
+    font-weight: bold;
+}
+.evenement{
+    border: solid black 1px;
+}
+#planning-jour tr td h5{
+    margin: 0
+}
+
+/* BROZDEL */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Définition des couleurs principales de MyTeam */
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* Définition du style global */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+/* Définition du style de accueil.php */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
+}
+
+.circle1, .circle2{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .3));
+    height: 10rem;
+    width: 10rem;
+    position: absolute;
+    border-radius: 50%;
+}
+.circle1{
+    top: 5%;
+    right: 7%;
+}
+.circle2{
+    bottom: 5%;
+    left: 6%;
+}
+body .container-accueil{
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    display: flex;
+    backdrop-filter: blur(1rem);
+}
+body .container-accueil .accueil-left{
+    width: auto;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+body .container-accueil .accueil-left .left-actions{
+    width: 100%;
+    height: 7%;
+}
+body .container-accueil .accueil-left .left-actions a{
+    text-decoration: none;
+    margin: 0 2px;
+}
+body .container-accueil .accueil-right{
+    width: 70%;
+    height: 100%;
+    padding: 20px 60px;
+    overflow: hidden;
+}
+
+/* respônsive */
+@media screen and (max-width: 1100px){
+    body{
+        height: auto;
+        padding: 40px;
+    }
+    .container-accueil{
+        height: auto !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .accueil-right{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 600px){
+    body{
+        padding: 40px 1% !important;
+    }
+    .container-accueil{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+
+}

@@ -46,27 +46,13 @@ for($i=1; $i<=$days ; $i++){
     $calendrier[] = ['date' => $annee."-".$mois."-".$jour, 'jourDeSemaine' => $Planning->dayOfWeek($annee."-".$mois."-".$i), 'jour' => $i, 'nbr' => "", 'projet' => false];
 }
 $nbrEvenements = $Evenements->nbrEvenements(substr($date,0,7),$_SESSION["idUtilisateur"]);
-// $projets = projetsUtilisateur($_SESSION["idUtilisateur"]);
 foreach($nbrEvenements as $evenement){
     foreach($calendrier as $jour){
         if($evenement["date"] == $jour["date"]){
             $calendrier[$jour["jour"]-1]["nbr"] = $evenement["nbr"];
-            unset($nbrEvenements[$key]);
+            // unset($nbrEvenements[$key]);
         }
-    }
-    foreach($projets as $key => $projet){
-        if(substr($projet["dateDebut"],0,4) > substr($jour["date"],0,4) OR substr($projet["dateDebut"],0,7) > substr($jour["date"],0,7) OR substr($projet["dateFin"],0,7) < substr($jour["date"],0,7) OR substr($projet["dateFin"],0,4) < substr($jour["date"],0,4)){
-            unset($projets[$key]);
-        }
-        if(dateIntervalle($projet["dateDebut"],$projet["dateFin"],$jour["date"])){
-            $jour["projet"] = "true";
-        }
-        
-    }
-    echo "<pre>";
-    print_r($jour);
-    echo "</pre>";
-    
+    }    
 }
 
 $evenements = $Evenements->evenementsParDate($date,$_SESSION["idUtilisateur"]);
