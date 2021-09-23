@@ -6,7 +6,7 @@ class Projets extends Modele{
     }
     
     public function selectionProjets(){
-        $requete = $this->getBdd()->prepare("SELECT * FROM projets");
+        $requete = $this->getBdd()->prepare("SELECT projets.*, participationprojet.*, utilisateurs.nom, utilisateurs.prenom FROM projets LEFT JOIN participationprojet USING(idProjet) LEFT JOIN utilisateurs USING(idUtilisateur)");
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -15,5 +15,30 @@ class Projets extends Modele{
         $requete = $this->getBdd()->prepare("SELECT * FROM projets WHERE idProjet = ?");
         $requete->execute([$idProjet]);
         return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getDate(){
+        $requete = $this->getBdd()->prepare('SELECT date FROM plannifications');
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function plannifications($idUtilisateur, $date){
+        $requete = $this->getBdd()->prepare('SELECT * FROM plannifications WHERE idUtilisateur = ? AND date = ?');
+        // On a formater la date pour quelle soit la même qu'en BDD
+        $requete->execute([$idUtilisateur, $date->format("Y-m-d")]);
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function selection_projets(){
+        $requete = $this->getBdd()->prepare('SELECT * FROM projets');
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function recherche_projet($s1){
+        $requete = $this->getBdd()->prepare('SELECT * FROM projets WHERE libelle LIKE ?');
+        $requete->execute(['%' . $s1 . '%', '%' . $s1 . '%']);
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -4,9 +4,7 @@ require_once "../traitements/accueil.php";
 require_once "../traitements/notConnected.php";
 
 $Utilisateur = new Utilisateurs();
-$membres = $Utilisateur->users();
 $Publication = new Publication();
-$Services = new Services();
 
 $informationsProfil = $Utilisateur->profil($_SESSION["idUtilisateur"]);
 $publications = $Publication->publications();
@@ -15,17 +13,6 @@ $InfosProfil = new InfoProfils();
 $Projets = new Projets();
 
 $Projets->selectionProjets();
-
-$jours_grises = [6, 7];
-
-// // Définition de la localisation pour la date
-setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
-
-// Définition du nombre de jours par mois (mois actuel)
-$nb_day_per_month = date('t', mktime(0, 0, 0, date("n"), 1, date("Y")));
-
-// On récupère la date actuel
-$date = new DateTime('NOW');
 ?>
 
 <head>
@@ -64,9 +51,6 @@ $date = new DateTime('NOW');
                     <a href="../pages/planning.php">
                         <li>Planning</li>
                     </a>
-                    <a href="../pages/accueil.php?page=planification">
-                        <li>Planification</li>
-                    </a>
                     <a href="../pages/accueil.php?page=projets">
                         <li>Projets</li>
                     </a>
@@ -97,12 +81,12 @@ $date = new DateTime('NOW');
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
 
-                    <!-- <div class="filtres">
+                    <div class="filtres">
                         <hr>
                         <p>Classer par : </p>
                         <button type="submit" onclick="filtreCroissant()">Plus récent</button>
                         <button type="submit" onclick="filtreDecroissant()">Moins récent</button>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
@@ -205,7 +189,6 @@ $date = new DateTime('NOW');
                     </form>
                 </div>
                 <?php
-            // Projets
             }else if($_GET["page"] == "projets"){
                 ?>
                 <div class="projets-header">
@@ -217,226 +200,24 @@ $date = new DateTime('NOW');
                         ?>
                         <div class="carte">
                             <div class="card-image">
-                                <img src="<?=$projet["image"];?>" alt="Image d'illustration" width="100">
+                                <img src="<?=$projet["image"];?>" alt="Image d'illustration">
                             </div>
                             <div class="card-title">
                                 <h2>
                                     <?=$projet["nomProjet"];?>
                                 </h2>
-                                <p>Créer le <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4);?></p>
-                                <p>Fin le <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4);?></p>
-                                <p>Salariés concernés :</p>
-                                <p><?=$projet["descriptionProjet"];?></p>
+                                <p>Projet créé le <?=$projet["dateDebut"];?></p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="detailsProjets.php?idProjet=<?=$projet["idProjet"];?>">En savoir plus</a>
                             </div>
                         </div>
                         <?php
                         }
-            }else if($_GET["page"] == "planification"){
-                ?>
-                    <section class="main_div">
-            <div class="top_left">
-                <p>Employés</p>
-            </div>
-            <div class="top_right" id="top_right">
-                <?php
-                $dateColonnes = clone $date;
-                for($i=0; $i<$nb_day_per_month; $i++){
-                    if(!empty($_POST["date_debut"])){
-                        $dateColonnes = new DateTime($_POST["date_debut"]);
-                        $date = new DateTime($_POST["date_debut"]);
-                        for($i=0; $i<$nb_day_per_month; $i++){
-                            ?>
-                            <div class="date">
-                                <?php
-                                switch($dateColonnes->format("D")){
-                                    case "Mon":
-                                        echo "Lu <br>";
-                                        break;
-                                    case "Tue":
-                                        echo "Ma <br>";
-                                        break;
-                                    case "Wed":
-                                        echo "Me <br>";
-                                        break;
-                                    case "Thu":
-                                        echo "Je <br>";
-                                        break;
-                                    case "Fri":
-                                        echo "Ve <br>";
-                                        break;
-                                    case "Sat":
-                                        echo "Sa <br>";
-                                        break;
-                                    case "Sun":
-                                        echo "Di <br>";
-                                        break;
-                            }
-                                echo substr($dateColonnes->format("D d/m"), 4, 5);
-                                ?>
-                            </div>
-                            <?php
-                            $dateColonnes->add(new DateInterval('P1D'));
-                        }
-                    }else{
-                        ?>
-                        <div class="date <?=in_array($dateColonnes->format('N') == 6 || $dateColonnes->format('N') == 7, $jours_grises) ? "grey" : "";?>">
-                            <?php
-                            switch($dateColonnes->format("D")){
-                                case "Mon":
-                                    echo "Lu <br>";
-                                    break;
-                                case "Tue":
-                                    echo "Ma <br>";
-                                    break;
-                                case "Wed":
-                                    echo "Me <br>";
-                                    break;
-                                case "Thu":
-                                    echo "Je <br>";
-                                    break;
-                                case "Fri":
-                                    echo "Ve <br>";
-                                    break;
-                                case "Sat":
-                                    echo "Sa <br>";
-                                    break;
-                                case "Sun":
-                                    echo "Di <br>";
-                                    break;
-                        }
-                            echo substr($dateColonnes->format("D d/m"), 4, 5);
-                            ?>
-                        </div>
-                        <?php
-                    }
-                    $dateColonnes->add(new DateInterval('P1D'));
-                }
-                ?>
-                <div style="min-width: 17px"></div>
-            </div>
-            <div class="bottom_left" id="bottom_left">
-                <?php
-                
-                foreach($membres as $user){
-                    ?>
-                    <div class="bl_ligne">
-                        <div class="user" id="<?php echo "user" . $user["idUtilisateur"];?>">
-                            <i class='fas fa-plus'></i>
-
-                            &nbsp;
-
-                            <?php echo  $user["nom"] . ", " . $user['prenom'] . "&nbsp;&nbsp;";?>
-
-                            &nbsp;&nbsp;&nbsp;
-
-                                <?php
-                                if($Services->rowCountService($user['idUtilisateur']) >= 1){
-                                    echo '<span style="color: grey; font-weight: 400">[' . $user['nomService'] . ']</span>';
-                                }else{
-                                    ?>
-                                    <a href="index.php?iduser=<?php echo $user['idUtilisateur'] ;?>">
-                                        <i style="cursor: pointer;" class="fas fa-concierge-bell"></i>
-                                    </a>
-                                    <?php
-                                }
-                                ?>
-                        </div>
-                    </div>
-                    <?php
-                    foreach($Utilisateur->affectations($user["idUtilisateur"]) as $projet){
-                        $datePlanif = clone $date;
-                        ?>
-                        <div class="nom_projet" id="<?=$user['idUtilisateur'];?>">
-                            <div class="projet">
-                                <?php
-                                echo "&#10132;" . " " . $projet["nomProjet"];
-                                ?>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                }
-                ?>
-                <div class="divMedia"></div>
-            </div>
-            <div class="bottom_right" id="bottom_right" onscroll="overflowY()">
-                <div class="contenu" id="contenu">
-
-                <?php
-                    foreach($membres as $user){
-                        $datePlanif = clone $date;
-                    
-                        ?>
-                        <div class="classMain" id="classMain">
-                            <?php
-                            $affectationByDateAndProject = [];
-                            ?>
-                            <div class="ligne_total">
-                            <?php
-                                for($j=0; $j<$nb_day_per_month; $j++){
-                                    $plannifications = $Projets->plannifications($user["idUtilisateur"], $datePlanif);
-                                    $total = 0;
-                                    $dateIndex = $datePlanif->format('dmY');
-                                    foreach($plannifications as $plannification){
-                                        if(!isset($affectationByDateAndProject[$dateIndex])){
-                                            $affectationByDateAndProject[$dateIndex] = [];
-                                        }
-                                        $total += $plannification['ratio'];
-                                        $affectationByDateAndProject[$dateIndex][$plannification['idProjet']] = $plannification['ratio'];
-                                    }
-                                    ?>
-                                        <div class="total <?php echo ($total <= 0.5) ? 'red' : (($total < 1) ? 'yellow' : 'green');?> <?=in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises) ? "grey" : "";?>">
-                                            <?php
-                                            if(in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises)){
-                                                echo "";
-                                            }else{
-                                                echo $total;
-                                            }
-                                            ?>
-                                        </div>
-                                    <?php
-                                    $datePlanif->add(new DateInterval('P1D'));
-                                }
-                            ?>
-                            </div>
-                            <?php
-                            
-                            foreach($Utilisateur->affectations($user["idUtilisateur"]) as $projet){
-                                $datePlanif = clone $date;
-                                ?>
-                                <div class="ligne" style="background-color: rgb(221, 221, 221);">
-                                    <?php
-                                    for($k=0; $k<$nb_day_per_month; $k++){
-                                        $dateIndex = $datePlanif->format("dmY");
-                                        ?>
-                                        <div style="cursor: pointer;" class="detail <?= in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises) ? "grey" : "";?>">
-                                            <?php
-                                            if(isset($affectationByDateAndProject[$dateIndex][$projet["idProjet"]])){
-                                                echo '<p id="ratio_p" style="background: lightblue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">' . number_format($affectationByDateAndProject[$dateIndex][$projet['idProjet']], 1, ',', '') . "</p>";
-                                            }else{
-                                                echo "";
-                                            }
-                                            ?>
-                                        </div>
-                                        <?php
-                                        $datePlanif->add(new DateInterval('P1D'));
-                                    }
-                                    ?>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                        <?php
-                    }
-                ?>
-                </div>
-            </div>
-        </section>
-                <?php
             }
             ?>
-                </div>
+            
+        </div>
     </div>
 
     <!-- Pop-up d'une nouvelle publication -->
@@ -474,7 +255,7 @@ $date = new DateTime('NOW');
         </div>
     </div>
 
+    <a id="mentions_legales" href="mentions_legales.php">Mentions légales</a>
 
     <script src="../pages/fonction.js"></script>
-    <script src="../pages/script_overflow.js"></script>
 </body>
