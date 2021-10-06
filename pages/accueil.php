@@ -23,6 +23,9 @@ $Projets->selectionProjets();
 </head>
 
 <body>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
     <div class="container-accueil">
         <div class="accueil-left">
             <div class="left-actions">
@@ -42,8 +45,9 @@ $Projets->selectionProjets();
                 ?>
             </div>
             <div class="left-header">
-                <img src="<?=$informationsProfil["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="65" height="65">
-                <p id="nomAndPrenom"><?=$informationsProfil["prenom"] . " " . $informationsProfil["nom"];?></p>
+                <img src="<?=$informationsProfil["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="70" height="70" onclick="window.location = '../pages/accueil.php?page=profil'">
+
+                <p id="nomAndPrenom" onclick="window.location = '../pages/accueil.php?page=profil'"><?=$informationsProfil["prenom"] . " " . $informationsProfil["nom"];?></p>
                 <p id="poste"><?=$informationsProfil["poste"];?></p>
             </div>
             <div class="left-content">
@@ -60,9 +64,9 @@ $Projets->selectionProjets();
                     <a href="../pages/accueil.php?page=projets">
                         <li>Projets</li>
                     </a>
-                    <a href="../pages/accueil.php?page=profil">
+                    <!-- <a href="../pages/accueil.php?page=profil">
                         <li>Profil</li>
-                    </a>
+                    </a> -->
                 </ul>
             </div>
             <div class="left-footer">
@@ -86,6 +90,12 @@ $Projets->selectionProjets();
                         <img src="<?=$informationsProfil["photoProfil"];?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
+                    <div class="actions">
+                        <div class="sondage" onclick="">
+                            <i class="fas fa-poll" title="Créer un sondage"></i>
+                            <p>Créer un sondage</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
@@ -452,10 +462,13 @@ $Projets->selectionProjets();
                 <label for="projet">Créer un post simple</label>
                 </form>
             </div>  
+        </div>
+    </div>
+
+    <!-- Popup du sondage -->
+    <div class="clickSondage">
+        <div class="container">
             
-            <div class="autres">
-                <i class="fas fa-poll"></i>
-            </div>
         </div>
     </div>
 

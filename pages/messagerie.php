@@ -34,7 +34,7 @@ require_once "../traitements/messagerie.php";
                     <?php
                     foreach($contacts as $contact){
                         ?>
-                        <a href="messagerie.php?avec=<?=$contact["prenom"];?>">
+                        <a href="messagerie.php?avec=<?=$contact["idUtilisateur"];?>">
                             <div class="contacts">
                                 <img src="<?=$contact["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
                                 <p><?=$contact["prenom"] . " " . $contact["nom"];?></p>

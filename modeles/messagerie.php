@@ -1,13 +1,13 @@
 <?php
 class Messagerie extends Modele{
     public function recuperationContacts($idUtilisateur){
-        $requete = $this->getBdd()->prepare("SELECT nom, prenom, photoProfil FROM utilisateurs WHERE idUtilisateur != ?");
+        $requete = $this->getBdd()->prepare("SELECT nom, prenom, photoProfil, idUtilisateur FROM utilisateurs WHERE idUtilisateur != ?");
         $requete->execute([$idUtilisateur]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function recuperationInformationsContact($getAvec){
-        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs WHERE prenom = ?");
+        $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs WHERE idUtilisateur = ?");
         $requete->execute([$getAvec]);
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
