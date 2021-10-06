@@ -1,6 +1,6 @@
 <?php
 require_once "header.php";
-$Publications = new Publications();
+$Publications = new Publication();
 
 if($Publications->recuperationJaimes($_SESSION["idUtilisateur"], $_POST["buttonJaime"]) >= 1){
     $Publications->like($_POST["buttonJaime"]);

@@ -1,6 +1,6 @@
 <?php
 require_once "header.php";
-$Publication = new Publications();
+$Publication = new Publication();
 
 if(!empty($_POST["reponse"])){
     extract($_POST);
