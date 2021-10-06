@@ -44,27 +44,111 @@ table#calendrier{
 #ajoutEvenement:focus-within{
     max-height: 1500px;
 }
+
+#button-color-choice{
+    height: 30px;
+    width: 70px;
+    padding-left: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+#button-color-choice:focus-within #color-choice{
+    display: flex; 
+}
+#color-choice{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: auto;
+    max-height: 0px;
+    width: 25vw;
+    min-width: 100px;
+    padding: 0px;
+    background-color: rgba(193, 193, 250);
+    border-radius: 10px;
+    transform: translate(-50px, -50px);
+    transition: ease-in-out 0.3s;
+    overflow: hidden;
+    position: absolute;
+    z-index: 255;
+}
+.color-button{
+    height: 30px;
+    width: 30px;
+    padding: 1px;
+    margin: 5px;
+    border-radius: 5px;
+    border: solid 2px rgba(128, 128, 128, 0.7);
+    background: content-box;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+.color-button:hover{
+    transform: scale(1.07);
+    box-shadow: 0.5px 0.5px 7px -3px rgba(0,0,0,0.65);
+}
+.color-button:active{
+    transform: scale(1);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+#color-button-preview{
+    margin: 0px;
+}
+#color-choice input{
+    display: none;
+}
+
 #planning-jour{
     width: 100%;
     height: 100%;
     background-color: rgba(240, 236, 236, 0.7);
-    border: solid black 1px;
+    border-radius: 10px;
+    border-collapse: collapse ;
+}
+
+#planning-jour tr:first-child{
+    border-top: none;
+    border-bottom: solid black 1px;
 }
 #planning-jour tr{
     border-top: solid black 1px;
     border-bottom: solid black 1px;
 }
+#planning-jour tr:last-child{
+    border-top: solid black 1px;
+    border-bottom: none;
+}
+
 #planning-jour tr td{
     text-align: center
 }
+
 .horaire{
+    width: 50px;
     max-width: 50px;
     border-right: solid black 1px;
     font-weight: bold;
 }
 .evenement{
     border: solid black 1px;
+    background-color: rgba(0, 0, 0, 0.171);
+    position: relative;
 }
+.btn-supr{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    background-color: rgba(255, 222, 173, 0);
+    transition: ease-in-out 0.1s;
+}
+.btn-supr:hover{
+    color: rgba(110, 110, 110);
+}
+button:focus{
+    outline: none;
+}
+
 #planning-jour tr td h5{
     margin: 0
 }
@@ -147,7 +231,28 @@ body .container-accueil .accueil-right{
     overflow: hidden;
 }
 
-/* respônsive */
+.alerte{
+    min-width: auto;
+    width: 60%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 1%;
+    z-index: 500;
+}
+.bouton-dismiss{
+    position: absolute;
+    right: 1%;
+}
+.bouton-mois{
+    width: 25px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.377);
+    border: solid rgba(0, 0, 0, 0.13) 1px;
+    border-radius: 50%;
+}
+/* responsive */
 @media screen and (max-width: 1100px){
     body{
         height: auto;
@@ -155,6 +260,7 @@ body .container-accueil .accueil-right{
     }
     .container-accueil{
         height: auto !important;
+        width: 600px !important;
         display: flex;
         flex-direction: column;
     }

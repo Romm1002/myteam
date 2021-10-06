@@ -5,9 +5,9 @@ class Evenements extends Modele{
         $requete ->execute([$date,$idUtilisateur]);
         return $requete-> fetchAll(PDO::FETCH_ASSOC);
     }
-    public function ajoutEvenement($designation,$date,$heureDebut,$heureFin,$idUtilisateur){
-        $requete = $this->getBdd()->prepare("INSERT INTO evenements(designation,date,heureDebut,heureFin,idUtilisateur) VALUES(?,?,?,?,?)");
-        $requete ->execute([$designation,$date,$heureDebut,$heureFin,$idUtilisateur]);
+    public function ajoutEvenement($designation,$date,$heureDebut,$heureFin,$idUtilisateur,$couleur){
+        $requete = $this->getBdd()->prepare("INSERT INTO evenements(designation,date,heureDebut,heureFin,idUtilisateur,couleur) VALUES(?,?,?,?,?,?)");
+        $requete ->execute([$designation,$date,$heureDebut,$heureFin,$idUtilisateur,$couleur]);
     }
     public function supprEvenement($idEvenement){
         $requete = $this->getBdd()->prepare("DELETE FROM evenements WHERE idEvenement = ?");

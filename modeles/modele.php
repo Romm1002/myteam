@@ -12,7 +12,6 @@ require_once "../modeles/Publications.php";
 require_once "../modeles/Projets.php";
 require_once "../modeles/Messagerie.php";
 require_once "../modeles/Administration.php";
-require_once "../modeles/fonctionCalendrier.php";
 require_once "../modeles/fonctionPlanning.php";
 require_once "../modeles/evenements.php";
 

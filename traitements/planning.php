@@ -1,5 +1,6 @@
 <?php
 require_once "../modeles/modele.php";
+
 $Evenements = new Evenements();
 $Planning = new Planning();
 if(!empty($_GET["date"])){
@@ -7,6 +8,12 @@ if(!empty($_GET["date"])){
 }else{
     $date = date("Y-m-d");
 }
+$annee = substr($date,0,4);
+$mois = substr($date,5,2);
+$jour = substr($date,8,2);
+$dateobject= new dateTime();
+$dateobject->setDate($annee, $mois, $jour);
+
 // suppression d'un evenement
 if(!empty($_POST["supprEvenement"])){
     $Evenements->supprEvenement($_POST["supprEvenement"]);
@@ -26,7 +33,7 @@ if(!empty($_POST["designation"]) && !empty($_POST["heureDebut"])){
         header("location:../pages/planning.php?date=".$date."&ajout=2");
         exit;
     }
-    $Evenements->ajoutEvenement($designation,$date,$heureDebut,$heureFin,$_SESSION["idUtilisateur"]);
+    $Evenements->ajoutEvenement($designation,$date,$heureDebut,$heureFin,$_SESSION["idUtilisateur"],$couleur);
     header("location:../pages/planning.php?date=".$date."&ajout=OK");
     exit;
 }
@@ -43,20 +50,34 @@ for($i=1; $i<=$days ; $i++){
     }else{
         $jour = $i;
     }
-    $calendrier[] = ['date' => $annee."-".$mois."-".$jour, 'jourDeSemaine' => $Planning->dayOfWeek($annee."-".$mois."-".$i), 'jour' => $i, 'nbr' => "", 'projet' => false];
+    $calendrier[] = ['date' => $annee."-".$mois."-".$jour, 'jourDeSemaine' => $Planning->dayOfWeek($annee."-".$mois."-".$i), 'jour' => $i, 'nbr' => ""];
 }
 $nbrEvenements = $Evenements->nbrEvenements(substr($date,0,7),$_SESSION["idUtilisateur"]);
 foreach($nbrEvenements as $evenement){
     foreach($calendrier as $jour){
         if($evenement["date"] == $jour["date"]){
             $calendrier[$jour["jour"]-1]["nbr"] = $evenement["nbr"];
-            // unset($nbrEvenements[$key]);
         }
     }    
 }
 
-$evenements = $Evenements->evenementsParDate($date,$_SESSION["idUtilisateur"]);
+$jour = substr($date,8,2);
+$moisPrec;
+$moisSuiv;
+if($mois +1 == 13){
+    $moisPrec = $annee . "-" . "11" . "-" . $jour;
+    $moisSuiv = $annee+1 . "-" . "01" . "-" . $jour;
+}elseif($mois-1 == 0){
+    $moisPrec = $annee-1 . "-" . "12" . "-" . $jour;
+    $moisSuiv = $annee . "-" . "02" . "-" . $jour;
+}else{
+    $moisPrec = $annee . "-" . ($mois-1 < 10 ? "0": "") . strval($mois-1) . "-" . $jour;
+    $moisSuiv = $annee . "-" . ($mois+1 < 10 ? "0": "") . strval($mois+1) . "-" . $jour;
+}
 
+
+
+$evenements = $Evenements->evenementsParDate($date,$_SESSION["idUtilisateur"]);
 function dateMois($date){
     $mois = substr($date,5,2);
     switch($mois){
@@ -86,16 +107,3 @@ function dateMois($date){
             return "Décembre";
     }
 }
-// function dateIntervalle($debut,$fin,$test){
-//     $dateDebut = new DateTime($debut);
-//     $dateFin = new DateTime($fin);
-//     $dateTest = new DateTime($test);
-    
-
-//     if ($dateDebut >= $dateTest and $dateFin >= $dateTest){
-//         return true;
-//     }else{
-//         return false;
-//     }
-    
-// }

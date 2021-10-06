@@ -1,6 +1,7 @@
 <?php
 require_once "../traitements/header.php";
 require_once "../traitements/planning.php";
+require_once "../traitements/notConnected.php";
 ?>
 <head>
     <link rel="stylesheet" href="../pages/styles/stylePlanning.css">
@@ -8,26 +9,27 @@ require_once "../traitements/planning.php";
 
 <body>
     <?php
+    // alertes
     if(!empty($_GET["ajout"])){
         if($_GET["ajout"] == "OK"){
             ?>
-            <div class="alert alert-success alert-dismissible fade show mt-3 p-1 index-50 position-absolute w-50 d-flex justify-content-center" role="alert">
+            <div class="alert alert-success alert-dismissible fade show alerte" role="alert">
                 <p class="m-0 my-auto">L'évènement a bien été ajouté.</p>
-                <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"> X</button>
+                <button type="button" class="btn bouton-dismiss" data-bs-dismiss="alert" aria-label="Close"> X</button>
             </div>
             <?php
         }elseif($_GET["ajout"] == 2){
             ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-3 p-1 index-50 position-absolute w-50 d-flex justify-content-center" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show alerte" role="alert">
                 <p class="m-0 my-auto">L'évènement ne peut être définit en dehors des horaires de travail.</p>
-                <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"> X</button>
+                <button type="button" class="btn bouton-dismiss" data-bs-dismiss="alert" aria-label="Close"> X</button>
             </div>
             <?php
         }elseif($_GET["ajout"] == 1){
             ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-3 p-1 index-50 position-absolute w-50 d-flex justify-content-center" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show alerte" role="alert">
                 <p class="m-0 my-auto">L'évènement ne peut finir avant de commencer.</p>
-                <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"> X</button>
+                <button type="button" class="btn bouton-dismiss" data-bs-dismiss="alert" aria-label="Close"> X</button>
             </div>
             <?php
         }
@@ -41,25 +43,38 @@ require_once "../traitements/planning.php";
             <!-- bouton retour -->
             <a href="index.php" class="btnDeconnexion d-flex"> <img src="../pages/images/flecheRetour.png" width="25px"></a>
             
-            <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group mt-1">
-                <input type='date' name='date' id='date' value="<?=!empty($_GET["date"]) ? $_GET["date"] : "";?>" class="form-control"/>
+            <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group mt-5">
+                <input  style="display:none" type='date' name='date' id='date' value="<?=!empty($_GET["date"]) ? $_GET["date"] : "";?>" class="form-control"/>
                 <table class="calendrier">
                     <thead>
-                        <th colspan="7" class="text-left"><?=dateMois($date);?></th>
+                        <tr>
+                            <th>
+                                <button name="date" value="<?=$moisPrec?>" class="bouton-mois"><</button>
+                            </th>
+                            <th colspan="5" class="text-center">
+                                <?=dateMois($date);?>
+                            </th>
+                            <th>
+                                <button name="date" value="<?=$moisSuiv?>" class="bouton-mois">></button>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
                         <?php
                         $a = 1;
-                        while ($a != $calendrier[0]['jourDeSemaine']) {
+                        while ($a != $calendrier[0]['jourDeSemaine']){
+                            if($a == 6){
+                                $a = -1;
+                            }
                             $a++;
-                        ?>
+                            ?>
                             <th></th>
                         <?php
                         }
                         foreach($calendrier as $jour){
                         ?>
-                            <th style="<?=$jour["projet"] == true ? 'border-top:solid red 1px' : 'border-top:solid black 1px';?>">
+                            <th>
                                 <button name="date" value="<?=$jour["date"];?>" class="btn jourCalendrier <?=$jour["date"] == $date ? "btn-info" : "";?>" onclick="btnCalendrier(event,'<?=$jour['date'];?>')">
                                     <div class="nbrEvenements<?=(!empty($jour["nbr"]))?" nbrEvenementsUnselected":"";?><?=($jour["date"] == $date && !empty($jour["nbr"])) ? " nbrEvenementsSelected" : "";?>">
                                         <?=(!empty($jour["nbr"]))?$jour["nbr"]:"";?>
@@ -95,7 +110,69 @@ require_once "../traitements/planning.php";
                         <small class="text-secondary">Optionel</small>
                     </div>
                 </div>
-                <button name="date" value="<?=$date;?>" class="btn btn-primary" >Enregistrer</button>
+                <div class="d-flex">
+                    <button name="date" value="<?=$date;?>" class="btn btn-primary" >Enregistrer</button>
+                    <div id="button-color-choice">
+                        <div class="color-button mt-1" id="color-button-preview" style="background-color: #97c7eeb3;" onclick="expandColor()"></div>
+                        <div id="color-choice">
+                            <!-- default -->
+                            <label for="couleur-1">
+                                <div class="color-button" style="background-color: #97c7eeb3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-1" value="#97c7eeb3" checked="checked">
+                            <!-- bleu -->
+                            <label for="couleur-2">
+                                <div class="color-button" style="background-color: #7b60f5b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-2" value="#7b60f5b3">
+                            <!-- bleu sombre-->
+                            <label for="couleur-3">
+                                <div class="color-button" style="background-color: #4a2fc7b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-3" value="#4a2fc7b3">
+                            <!-- violet-->
+                            <label for="couleur-4">
+                                <div class="color-button" style="background-color: #9346d3b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-4" value="#9346d3b3">
+                            <!-- rose-->
+                            <label for="couleur-5">
+                                <div class="color-button" style="background-color: #d954b3b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-5" value="#d954b3b3">
+                            <!-- saumon-->
+                            <label for="couleur-6">
+                                <div class="color-button" style="background-color: #ed5454b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-6" value="#ed5454b3">
+                            <!-- rouge-->
+                            <label for="couleur-7">
+                                <div class="color-button" style="background-color: #e30e0eb3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-7" value="#e30e0eb3">
+                            <!-- orange-->
+                            <label for="couleur-8">
+                                <div class="color-button" style="background-color: #e3760eb3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-8" value="#e3760eb3">
+                            <!-- jaune-->
+                            <label for="couleur-9">
+                                <div class="color-button" style="background-color: #c6cd25b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-9" value="#c6cd25b3">
+                            <!-- vert-->
+                            <label for="couleur-10">
+                                <div class="color-button" style="background-color: #4acd25b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-10" value="#4acd25b3">
+                            <!-- vert sombre-->
+                            <label for="couleur-11">
+                                <div class="color-button" style="background-color: #398d21b3;" onclick="preview(event)"></div>
+                            </label>
+                            <input type="radio" name="couleur" id="couleur-11" value="#398d21b3">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>          
 
@@ -113,13 +190,16 @@ require_once "../traitements/planning.php";
                                 foreach($evenements as $evenement){
                                     if(substr($evenement["heureDebut"], 0, 2) == $i){
                                         ?>
-                                        <td class="evenement" rowspan="<?=substr($evenement["heureFin"],0,2) - substr($evenement["heureDebut"],0,2) +1 +(substr($evenement["heureFin"],3,2)>0 ? 1 : 0) ?>">
+                                        <td class="evenement" style="background-color : <?= !empty($evenement["couleur"]) ? $evenement["couleur"] : "";?>" rowspan="<?=substr($evenement["heureFin"],0,2) - substr($evenement["heureDebut"],0,2) +1 +(substr($evenement["heureFin"],3,2)>0 ? 1 : 0) ?>">
                                             <?="<h5>",$evenement["designation"],"</h5>", substr($evenement["heureDebut"],0,5)?>
                                             <?php
                                                 if($evenement["heureDebut"] != $evenement["heureFin"]){
                                                     echo " - " , substr($evenement["heureFin"],0,5);
                                                 }
                                             ?>
+                                            <form action="../traitements/planning.php?date=<?=$date?>" method="post">
+                                                <button name="supprEvenement" value="<?=$evenement["idEvenement"];?>" class="btn-supr">x</button>
+                                            </form>
                                         </td>
                                         <?php
                                     }
