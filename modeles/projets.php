@@ -6,7 +6,7 @@ class Projets extends Modele{
     }
     
     public function selectionProjets(){
-        $requete = $this->getBdd()->prepare("SELECT projets.*, participationprojet.*, utilisateurs.nom, utilisateurs.prenom FROM projets LEFT JOIN participationprojet USING(idProjet) LEFT JOIN utilisateurs USING(idUtilisateur)");
+        $requete = $this->getBdd()->prepare("SELECT utilisateurs.nom, utilisateurs.prenom, participationprojet.* FROM utilisateurs LEFT JOIN participationprojet USING(idUtilisateur) WHERE idProjet IS NOT NULL");
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -42,3 +42,6 @@ class Projets extends Modele{
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+
+// "SELECT projets.*, participationprojet.*, utilisateurs.nom, utilisateurs.prenom FROM projets LEFT JOIN participationprojet USING(idProjet) LEFT JOIN utilisateurs USING(idUtilisateur)"

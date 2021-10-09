@@ -64,9 +64,6 @@ $Projets->selectionProjets();
                     <a href="../pages/accueil.php?page=projets">
                         <li>Projets</li>
                     </a>
-                    <!-- <a href="../pages/accueil.php?page=profil">
-                        <li>Profil</li>
-                    </a> -->
                 </ul>
             </div>
             <div class="left-footer">
@@ -208,7 +205,7 @@ $Projets->selectionProjets();
                 </div>
                 <div class="projets-content">
                 <?php
-                        foreach($Projets->selectionProjets() as $projet){
+                        foreach($Projets->selection_projets() as $projet){
                         ?>
                         <div class="carte">
                             <div class="card-image">
@@ -218,10 +215,9 @@ $Projets->selectionProjets();
                                 <h2>
                                     <?=$projet["nomProjet"];?>
                                 </h2>
-                                <p>Créer le <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4);?></p>
-                                <p>Fin le <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4);?></p>
-                                <p>Salariés concernés :</p>
-                                <p><?=$projet["descriptionProjet"];?></p>
+                                <p id="date">Du <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4);?> au <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4);?></p>
+                                <p class="noItalic">Salariés concernés : <?php foreach($Projets->selectionProjets() as $user){echo $user['prenom'] . " " . $user['nom'] . ", ";};?></p>
+                                <p class="noItalic"><?=$projet["descriptionProjet"];?></p>
                             </div>
                         </div>
                         <?php

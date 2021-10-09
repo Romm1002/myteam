@@ -43,6 +43,13 @@ if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
             header("location:../pages/inscription.php?error=passwordLen");
             //mdp pas assez long
         }
+
+        // Vérification de la checkbox des CdU
+        if(!isset($_POST["conditions_utilisations"])){
+            $erreurs++;
+            header("location:../pages/inscription.php?error=checkbox");
+            // checkbox des conditions d'utilisations n'est pas cochée
+        }
     }else{
         $erreurs++;
         header("location:../pages/inscription.php?error=empty");

@@ -33,7 +33,7 @@ body img#logoInscription{
 body .container-inscription{
     width: 600px;
     height: auto;
-    background-color: rgba(56, 56, 56, 0.842);
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 30px;
     border-radius: 3px;
 }
@@ -99,6 +99,22 @@ body .container-inscription .inscription-content form .form-ligne .ligne-left in
 }
 body .container-inscription .inscription-content form .form-ligne .ligne-right{
     width: 50%;
+}
+body .container-inscription .inscription-content form .cu{
+    display: flex;
+    align-items: center;
+}
+body .container-inscription .inscription-content form .cu input{
+    border: none;
+}
+body .container-inscription .inscription-content form .cu p{
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+body .container-inscription .inscription-content form .cu p a{
+    color: var(--blue1);
+    font-weight: 600;
+    font-size: 15px;
 }
 body .container-inscription .inscription-content a{
     color: #111;

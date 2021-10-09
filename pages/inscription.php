@@ -52,6 +52,11 @@ require_once "../traitements/connected.php";
                     </div>
                 </div>
 
+                <div class="form-lign-solo cu">
+                    <input type="checkbox" name="conditions_utilisations" id="conditions_utilisations">
+                    <p>J'accepte les <a href="../pages/mentions_legales">Conditions d'utilisations</a></p>
+                </div>
+
                 <a id="goto" href="../pages/index.php">Tu as déjà un compte ? C'est ICI !</a>
         </div>
         <div class="inscription-footer">

@@ -80,6 +80,10 @@
                     <h1>Qu'est-ce qu'une donnée personnelle ?</h1>
                     <p>Une donnée personnelle est toute information se rapportant à une personne physique identifiée ou identifiable. Mais, parce qu’elles concernent des personnes, celles-ci doivent en conserver la maîtrise.</p>
                 </div>
+                <div class="texte">
+                    <h1>Quelles sont mes données personnelles collectées ?</h1>
+                    <p>MyTeam peut être amené à collecter vos nom, prénom, adresse email, mot de passe ainsi que vos date de naissance.</p>
+                </div>
             </div>
             <?php
         }

@@ -595,9 +595,19 @@ body .container-accueil .accueil-right .projets-content .carte .card-title{
     padding: 10px 10px 0px 10px;
     margin-bottom: 0;
 }
+body .container-accueil .accueil-right .projets-content .carte .card-title h2{
+    margin-bottom: 2px;
+}
 body .container-accueil .accueil-right .projets-content .carte .card-title p{
     margin-bottom: 5px;
     font-style: italic;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-title p#date{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+body .container-accueil .accueil-right .projets-content .carte .card-title p.noItalic{
+    font-style: normal;
 }
 
 
