@@ -8,10 +8,7 @@ require_once "../traitements/connected.php";
 </head>
 
 <body>
-    <!-- Background de fond -->
-    <video src="../pages/images/bgConnexion.mp4" muted autoplay loop></video>
-
-    <img id="logoInscription" src="images/logoMYTEAM/logo.svg" alt="Logo de MyTeam" width="200">
+    <img id="logoInscription" src="images/logoMYTEAM/logo_white_large.png" alt="Logo de MYTeam" width="200">
 
 
     <div class="container-inscription">
@@ -55,7 +52,12 @@ require_once "../traitements/connected.php";
                     </div>
                 </div>
 
-                <a href="../pages/index.php">Tu as déjà un compte ? C'est ICI !</a>
+                <div class="form-lign-solo cu">
+                    <input type="checkbox" name="conditions_utilisations" id="conditions_utilisations">
+                    <p>J'accepte les <a href="../pages/mentions_legales">Conditions d'utilisations</a></p>
+                </div>
+
+                <a id="goto" href="../pages/index.php">Tu as déjà un compte ? C'est ICI !</a>
         </div>
         <div class="inscription-footer">
                 <button type="submit" name="envoi" value="1">S'inscrire</button>

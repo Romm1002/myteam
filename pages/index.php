@@ -8,11 +8,7 @@ require_once "../traitements/connected.php";
 </head>
 
 <body>
-    <!-- Background de fond -->
-    <video src="../pages/images/bgConnexion.mp4" muted autoplay loop></video>
-
-    <img id="logoConnexion" src="images/logoMYTEAM/logo.svg" alt="Logo de MyTeam" width="200">
-
+    <img src="../pages/images/logoMYTEAM/logo_white_large.png" alt="Logo de MYTeam" id="logoConnexion" width="200">
 
     <div class="container-connexion">
         <div class="connexion-header">
@@ -27,7 +23,7 @@ require_once "../traitements/connected.php";
                 <input type="password" id="mdp" name="mdp" placeholder="Mot de passe"  required>
                 <img src="../pages/images/eye.png" onclick="togglePassword('mdp')" class="field-icon" width="25">
 
-                <a id="goto" href="../pages/inscription.php">Vous n'êtes pas encore inscrit ? C'est ICI !</a>
+                <a id="goto" href="../pages/inscription.php">Nouveau sur MYTeam ? Rejoignez-nous !</a>
             </div>
         <div class="connexion-footer">
                 <button type="submit" name="envoi" value="1">Se connecter</button>
@@ -65,5 +61,4 @@ if(!empty($_GET)){
         <?php
     }
 }
-
 ?>

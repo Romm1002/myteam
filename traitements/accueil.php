@@ -9,10 +9,12 @@ if(empty($_POST["classement"])){
 
 extract($_POST);
 setlocale(LC_TIME, "fr_FR.utf-8", "fra");
-$date = strftime("%A %d %B à %H:%M");
+
+$date = new DateTime();
+
 
 if(!empty($_POST["nouvellePublication"])){
     extract($_POST);
-    $Publication->newPublication($nouvellePublication, $date, $_SESSION["idUtilisateur"], $typePost);
+    $Publication->newPublication($nouvellePublication, $date->format('Y-m-d H:i:s'), $_SESSION["idUtilisateur"], $typePost);
     header("location:../pages/accueil.php");
 }

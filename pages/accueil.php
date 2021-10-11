@@ -1,31 +1,21 @@
 <?php
 require_once "../traitements/header.php";
 require_once "../traitements/accueil.php";
+require_once "../traitements/planification.php";
 require_once "../traitements/notConnected.php";
 
-$Utilisateur = new Utilisateurs();
-$membres = $Utilisateur->users();
+$Utilisateurs = new Utilisateurs();
+$membres = $Utilisateurs->users();
 $Publication = new Publication();
 $Services = new Services();
 
-$informationsProfil = $Utilisateur->profil($_SESSION["idUtilisateur"]);
+$informationsProfil = $Utilisateurs->profil($_SESSION["idUtilisateur"]);
 $publications = $Publication->publications();
 
 $InfosProfil = new InfoProfils();
 $Projets = new Projets();
 
 $Projets->selectionProjets();
-
-$jours_grises = [6, 7];
-
-// // Définition de la localisation pour la date
-setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
-
-// Définition du nombre de jours par mois (mois actuel)
-$nb_day_per_month = date('t', mktime(0, 0, 0, date("n"), 1, date("Y")));
-
-// On récupère la date actuel
-$date = new DateTime('NOW');
 ?>
 
 <head>
@@ -33,6 +23,9 @@ $date = new DateTime('NOW');
 </head>
 
 <body>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
     <div class="container-accueil">
         <div class="accueil-left">
             <div class="left-actions">
@@ -52,8 +45,9 @@ $date = new DateTime('NOW');
                 ?>
             </div>
             <div class="left-header">
-                <img src="<?=$informationsProfil["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="65" height="65">
-                <p id="nomAndPrenom"><?=$informationsProfil["prenom"] . " " . $informationsProfil["nom"];?></p>
+                <img src="<?=$informationsProfil["photoProfil"];?>" alt="Photo de profil de <?=$informationsProfil["nom"] . $informationsProfil["prenom"];?>" width="70" height="70" onclick="window.location = '../pages/accueil.php?page=profil'">
+
+                <p id="nomAndPrenom" onclick="window.location = '../pages/accueil.php?page=profil'"><?=$informationsProfil["prenom"] . " " . $informationsProfil["nom"];?></p>
                 <p id="poste"><?=$informationsProfil["poste"];?></p>
             </div>
             <div class="left-content">
@@ -69,9 +63,6 @@ $date = new DateTime('NOW');
                     </a>
                     <a href="../pages/accueil.php?page=projets">
                         <li>Projets</li>
-                    </a>
-                    <a href="../pages/accueil.php?page=profil">
-                        <li>Profil</li>
                     </a>
                 </ul>
             </div>
@@ -96,13 +87,12 @@ $date = new DateTime('NOW');
                         <img src="<?=$informationsProfil["photoProfil"];?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
-
-                    <!-- <div class="filtres">
-                        <hr>
-                        <p>Classer par : </p>
-                        <button type="submit" onclick="filtreCroissant()">Plus récent</button>
-                        <button type="submit" onclick="filtreDecroissant()">Moins récent</button>
-                    </div> -->
+                    <div class="actions">
+                        <div class="sondage" onclick="">
+                            <i class="fas fa-poll" title="Créer un sondage"></i>
+                            <p>Créer un sondage</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
@@ -116,7 +106,9 @@ $date = new DateTime('NOW');
                                     <p><?=$publication["nom"] . " " . $publication["prenom"];?></p>
                                 </div>
                                 <div class="header-right">
-                                    <p><?=$publication["datePublication"];?></p>
+                                    <p><?php 
+                                        echo substr($publication['datePublication'], 8, 2) . "/" . substr($publication["datePublication"], 5, 2) . "/" . substr($publication["datePublication"], 0, 4) . " à " . substr($publication["datePublication"], 11, 2) . "h" . substr($publication["datePublication"], 14, 2);
+                                    ?></p>
                                 </div>
                             </div>
                             <div class="publication-content">
@@ -213,7 +205,7 @@ $date = new DateTime('NOW');
                 </div>
                 <div class="projets-content">
                 <?php
-                        foreach($Projets->selectionProjets() as $projet){
+                        foreach($Projets->selection_projets() as $projet){
                         ?>
                         <div class="carte">
                             <div class="card-image">
@@ -223,17 +215,16 @@ $date = new DateTime('NOW');
                                 <h2>
                                     <?=$projet["nomProjet"];?>
                                 </h2>
-                                <p>Créer le <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4);?></p>
-                                <p>Fin le <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4);?></p>
-                                <p>Salariés concernés :</p>
-                                <p><?=$projet["descriptionProjet"];?></p>
+                                <p id="date">Du <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4);?> au <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4);?></p>
+                                <p class="noItalic">Salariés concernés : <?php foreach($Projets->selectionProjets() as $user){echo $user['prenom'] . " " . $user['nom'] . ", ";};?></p>
+                                <p class="noItalic"><?=$projet["descriptionProjet"];?></p>
                             </div>
                         </div>
                         <?php
                         }
             }else if($_GET["page"] == "planification"){
                 ?>
-                    <section class="main_div">
+                <section class="main_div">
             <div class="top_left">
                 <p>Employés</p>
             </div>
@@ -316,7 +307,6 @@ $date = new DateTime('NOW');
             </div>
             <div class="bottom_left" id="bottom_left">
                 <?php
-                
                 foreach($membres as $user){
                     ?>
                     <div class="bl_ligne">
@@ -325,25 +315,19 @@ $date = new DateTime('NOW');
 
                             &nbsp;
 
-                            <?php echo  $user["nom"] . ", " . $user['prenom'] . "&nbsp;&nbsp;";?>
+                            <?php echo  $user["nom"] . ", " . $user['prenom'];?>
 
-                            &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;
 
                                 <?php
                                 if($Services->rowCountService($user['idUtilisateur']) >= 1){
                                     echo '<span style="color: grey; font-weight: 400">[' . $user['nomService'] . ']</span>';
-                                }else{
-                                    ?>
-                                    <a href="index.php?iduser=<?php echo $user['idUtilisateur'] ;?>">
-                                        <i style="cursor: pointer;" class="fas fa-concierge-bell"></i>
-                                    </a>
-                                    <?php
                                 }
                                 ?>
                         </div>
                     </div>
                     <?php
-                    foreach($Utilisateur->affectations($user["idUtilisateur"]) as $projet){
+                    foreach($Utilisateurs->affectations($user["idUtilisateur"]) as $projet){
                         $datePlanif = clone $date;
                         ?>
                         <div class="nom_projet" id="<?=$user['idUtilisateur'];?>">
@@ -401,7 +385,7 @@ $date = new DateTime('NOW');
                             </div>
                             <?php
                             
-                            foreach($Utilisateur->affectations($user["idUtilisateur"]) as $projet){
+                            foreach($Utilisateurs->affectations($user["idUtilisateur"]) as $projet){
                                 $datePlanif = clone $date;
                                 ?>
                                 <div class="ligne" style="background-color: rgb(221, 221, 221);">
@@ -409,10 +393,10 @@ $date = new DateTime('NOW');
                                     for($k=0; $k<$nb_day_per_month; $k++){
                                         $dateIndex = $datePlanif->format("dmY");
                                         ?>
-                                        <div style="cursor: pointer;" class="detail <?= in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises) ? "grey" : "";?>">
+                                        <div class="detail <?= in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises) ? "grey" : "";?>">
                                             <?php
                                             if(isset($affectationByDateAndProject[$dateIndex][$projet["idProjet"]])){
-                                                echo '<p id="ratio_p" style="background: lightblue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">' . number_format($affectationByDateAndProject[$dateIndex][$projet['idProjet']], 1, ',', '') . "</p>";
+                                                echo '<p id="ratio_p" style="background: lightblue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 0px">' . number_format($affectationByDateAndProject[$dateIndex][$projet['idProjet']], 1, ',', '') . "</p>";
                                             }else{
                                                 echo "";
                                             }
@@ -434,10 +418,13 @@ $date = new DateTime('NOW');
             </div>
         </section>
                 <?php
-            }
+        }
             ?>
-                </div>
+        </div>
     </div>
+            
+
+
 
     <!-- Pop-up d'une nouvelle publication -->
     <div class="clickPublications" id="clickPublications" style="display: none;">
@@ -470,10 +457,19 @@ $date = new DateTime('NOW');
                 <input type="radio" name="typePost" class="typePost" id="projet" checked value="simple">
                 <label for="projet">Créer un post simple</label>
                 </form>
-            </div>          
+            </div>  
         </div>
     </div>
 
+    <!-- Popup du sondage -->
+    <div class="clickSondage">
+        <div class="container">
+            
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script src="../pages/fonction.js"></script>
     <script src="../pages/script_overflow.js"></script>

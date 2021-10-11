@@ -17,8 +17,12 @@ require_once "../traitements/messagerie.php";
         <div class="circle1"></div>
         <div class="circle2"></div>
 
+        <div class="container">
+
+        </div>
+
         <section class="glass">
-            <div class="dashboard">
+            <!-- <div class="dashboard">
                 <div class="dashboard-header">
                     <a href="accueil.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
                     <form method="POST">
@@ -34,7 +38,7 @@ require_once "../traitements/messagerie.php";
                     <?php
                     foreach($contacts as $contact){
                         ?>
-                        <a href="messagerie.php?avec=<?=$contact["prenom"];?>">
+                        <a href="messagerie.php?avec=<?=$contact["idUtilisateur"];?>">
                             <div class="contacts">
                                 <img src="<?=$contact["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
                                 <p><?=$contact["prenom"] . " " . $contact["nom"];?></p>
@@ -86,7 +90,7 @@ require_once "../traitements/messagerie.php";
                     <?php
                 }
                 ?>
-            </div>
+            </div> -->
         </section>
     </main>
 </body>

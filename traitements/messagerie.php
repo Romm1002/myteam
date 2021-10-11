@@ -20,8 +20,9 @@ if(!empty($_POST["newMessage"])){
     <?php
 }
 
+
 if(!empty($_GET)){
-    if($_GET["avec"] == $_SESSION["prenom"]){
+    if($_GET["avec"] == $_SESSION["idUtilisateur"]){
         header("location:messagerie.php");
     }
 }
