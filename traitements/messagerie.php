@@ -7,17 +7,13 @@ if(!empty($_POST["filtreRecherche"])){
 }
 
 if(!empty($_POST["nouveauMessage"])){
-    $Messagerie->newMessage($_SESSION["prenom"], $_GET["avec"], $_POST["nouveauMessage"]);
+    $Messagerie->newMessage($_SESSION["idUtilisateur"], $_GET["avec"], $_POST["nouveauMessage"]);
 }
 
 if(!empty($_POST["newMessage"])){
     extract($_POST);
-    $Messagerie->newMessage($_SESSION["prenom"], $_GET["avec"], $newMessage);
-    ?>
-    <script>
-        document.location.href="messagerie.php?avec=<?=$_GET["avec"];?>"
-    </script>
-    <?php
+    $Messagerie->newMessage($_SESSION["idUtilisateur"], $_GET["avec"], $newMessage);
+    header("location:messagerie.php?avec=" . $_GET["avec"]);
 }
 
 

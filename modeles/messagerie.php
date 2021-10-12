@@ -6,20 +6,20 @@ class Messagerie extends Modele{
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function recuperationInformationsContact($getAvec){
+    public function recuperationInformationsContact($idAvec){
         $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs WHERE idUtilisateur = ?");
-        $requete->execute([$getAvec]);
+        $requete->execute([$idAvec]);
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
     
-    public function newMessage($envoyeur, $receveur, $contenu){
-        $requete = $this->getBdd()->prepare("INSERT INTO messagerie(envoyeur, receveur, contenu, heure) VALUES(?, ?, ?, NOW())");
-        $requete->execute([$envoyeur, $receveur, $contenu]);
+    public function newMessage($idEnvoyeur, $idReceveur, $contenu){
+        $requete = $this->getBdd()->prepare("INSERT INTO messagerie(idEnvoyeur,idReceveur, contenu, heure) VALUES(?, ?, ?, NOW())");
+        $requete->execute([$idEnvoyeur, $idReceveur, $contenu]);
     }
     
-    public function recuperationMessage($personne1, $personne2){
-        $requete = $this->getBdd()->prepare("SELECT * FROM messagerie WHERE (envoyeur = ? AND receveur = ?) OR (envoyeur = ? AND receveur = ?)");
-        $requete->execute([$personne1, $personne2, $personne2, $personne1]);
+    public function recuperationMessage($idPersonne1, $idPersonne2){
+        $requete = $this->getBdd()->prepare("SELECT * FROM messagerie WHERE (idEnvoyeur = ? AND idReceveur = ?) OR (idEnvoyeur = ? AND idReceveur = ?)");
+        $requete->execute([$idPersonne1, $idPersonne2, $idPersonne2, $idPersonne1]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     

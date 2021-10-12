@@ -237,14 +237,7 @@ body .container-accueil .accueil-left{
     display: flex;
     flex-direction: column;
 }
-body .container-accueil .accueil-left .left-actions{
-    width: 100%;
-    height: 7%;
-}
-body .container-accueil .accueil-left .left-actions a{
-    text-decoration: none;
-    margin: 0 2px;
-}
+
 body .container-accueil .accueil-right{
     width: 70%;
     height: 100%;
