@@ -32,8 +32,14 @@ require_once "../traitements/notConnected.php";
                 <button type="button" class="btn bouton-dismiss" data-bs-dismiss="alert" aria-label="Close"> X</button>
             </div>
             <?php
+        }elseif($_GET["ajout"] == "modif"){
+            ?>
+            <div class="alert alert-success alert-dismissible fade show alerte" role="alert">
+                <p class="m-0 my-auto">L'évènement a bien été modifié.</p>
+                <button type="button" class="btn bouton-dismiss" data-bs-dismiss="alert" aria-label="Close"> X</button>
+            </div>
+            <?php
         }
-        
     }
     ?>
     <div class="circle1"></div>
@@ -43,7 +49,7 @@ require_once "../traitements/notConnected.php";
             <!-- bouton retour -->
             <a href="index.php" class="btnDeconnexion d-flex"> <img src="../pages/images/flecheRetour.png" width="25px"></a>
             
-            <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group mt-5">
+            <form action="../pages/planning.php" method='get' id='saisirDate' class="form-group m-3">
                 <input  style="display:none" type='date' name='date' id='date' value="<?=!empty($_GET["date"]) ? $_GET["date"] : "";?>" class="form-control"/>
                 <table class="calendrier">
                     <thead>
@@ -102,11 +108,11 @@ require_once "../traitements/notConnected.php";
                 <div class="d-flex">
                     <div class="mr-2 d-flex flex-column align-items-start">
                         <label for="heureDebut" class="form-label">Début</label>
-                        <input type="time" id="heureDebut" name="heureDebut" class="form-control" required>
+                        <input type="time" id="heureDebut" name="heureDebut" class="form-control" required min="08:00" max="19:00">
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label for="heureFin" class="form-label">Fin</label>
-                        <input type="time" id="heureFin" name="heureFin" class="form-control">
+                        <input type="time" id="heureFin" name="heureFin" class="form-control" min="08:00" max="19:00">
                         <small class="text-secondary">Optionel</small>
                     </div>
                 </div>
@@ -190,16 +196,26 @@ require_once "../traitements/notConnected.php";
                                 foreach($evenements as $evenement){
                                     if(substr($evenement["heureDebut"], 0, 2) == $i){
                                         ?>
-                                        <td class="evenement" style="background-color : <?= !empty($evenement["couleur"]) ? $evenement["couleur"] : "";?>" rowspan="<?=substr($evenement["heureFin"],0,2) - substr($evenement["heureDebut"],0,2) +1 +(substr($evenement["heureFin"],3,2)>0 ? 1 : 0) ?>">
-                                            <?="<h5>",$evenement["designation"],"</h5>", substr($evenement["heureDebut"],0,5)?>
-                                            <?php
-                                                if($evenement["heureDebut"] != $evenement["heureFin"]){
-                                                    echo " - " , substr($evenement["heureFin"],0,5);
-                                                }
-                                            ?>
-                                            <form action="../traitements/planning.php?date=<?=$date?>" method="post">
-                                                <button name="supprEvenement" value="<?=$evenement["idEvenement"];?>" class="btn-supr">x</button>
-                                            </form>
+                                        <td rowspan="<?=substr($evenement["heureFin"],0,2) - substr($evenement["heureDebut"],0,2) +1 +(substr($evenement["heureFin"],3,2)>0 ? 1 : 0) ?>">
+                                            <div class="evenement" style="background-color : <?= !empty($evenement["couleur"]) ? $evenement["couleur"] : "";?>">
+                                                <!-- modifier un evenement -->
+                                                <form action="../traitements/planning.php?date=<?=$date?>" method="POST">
+                                                    <input type="hidden" name="modif" value="<?=$evenement["idEvenement"];?>">
+                                                    <input type="text" class="editEvenement" id="designation<?=$evenement["idEvenement"];?>" name="designation" value="<?=$evenement["designation"];?>" readonly onclick="editEvenement('designation<?=$evenement['idEvenement'];?>')" autocomplete="off">
+                                                </form>
+                                                <p>
+                                                    <?php
+                                                        echo substr($evenement["heureDebut"],0,5);
+                                                        if($evenement["heureDebut"] != $evenement["heureFin"]){
+                                                            echo " - " , substr($evenement["heureFin"],0,5);
+                                                        }
+                                                    ?>
+                                                </p>
+                                                <!-- supprimer un evenement -->
+                                                <form action="../traitements/planning.php?date=<?=$date?>" method="post">
+                                                    <button name="supprEvenement" value="<?=$evenement["idEvenement"];?>" class="btn-supr">x</button>
+                                                </form>
+                                            </div>
                                         </td>
                                         <?php
                                     }

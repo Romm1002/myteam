@@ -1,8 +1,5 @@
 
 /* STYLE PLANNING */
-table#calendrier{
-    width: 80%;
-}
 .jourCalendrier{
     margin: 2px 0 5px 0;
     padding-top: 0;
@@ -98,24 +95,20 @@ table#calendrier{
     display: none;
 }
 
+/* PLANNING */
 #planning-jour{
     width: 100%;
     height: 100%;
+    line-height: 2em;
     background-color: rgba(240, 236, 236, 0.7);
     border-radius: 10px;
     border-collapse: collapse ;
 }
 
-#planning-jour tr:first-child{
-    border-top: none;
-    border-bottom: solid black 1px;
-}
 #planning-jour tr{
-    border-top: solid black 1px;
-    border-bottom: solid black 1px;
+    border-bottom: solid rgba(41, 64, 101, 0.3) 1px;
 }
 #planning-jour tr:last-child{
-    border-top: solid black 1px;
     border-bottom: none;
 }
 
@@ -126,18 +119,44 @@ table#calendrier{
 .horaire{
     width: 50px;
     max-width: 50px;
-    border-right: solid black 1px;
+    border-right: solid rgba(0, 0, 0, 0.4) 2px;
     font-weight: bold;
 }
 .evenement{
-    border: solid black 1px;
+    height: 98%;
+    margin: 2px;
+    border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.171);
     position: relative;
+}
+.editEvenement{
+    overflow: visible;
+    background-color: rgba(0, 0, 0, 0);
+    color: #212529;
+    border: solid #8a8a8a00 1px;
+    outline: none;
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 3px;
+}
+.editEvenementSelected{
+    overflow: visible;
+    background-color: #cecece87;
+    color: #212529;
+    border: solid #8a8a8a 1px;
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 3px;
+}
+.evenement p{
+    margin: 0px;
 }
 .btn-supr{
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: 10px;
     border: none;
     background-color: rgba(255, 222, 173, 0);
     transition: ease-in-out 0.1s;
@@ -215,6 +234,8 @@ body .container-accueil .accueil-left{
     background-color: rgba(255, 255, 255, 0.5);
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+    display: flex;
+    flex-direction: column;
 }
 body .container-accueil .accueil-left .left-actions{
     width: 100%;
@@ -267,6 +288,14 @@ body .container-accueil .accueil-right{
     .accueil-right{
         width: 100% !important;
     }
+    #ajoutEvenement{
+        align-items: center;
+        align-self: center;
+    }
+    #saisirDate{
+        align-items: center;
+        align-self: center;
+    }
 }
 @media screen and (max-width: 600px){
     body{
@@ -275,6 +304,9 @@ body .container-accueil .accueil-right{
     .container-accueil{
         width: 100% !important;
         height: 100% !important;
+    }
+    #planning-jour{
+        line-height: 3em;
     }
     
 

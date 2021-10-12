@@ -32,3 +32,17 @@ function preview(e){
     document.getElementById("color-button-preview").style.backgroundColor = e.path[0].style.backgroundColor;
 }
 
+window.onload = function(){
+    var editInputs = document.querySelectorAll(".editEvenement");
+    editInputs.forEach(editInput => editInput.style.width = editInput.value.length + "ch");
+};
+
+function editEvenement(id){
+    var evenement = document.getElementById(id);
+    var editInputsSelected = document.querySelectorAll(".editEvenementSelected");
+    editInputsSelected.forEach(editInputSelected => editInputSelected.className = "editEvenement");
+
+    evenement.readOnly = false;
+    evenement.className = "editEvenementSelected";
+    evenement.addEventListener('input', function(){this.style.width = this.value.length + "ch";}); 
+}

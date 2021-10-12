@@ -18,4 +18,8 @@ class Evenements extends Modele{
         $requete->execute([$date . "%",$idUtilisateur]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function modifEvenement($id, $designation){
+        $requete = $this->getBdd()->prepare("UPDATE evenements SET designation = ? WHERE idEvenement = ?");
+        $requete->execute([$designation, $id]);
+    }
 }

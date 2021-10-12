@@ -19,6 +19,14 @@ if(!empty($_POST["supprEvenement"])){
     $Evenements->supprEvenement($_POST["supprEvenement"]);
     header("location:../pages/planning.php?date=".$date);
 }
+
+// modification d'un evenement
+if(!empty($_POST["designation"]) && !empty($_POST["modif"])){
+    extract($_POST);
+    $Evenements->modifEvenement($modif, $designation);
+    header("location:../pages/planning.php?date=".$date."&ajout=modif");
+}
+
 // ajout d'un evenement
 if(!empty($_POST["designation"]) && !empty($_POST["heureDebut"])){
     extract($_POST);
@@ -29,7 +37,7 @@ if(!empty($_POST["designation"]) && !empty($_POST["heureDebut"])){
         header("location:../pages/planning.php?date=".$date."&ajout=1");
         exit;
     }
-    if(intval($heureDebut) < 8 || intval($heureFin) > 18){
+    if(intval($heureDebut) < 8 || intval($heureFin) > 19){
         header("location:../pages/planning.php?date=".$date."&ajout=2");
         exit;
     }
