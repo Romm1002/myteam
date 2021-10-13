@@ -35,7 +35,7 @@ require_once "../traitements/notConnected.php";
                 <?php
                     foreach($contacts as $contact){
                         ?>
-                        <a href="messagerie.php?avec=<?=$contact["idUtilisateur"];?>">
+                        <a href="messagerie.php?avec=<?=$contact["idUtilisateur"];?>#bottom">
                             <div class="contacts">
                                 <img src="<?=$contact["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
                                 <p><?=$contact["prenom"] . " " . $contact["nom"];?></p>
@@ -67,13 +67,14 @@ require_once "../traitements/notConnected.php";
                             <?php
                             foreach($Messagerie->recuperationMessage($_SESSION["idUtilisateur"], $_GET["avec"]) as $message){
                                 ?>
-                                <div class="message <?=$_SESSION["prenom"] == $message["idEnvoyeur"] ? "ml-auto" : "mr-auto";?>">
+                                <div class="message <?=$_SESSION["idUtilisateur"] == $message["idEnvoyeur"] ? "envoye" : "recus";?>">
                                     <p><?=$message["contenu"];?></p>
                                 </div>
                                 <?php
                             }
                             ?>
                             </div>
+                            <div id="bottom"></div>
                         </div>
 
                         <div class="reseau-footer">

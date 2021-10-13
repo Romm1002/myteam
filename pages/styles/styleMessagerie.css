@@ -25,6 +25,9 @@ main{
     display: flex;
     justify-content: center;
 }
+img{
+    border-radius: 50%;
+}
 /* Définition du style de accueil.php */
 body{
     width: 100%;
@@ -102,6 +105,9 @@ body .container-accueil .accueil-right{
     min-height: 50px;
     margin: 10px 0px;
 }
+.contacts img{
+    margin-right: 10px;
+}
 .no-get{
     width: 60vw;
     max-width: 100%;
@@ -131,6 +137,33 @@ body .container-accueil .accueil-right{
     box-shadow: inset 3px 3px 25px -15px rgba(0,0,0,0.75);
     overflow: auto;
     border-radius: 5px;
+}
+.envoye{
+    display: flex;
+    justify-content: flex-end;
+}
+.recus{
+    display: flex;
+    justify-content: flex-start;
+}
+.message p{
+    min-width: 25px;
+    max-width: 80%;
+    padding: 5px;
+    margin: 3px;
+    border-radius: 15px;
+    text-align: center;
+}
+.envoye p{
+    background: linear-gradient(0.45turn, rgba(46, 255, 255, 47%), rgba(37, 95, 144, 58%));
+    box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, 30%);
+    border-bottom-right-radius: 0px;
+}
+.recus p{
+    background: linear-gradient(0.45turn, rgba(255, 255, 255, 35%), rgba(135, 134, 134, 50%));
+    box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, 30%);
+    border-bottom-left-radius: 0px;
+
 }
 
 .reseau-footer{
