@@ -202,11 +202,13 @@ $Projets = new Projets();
                             <tbody>
                                 <?php
                                 foreach($Administration->recuperationMessages() as $message){
+                                    $envoyeur = $Utilisateurs->selectAll($message["idEnvoyeur"]);
+                                    $receveur = $Utilisateurs->selectAll($message["idReceveur"]);
                                     ?>
                                     <tr>
                                         <td><?=$message["idMessage"];?></td>
-                                        <td><?=$message["envoyeur"];?></td>
-                                        <td><?=$message["receveur"];?></td>
+                                        <td><?=$envoyeur["nom"] . " " . $envoyeur["prenom"] ;?></td>
+                                        <td><?=$receveur["nom"] . " " . $receveur["prenom"] ;?></td>
                                         <td><?=$message["contenu"];?></td>
                                         <td><?=substr($message["heure"], 8, 2) . " " . $Administration->dateMois(substr($message["heure"], 5, 2)) . " " . substr($message["heure"], 0, 4) . " à " . substr($message["heure"], 11, 5);?></td>
                                         <td>

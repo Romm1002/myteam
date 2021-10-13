@@ -19,9 +19,11 @@ require_once "../traitements/notConnected.php";
     <main>
         <div class="circle1"></div>
         <div class="circle2"></div>
+        
+        <div id="container-accueil">
+            <div id="block" onclick="afficherContacts()"></div>
 
-        <div class="container-accueil">
-            <div class="accueil-left">
+            <div id="accueil-left">
                 <a href="accueil.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
                 <!-- fonction recherche -->
                 <form method="POST">
@@ -45,8 +47,12 @@ require_once "../traitements/notConnected.php";
                     }
                     ?>
                 </div>
+                <div id="btn-contact" onclick="afficherContacts()">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </div>
-            <div class="accueil-right">
+
+            <div id="accueil-right">
             <?php
                 if(empty($_GET)){
                     ?>
@@ -89,51 +95,8 @@ require_once "../traitements/notConnected.php";
                 ?>
             </div>
         </div>
-
-        <!-- <section class="glass">
-            
-
-            <div class="reseau">
-                <?php
-                if(empty($_GET)){
-                    ?>
-                    <div class="no-get">
-                        <h1>Pour démarrer une discussion, séléctionnez un contact.</h1>
-                    </div>
-                    <?php
-                }else{
-                    ?>
-                    <div class="get">
-                        <div class="reseau-header">
-                            <img src="<?=$Messagerie->recuperationInformationsContact($_GET["avec"])["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
-                            <p><?=$Messagerie->recuperationInformationsContact($_GET["avec"])["prenom"] . " " . $Messagerie->recuperationInformationsContact($_GET["avec"])["nom"];?></p>
-                        </div>
-
-                        <div class="reseau-content">
-                            <div class="messages">
-                            <?php
-                            foreach($Messagerie->recuperationMessage($_SESSION["prenom"], $_GET["avec"]) as $message){
-                                ?>
-                                <div class="message <?=$_SESSION["prenom"] == $message["envoyeur"] ? "ml-auto" : "mr-auto";?>">
-                                    <p><?=$message["contenu"];?></p>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                            </div>
-                        </div>
-
-                        <div class="reseau-footer">
-                            <form method="POST">
-                                <input type="text" name="newMessage" placeholder="Votre message...">
-                                <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-            </div>
-        </section> -->
     </main>
+    <script src="scriptMessagerie.js">
+        
+    </script>
 </body>
