@@ -15,7 +15,7 @@ $publications = $Publication->publications();
 $InfosProfil = new InfoProfils();
 $Projets = new Projets();
 
-$Projets->selectionProjets();
+// $Projets->selectionProjets();
 ?>
 
 <head>
@@ -205,7 +205,12 @@ $Projets->selectionProjets();
                 </div>
                 <div class="projets-content">
                 <?php
-                        foreach($Projets->selection_projets() as $projet){
+                if($_SESSION["grade"] == 10){
+                    $projets = $Projets->selection_projets();
+                }else{
+                    $projets = $Projets->selection_projets_participants($_SESSION["idUtilisateur"]);
+                }
+                        foreach($projets as $projet){
                         ?>
                         <div class="carte">
                             <div class="card-image">
@@ -216,7 +221,7 @@ $Projets->selectionProjets();
                                     <?=$projet["nomProjet"];?>
                                 </h2>
                                 <p id="date">Du <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4);?> au <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4);?></p>
-                                <p class="noItalic">Salariés concernés : <?php foreach($Projets->selectionProjets() as $user){echo $user['prenom'] . " " . $user['nom'] . ", ";};?></p>
+                                <p class="noItalic">Salariés concernés : <?php foreach($Projets->selectionParticipants($projet["idProjet"]) as $user){echo $user['prenom'] . " " . $user['nom'] . ", ";};?></p>
                                 <p class="noItalic"><?=$projet["descriptionProjet"];?></p>
                             </div>
                         </div>

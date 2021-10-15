@@ -47,6 +47,7 @@ require_once "../traitements/notConnected.php";
                     }
                     ?>
                 </div>
+                <!-- bouton responsiv -->
                 <div id="btn-contact" onclick="afficherContacts()">
                     <i class="fas fa-arrow-right"></i>
                 </div>

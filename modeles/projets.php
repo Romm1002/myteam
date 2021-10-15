@@ -5,9 +5,9 @@ class Projets extends Modele{
         $requete->execute([$nomProjet, $membresProjet, $descriptionProjet, $dateDebut, $dateFin, "../pages/images/projets/projet" . rand(1, 7) . ".jpg"]);
     }
     
-    public function selectionProjets(){
-        $requete = $this->getBdd()->prepare("SELECT utilisateurs.nom, utilisateurs.prenom, participationprojet.* FROM utilisateurs LEFT JOIN participationprojet USING(idUtilisateur) WHERE idProjet IS NOT NULL");
-        $requete->execute();
+    public function selectionParticipants($idProjet){
+        $requete = $this->getBdd()->prepare("SELECT utilisateurs.nom, utilisateurs.prenom, participationprojet.* FROM participationprojet LEFT JOIN utilisateurs USING(idUtilisateur) WHERE idProjet = ?");
+        $requete->execute([$idProjet]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     
@@ -33,6 +33,11 @@ class Projets extends Modele{
     public function selection_projets(){
         $requete = $this->getBdd()->prepare('SELECT * FROM projets');
         $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function selection_projets_participants($idUtilisateur){
+        $requete = $this->getBdd()->prepare('SELECT * FROM `participationprojet` LEFT JOIN projets USING(idProjet) WHERE idUtilisateur = ?');
+        $requete->execute([$idUtilisateur]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 

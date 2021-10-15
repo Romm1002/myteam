@@ -53,7 +53,7 @@ require_once "../traitements/connected.php";
                 </div>
 
                 <div class="form-lign-solo cu">
-                    <input type="checkbox" name="conditions_utilisations" id="conditions_utilisations">
+                    <input type="checkbox" name="conditions_utilisations" id="conditions_utilisations" required>
                     <p>J'accepte les <a href="../pages/mentions_legales">Conditions d'utilisations</a></p>
                 </div>
 
@@ -103,6 +103,13 @@ if(!empty($_GET)){
         ?>
         <div class="alert alert-success">
             L'inscription à été réalisée ! Vous pouvez désormais vous connectez !
+        </div>
+        <?php
+    }
+    else if($_GET["error"] == "checkbox"){
+        ?>
+        <div class="alert alert-danger">
+            Pour vous inscrire veuillez accepter les conditions générales d'utilisations.
         </div>
         <?php
     }
