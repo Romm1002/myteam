@@ -16,15 +16,14 @@
 
 /* Définition du style de connexion.php aka index.php */
 body{
-    width: 100%;
-    height: 100vh;
     background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
+}
+main{
+    width: 100%;
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
-
 body img#logoMYTeam{
     position: absolute;
     top: 5%;
@@ -47,14 +46,14 @@ body .circle2{
     bottom: 5%;
     left: 18%;
 }
-
-body .mentions_legales{
+.mentions_legales{
     width: 50%;
-    height: 80%;
+    min-height: 75vh;
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(1rem);
     border-radius: 5px;
     padding: 30px 15px;
+    margin: 5% 0px;
 }
 
 body .mentions_legales .title{
