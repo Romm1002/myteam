@@ -35,13 +35,13 @@ $Projets = new Projets();
                 </a>
                 <!-- Bouton accès à l'administration si le idPoste est à 3 qui correspond à ADMIN -->
                 <?php
-                if($informationsProfil["idposte"] == 2){
+                // if($informationsProfil["idposte"] == 2){
                     ?>
-                    <a href="../pages/equipe.php?pages=membre" title="Accéder à l'administration">
+                    <!-- <a href="../pages/equipe.php?pages=membre" title="Accéder à l'administration">
                         <img src="images/admin.png" class="btnAdmin" alt="Bouton accès administration" width="35">
-                    </a>
+                    </a> -->
                     <?php
-                }
+                // }
                 ?>
             </div>
             <div class="left-header">
@@ -87,12 +87,12 @@ $Projets = new Projets();
                         <img src="<?=$informationsProfil["photoProfil"];?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
-                    <div class="actions">
+                    <!-- <div class="actions">
                         <div class="sondage" onclick="">
                             <i class="fas fa-poll" title="Créer un sondage"></i>
                             <p>Créer un sondage</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
