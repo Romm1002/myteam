@@ -1,12 +1,6 @@
 <?php
 class Utilisateurs extends Modele{
-    private $idUtilisateur;
-    private $nom;
-    private $prenom;
-    private $admin;
-    private $login;
-    private $mdp;
-    private $email;
+    
 
     public function insertionInscription($nom, $prenom, $datenaiss, $email, $mdp, $idposte, $photoProfil){
         $requete = $this->getBdd()->prepare("INSERT INTO utilisateurs(nom,prenom,datenaiss,email,mdp,idposte,photoProfil) VALUES (?,?,?,?,?,?,?)");

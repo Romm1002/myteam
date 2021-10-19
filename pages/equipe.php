@@ -6,7 +6,7 @@ $Projets = new Projets();
 
 ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-<link rel="stylesheet" href="../pages/styleAdministration.css">
+<link rel="stylesheet" href="../pages/styles/styleAdministration.css">
 
 <body>
     <div class="navigation">
@@ -231,7 +231,7 @@ $Projets = new Projets();
                     </div>
                     <div class="gestion-content cards">
                         <?php
-                        foreach($Projets->selectionProjets() as $projet){
+                        foreach($Projets->selection_projets() as $projet){
                             ?>
                             <div class="projet-card">
                                 <div class="card-hero">
@@ -261,5 +261,5 @@ $Projets = new Projets();
     </div>
 
 
-    <script src="scriptAdministration.js"></script>
+    <script src="../pages/scripts/scriptAdministration.js"></script>
 </body>

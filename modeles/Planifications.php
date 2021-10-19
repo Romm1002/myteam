@@ -1,9 +1,5 @@
 <?php
 class Plannifications extends Modele{
-    private $idUtilisateur;
-    private $idProjet;
-    private $date;
-    private $ratio;
 
     public function update_ratio($ratio, $idUtilisateur, $idProjet, $date){
         $requete = $this->getBdd()->prepare('UPDATE plannifications SET ratio = ? WHERE idUtilisateur = ? AND idProjet = ? AND date = ?');

@@ -97,7 +97,7 @@ require_once "../traitements/notConnected.php";
             </div>
         </div>
     </main>
-    <script src="scriptMessagerie.js">
+    <script src="../pages/scripts/scriptMessagerie.js">
         
     </script>
 </body>

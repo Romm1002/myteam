@@ -479,6 +479,6 @@ $Projets = new Projets();
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script src="../pages/fonction.js"></script>
-    <script src="../pages/script_overflow.js"></script>
+    <script src="../pages/scripts/fonction.js"></script>
+    <script src="../pages/scripts/script_overflow.js"></script>
 </body>

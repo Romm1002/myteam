@@ -47,4 +47,4 @@ $Administration->recuperationPostes();
         </form>
     </div>
     
-    <script src="fonction.js"></script>
+    <script src="../pages/scripts/fonction.js"></script>

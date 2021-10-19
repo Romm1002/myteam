@@ -1,8 +1,5 @@
 <?php
 class Services extends Modele{
-    private $idService;
-    private $nomService;
-    private $idUtilisateur;
 
     public function getNomService(){
         $requete = $this->getBdd()->prepare('SELECT * FROM les_services');
