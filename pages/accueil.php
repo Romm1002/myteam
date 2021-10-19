@@ -26,6 +26,9 @@ $Projets = new Projets();
     <div class="circle1"></div>
     <div class="circle2"></div>
 
+    <div id="footer">
+        <a href="mentions_legales.php">mentions légales</a>
+    </div>
     <div class="container-accueil">
         <div class="accueil-left">
             <div class="left-actions">
@@ -87,12 +90,21 @@ $Projets = new Projets();
                         <img src="<?=$informationsProfil["photoProfil"];?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
+<<<<<<< HEAD
                     <!-- <div class="actions">
                         <div class="sondage" onclick="">
                             <i class="fas fa-poll" title="Créer un sondage"></i>
                             <p>Créer un sondage</p>
                         </div>
                     </div> -->
+=======
+                    <div class="actions">
+                        <!-- <div class="sondage" onclick="">
+                            <i class="fas fa-poll" title="Créer un sondage"></i>
+                            <p>Créer un sondage</p>
+                        </div> -->
+                    </div>
+>>>>>>> damien
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
