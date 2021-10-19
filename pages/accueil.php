@@ -26,6 +26,9 @@ $Projets = new Projets();
     <div class="circle1"></div>
     <div class="circle2"></div>
 
+    <div id="footer">
+        <a href="mentions_legales.php">mentions légales</a>
+    </div>
     <div class="container-accueil">
         <div class="accueil-left">
             <div class="left-actions">
@@ -37,9 +40,9 @@ $Projets = new Projets();
                 <?php
                 if($informationsProfil["idposte"] == 2){
                     ?>
-                    <a href="../pages/equipe.php?pages=membre" title="Accéder à l'administration">
+                    <!-- <a href="../pages/equipe.php?pages=membre" title="Accéder à l'administration">
                         <img src="images/admin.png" class="btnAdmin" alt="Bouton accès administration" width="35">
-                    </a>
+                    </a> -->
                     <?php
                 }
                 ?>
@@ -88,10 +91,10 @@ $Projets = new Projets();
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
                     <div class="actions">
-                        <div class="sondage" onclick="">
+                        <!-- <div class="sondage" onclick="">
                             <i class="fas fa-poll" title="Créer un sondage"></i>
                             <p>Créer un sondage</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="right-content" id="right-content">
