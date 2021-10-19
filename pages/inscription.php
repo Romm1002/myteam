@@ -4,13 +4,16 @@ require_once "../traitements/connected.php";
 ?>
 
 <head>
+    <!-- Style de la page -->
     <link rel="stylesheet" href="../pages/styles/styleInscription.css">
 </head>
 
 <body>
+    <!-- Logo MyTeam -->
     <img id="logoInscription" src="images/logoMYTEAM/logo_white_large.png" alt="Logo de MYTeam" width="200">
 
 
+    <!-- Conteneur du bloc d'inscription -->
     <div class="container-inscription">
         <div class="inscription-header">
             <h1>Inscription</h1>
@@ -67,6 +70,7 @@ require_once "../traitements/connected.php";
 </body>
 
 <?php
+// Gestion des erreurs avec un GET
 if(!empty($_GET)){
     if($_GET["error"] == "invalideEmail"){
         ?>

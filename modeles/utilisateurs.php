@@ -1,24 +1,19 @@
 <?php
 class Utilisateurs extends Modele{
-    private $idUtilisateur;
-    private $nom;
-    private $prenom;
-    private $admin;
-    private $login;
-    private $mdp;
-    private $email;
-
+    // Permet l'insertion en BDD des données fournies par l'utilisateur lors de l'inscription
     public function insertionInscription($nom, $prenom, $datenaiss, $email, $mdp, $idposte, $photoProfil){
         $requete = $this->getBdd()->prepare("INSERT INTO utilisateurs(nom,prenom,datenaiss,email,mdp,idposte,photoProfil) VALUES (?,?,?,?,?,?,?)");
         $requete->execute([$nom,$prenom,$datenaiss,$email,$mdp,$idposte,$photoProfil]);
     }
 
+    // Récupération des emails présents en BDD pour les vérifier lors de la connexion
     public function inscription($email){
         $requete = $this->getBdd()->prepare("SELECT email FROM utilisateurs WHERE email = ?");
         $requete->execute([$email]);
         return $requete->rowCount();
     }
 
+    // à voir
     public function connexion($email){
         $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs LEFT JOIN postes ON utilisateurs.idposte = postes.idposte WHERE email = ?");
         $requete->execute([$email]);
@@ -26,28 +21,33 @@ class Utilisateurs extends Modele{
         return $requete->rowCount();
     }
 
+    // Permet l'affichage d'un profil en fonction de la personne connecté
     public function profil($idUtilisateur){
         $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs INNER JOIN postes USING(idposte) WHERE idUtilisateur = ?");
         $requete->execute([$idUtilisateur]);
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
     
+    // Permet la modification de son email
     public function modificationEmail($email){
         $requete = $this->getBdd()->prepare("SELECT email FROM utilisateurs WHERE email = ?");
         $requete->execute([$email]);
         return $requete->rowCount();
     }
     
+    // Permet la modification des données ci-dessous
     public function updateProfil($nom, $prenom, $email, $idUtilisateur){
         $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET nom = ?, prenom = ?,  email = ? WHERE idUtilisateur = ?");
         $requete->execute([$nom, $prenom, $email, $idUtilisateur]);
     }
     
+    // Permet la modification de sa photo de profil
     public function updatePhotoProfil($target_file, $idUtilisateur){
         $requete = $this->getBdd() ->prepare("UPDATE utilisateurs SET photoProfil = ? WHERE idUtilisateur = ?");
         $requete->execute([$target_file, $idUtilisateur]);
     }
     
+    // Permet la modification de son mdp
     public function updateMdp($mdp, $idUtilisateur){
         $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET mdp = ? WHERE idUtilisateur = ?");
         $requete->execute([$mdp, $idUtilisateur]);
