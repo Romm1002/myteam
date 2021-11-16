@@ -1077,3 +1077,16 @@ body .main_div .bottom_right .classMain div.ligne div.detail:nth-last-child(-n+1
     background: repeating-linear-gradient(56deg, rgb(59, 59, 59) 15px, rgb(59, 59, 59) 20px, grey 20px, grey 25px);
     color: white;
 }
+#footer{
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    z-index: 1000;
+    padding: 5px;
+}
+#footer a{
+    text-decoration: none;
+    color: black;
+}

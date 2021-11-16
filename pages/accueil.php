@@ -26,6 +26,9 @@ $Projets = new Projets();
     <div class="circle1"></div>
     <div class="circle2"></div>
 
+    <div id="footer">
+        <a href="mentions_legales.php">mentions légales</a>
+    </div>
     <div class="container-accueil">
         <div class="accueil-left">
             <div class="left-actions">
@@ -87,12 +90,12 @@ $Projets = new Projets();
                         <img src="<?=$informationsProfil["photoProfil"];?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
-                    <!-- <div class="actions">
-                        <div class="sondage" onclick="">
+                    <div class="actions">
+                        <!-- <div class="sondage" onclick="">
                             <i class="fas fa-poll" title="Créer un sondage"></i>
                             <p>Créer un sondage</p>
-                        </div>
-                    </div> -->
+                        </div> -->
+                    </div>
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
@@ -476,6 +479,6 @@ $Projets = new Projets();
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script src="../pages/fonction.js"></script>
-    <script src="../pages/script_overflow.js"></script>
+    <script src="../pages/scripts/fonction.js"></script>
+    <script src="../pages/scripts/script_overflow.js"></script>
 </body>

@@ -34,6 +34,6 @@ require_once "../traitements/projets.php";
     <button type="submit" class="btn btn-primary d-block my-4 mx-auto">Créer le projet</button>
 
 </form>
-<script src="fonction.js"></script>
+<script src="../pages/scripts/fonction.js"></script>
 </div>
 </body>
