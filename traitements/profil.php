@@ -13,7 +13,7 @@ if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]))
     if(count($erreurs) === 0){
         //aucune erreur, envoie du formulaire
         try{
-            $utilisateur->updateProfil($_POST["nom"], $_POST["prenom"], $_POST["email"]);
+            $utilisateur->updateProfil($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["couleur"]);
             if(!empty($_FILES["pdp"]) && !empty($_FILES["pdp"]["name"])){
                 $allowed =  array('gif','png' ,'jpg');
                 $target_dir = "../pages/images/avatar/";

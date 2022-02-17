@@ -121,6 +121,26 @@ if(!empty($_GET)){
         </div>
         <?php
     }
-    
+    else if($_GET["error"] == "agemoins"){
+        ?>
+        <div class="alert alert-danger">
+            Vous êtes trop jeune pour vous inscrire.
+        </div>
+        <?php
+    }
+    else if($_GET["error"] == "ageplus"){
+        ?>
+        <div class="alert alert-danger">
+            Vous êtes trop vieux pour vous inscrire.
+        </div>
+        <?php
+    }
+    else if($_GET["error"] == "notStrong"){
+        ?>
+        <div class="alert alert-danger">
+            Le mot de passe doit contenir une minuscule, une majucsule, un chiffre et un caractère spécial au minimum.
+        </div>
+        <?php
+    }
 }
 ?>

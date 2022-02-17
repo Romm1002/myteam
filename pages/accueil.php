@@ -11,9 +11,15 @@ require_once "../traitements/notConnected.php";
     <link rel="stylesheet" href="../pages/styles/styleAccueil.css">
 </head>
 
+<style>
+    .couleurPerso{
+        background-color: <?=$_SESSION["color"];?>;
+    }
+</style>
+
 <body>
-    <div class="circle1"></div>
-    <div class="circle2"></div>
+    <div class="circle1 couleurPerso"></div>
+    <div class="circle2 couleurPerso"></div>
 
     <div id="footer">
         <a href="mentions_legales.php">mentions légales</a>
@@ -156,13 +162,16 @@ require_once "../traitements/notConnected.php";
                 </div>
                 <div class="profil-content">
                     <form action="../traitements/profil.php" method="post" enctype="multipart/form-data">
-                        <div class="content-nom content-box">
-                            <label for="nom">Nom</label>
-                            <input type="text" name="nom" placeholder="Nom..." value="<?=htmlspecialchars($utilisateur->getNom());?>" required>
-                        </div>
-                        <div class="content-prenom content-box">
-                            <label for="prenom">Prénom</label>
-                            <input type="text" name="prenom" placeholder="Prénom..." value="<?=htmlspecialchars($utilisateur->getPrenom());?>" required>
+                        <div class="content-nom">
+                            <div class="content-1">
+                                <label for="nom">Nom</label>
+                                <input type="text" name="nom" placeholder="Nom..." value="<?=htmlspecialchars($utilisateur->getNom());?>" required>
+                            </div>
+
+                            <div class="content-1">
+                                <label for="prenom">Prénom</label>
+                                <input type="text" name="prenom" placeholder="Prénom..." value="<?=htmlspecialchars($utilisateur->getPrenom());?>" required>
+                            </div>
                         </div>
                         <div class="content-pdp content-box">
                             <label for="pdp">Photo de profil</label>
@@ -175,6 +184,10 @@ require_once "../traitements/notConnected.php";
                         <div class="content-mdp content-box">
                             <label for="mdp">Mot de passe</label>
                             <a href="../pages/modificationMdp.php">Modifier votre mot de passe</a>
+                        </div>
+                        <div class="content-color content-box">
+                            <label for="color">Couleur du profil</label>
+                            <input type="color" name="color">
                         </div>
                         <div class="content-suppression content-box">
                             <a id="supprimer_compte" href="../traitements/suppression_compte.php">Supprimer mon compte</a>

@@ -87,7 +87,7 @@ class Modele{
         $requete->execute();
         foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
             $utilisateur = new Utilisateurs;
-            $utilisateur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"]);
+            $utilisateur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"], $value["color"]);
             array_push($listUtilisateur, $utilisateur);
         }
         return $listUtilisateur;
