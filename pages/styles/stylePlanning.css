@@ -1,0 +1,306 @@
+
+/* STYLE PLANNING */
+.jourCalendrier{
+    margin: 2px 0 5px 0;
+    padding-top: 0;
+    padding-bottom: 1px;
+    line-height: 1rem;
+
+}
+.nbrEvenements{
+    color: white;
+    position: relative;
+    top: 1px;
+    right: -12px;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    overflow: hidden;
+}
+.nbrEvenementsUnselected{
+    background-color: rgba(255, 0, 0, 0.6);
+}
+.nbrEvenementsSelected{
+    background-color: red;
+}
+.titre{
+    background-color: var(--blue2);
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+}
+#ajoutEvenement{
+    max-height: 40px;
+    overflow: hidden;
+    transition: 2.8s;
+}
+#ajoutEvenement:hover{
+    max-height: 1500px;
+}
+#ajoutEvenement:focus-within{
+    max-height: 1500px;
+}
+
+#button-color-choice{
+    height: 30px;
+    width: 70px;
+    padding-left: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+#button-color-choice:focus-within #color-choice{
+    display: flex; 
+}
+#color-choice{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: auto;
+    max-height: 0px;
+    width: 25vw;
+    min-width: 100px;
+    padding: 0px;
+    background-color: rgba(193, 193, 250);
+    border-radius: 10px;
+    transform: translate(-50px, -50px);
+    transition: ease-in-out 0.3s;
+    overflow: hidden;
+    position: absolute;
+    z-index: 255;
+}
+.color-button{
+    height: 30px;
+    width: 30px;
+    padding: 1px;
+    margin: 5px;
+    border-radius: 5px;
+    border: solid 2px rgba(128, 128, 128, 0.7);
+    background: content-box;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+.color-button:hover{
+    transform: scale(1.07);
+    box-shadow: 0.5px 0.5px 7px -3px rgba(0,0,0,0.65);
+}
+.color-button:active{
+    transform: scale(1);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+#color-button-preview{
+    margin: 0px;
+}
+#color-choice input{
+    display: none;
+}
+
+/* PLANNING */
+#planning-jour{
+    width: 100%;
+    height: 100%;
+    line-height: 2em;
+    background-color: rgba(240, 236, 236, 0.7);
+    border-radius: 10px;
+    border-collapse: collapse ;
+}
+
+#planning-jour tr{
+    border-bottom: solid rgba(41, 64, 101, 0.3) 1px;
+}
+#planning-jour tr:last-child{
+    border-bottom: none;
+}
+
+#planning-jour tr td{
+    text-align: center
+}
+
+.horaire{
+    width: 50px;
+    max-width: 50px;
+    border-right: solid rgba(0, 0, 0, 0.4) 2px;
+    font-weight: bold;
+}
+.evenement{
+    height: 98%;
+    margin: 2px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.171);
+    position: relative;
+}
+.editEvenement{
+    overflow: visible;
+    background-color: rgba(0, 0, 0, 0);
+    color: #212529;
+    border: solid #8a8a8a00 1px;
+    outline: none;
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 3px;
+}
+.editEvenementSelected{
+    overflow: visible;
+    background-color: #cecece87;
+    color: #212529;
+    border: solid #8a8a8a 1px;
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 3px;
+}
+.evenement p{
+    margin: 0px;
+}
+.btn-supr{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    border: none;
+    background-color: rgba(255, 222, 173, 0);
+    transition: ease-in-out 0.1s;
+}
+.btn-supr:hover{
+    color: rgba(110, 110, 110);
+}
+button:focus{
+    outline: none;
+}
+
+#planning-jour tr td h5{
+    margin: 0
+}
+
+/* BROZDEL */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Définition des couleurs principales de MyTeam */
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* Définition du style global */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+/* Définition du style de accueil.php */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
+}
+
+.circle1, .circle2{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .3));
+    height: 10rem;
+    width: 10rem;
+    position: absolute;
+    border-radius: 50%;
+}
+.circle1{
+    top: 5%;
+    right: 7%;
+}
+.circle2{
+    bottom: 5%;
+    left: 6%;
+}
+body .container-accueil{
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    display: flex;
+    backdrop-filter: blur(1rem);
+}
+body .container-accueil .accueil-left{
+    width: auto;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+body .container-accueil .accueil-right{
+    width: 70%;
+    height: 100%;
+    padding: 20px 60px;
+    overflow: hidden;
+}
+
+.alerte{
+    min-width: auto;
+    width: 60%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 1%;
+    z-index: 500;
+}
+.bouton-dismiss{
+    position: absolute;
+    right: 1%;
+}
+.bouton-mois{
+    width: 25px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.377);
+    border: solid rgba(0, 0, 0, 0.13) 1px;
+    border-radius: 50%;
+}
+/* responsive */
+@media screen and (max-width: 1100px){
+    body{
+        height: auto;
+        padding: 40px;
+    }
+    .container-accueil{
+        height: auto !important;
+        width: 600px !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .accueil-right{
+        width: 100% !important;
+    }
+    #ajoutEvenement{
+        align-items: center;
+        align-self: center;
+    }
+    #saisirDate{
+        align-items: center;
+        align-self: center;
+    }
+}
+@media screen and (max-width: 600px){
+    body{
+        padding: 40px 1% !important;
+    }
+    .container-accueil{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    #planning-jour{
+        line-height: 3em;
+    }
+    
+
+}

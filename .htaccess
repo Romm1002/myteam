@@ -1,0 +1,47 @@
+# force redirection to https
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteCond %{ENV:HTTPS} !on [OR]
+#    RewriteCond %{ENV:HTTP_HOST} ^www\. [NC]
+#    RewriteRule ^ https://myteam.ipssi-sio.fr%{ENV:REQUEST_URI} [R=302,L,NE]
+#</IfModule>
+
+<IfModule mod_headers.c>
+	Header set X-Frame-Options "DENY"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Content-Security-Policy "base-uri 'self';"
+</IfModule>
+
+#<IfModule mod_headers.c>
+#  <FilesMatch "\.(js|css|xml|gz)$">
+#    Header append Vary: Accept-Encoding
+#  </FilesMatch>
+#</IfModule>
+
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header set X-Content-Type-Options nosniff
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header always append X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header set Referrer-Policy "same-origin"
+</IfModule>
+
+#<IfModule mod_headers.c>
+#	Header set Feature-Policy "geolocation 'self'; vibrate 'none'"
+#</IfModule>

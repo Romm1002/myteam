@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Définition des couleurs principales de MyTeam */
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* Définition du style global */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Définition du style de accueil.php */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
+}
+body img{
+    position: absolute;
+    top: 4%;
+    left: 3%;
+}
+body .circle1, body .circle2{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+}
+body .circle1{
+    top: 11%;
+    right: 22%;
+}
+body .circle2{
+    bottom: 11%;
+    left: 22%;
+}
+body .container-mdp{
+    width: 50%;
+    height: 60%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    backdrop-filter: blur(0.5rem);
+    padding: 20px;
+}
+body .container-mdp .container-header{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-mdp .container-header a{
+    position: relative;
+    right: 13%;
+    bottom: 40%;
+    font-size: 18px;
+    cursor: pointer;
+    color: #111;
+    text-decoration: none;
+}
+body .container-mdp .container-header h1{
+    font-weight: 400;
+}
+body .container-mdp .container-content{
+    width: 100%;
+    height: 60%;
+}
+body .container-mdp .container-content form{
+    width: 100%;
+    height: 100%;
+    padding: 0 30px;
+}
+body .container-mdp .container-content form .mdp{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+body .container-mdp .container-content form .mdp label{
+    font-weight: 500;
+    font-size: 17px;
+}
+body .container-mdp .container-content form .mdp input{
+    height: 35px;
+    padding: 0 5px;
+    outline: none;
+}
+body .container-mdp .container-footer{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container-mdp .container-footer button{
+    width: 40%;
+    height: 40px;
+    font-size: 17px;
+    border: none;
+    border-radius: 5px;
+    background: var(--blue1);
+    transition: 0.5s ease background;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    outline: none;
+}
+body .container-mdp .container-footer button:hover{
+    background: rgb(47, 120, 255);
+}
+
+.alert{
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+}

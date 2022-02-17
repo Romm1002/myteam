@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Définition des couleurs principales de MyTeam */
+:root{
+    --blue1: #007add;
+    --blue2: #5ebfec;
+}
+
+/* Définition du style global */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+/* Définition du style de accueil.php */
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
+}
+
+.circle1, .circle2{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .3));
+    height: 10rem;
+    width: 10rem;
+    position: absolute;
+    border-radius: 50%;
+}
+.circle1{
+    top: 5%;
+    right: 14%;
+}
+.circle2{
+    bottom: 5%;
+    left: 13%;
+}
+
+body .container{
+    width: 60%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    backdrop-filter: blur(1rem);
+    padding: 20px 30px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 20% 60% 10%;
+}
+
+body .container .container-header{
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 100%;
+}
+body .container .container-header .retour{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container .container-header .retour i{
+    font-size: 20px;
+    cursor: pointer;
+}
+body .container .container-header .titre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container .container-header .titre h1{
+    font-size: 30px;
+    margin-bottom: 0px;
+}
+body .container .container-header .tache{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container .container-header .tache i{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+body .container .container-participants{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 30% 70%;
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 5px 10px;
+}
+body .container .container-participants .titre{
+    display: flex;
+    align-items: center;
+}
+body .container .container-participants .titre h6{
+    margin-bottom: 0px;
+    font-style: italic;
+}
+body .container .container-participants .participants{
+    display: flex;
+    padding: 5px 0px;
+}
+body .container .container-participants .participants .carte{
+    width: 140px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 100%;
+}
+body .container .container-participants .participants .carte .photo_profil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container .container-participants .participants .carte .photo_profil img{
+    object-fit: cover;
+    border-radius: 50%;
+}
+body .container .container-participants .participants .carte .nom_prenom{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+}
+body .container .container-participants .participants .carte .nom, body .container .container-participants .participants .carte .prenom{
+    display: flex;
+    align-items: center;
+}
+body .container .container-participants .participants .carte .nom p, body .container .container-participants .participants .carte .prenom p{
+    margin-bottom: 0px;
+    font-size: 11px;
+}
+
+body .container .container-chat{
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+    padding: 5px 10px;
+}
+body .container .container-chat .titre{
+    display: flex;
+    align-items: center;
+}
+body .container .container-chat .titre h6{
+    margin-bottom: 0px;
+    font-style: italic;
+}
+body .container .container-chat .chatbox{
+    background-color: rgba(255, 255, 255, 0.5);
+    max-height: 100%;
+    width: 100%;
+    overflow: hidden auto;
+    padding: 10px 0px;
+}
+body .container .container-chat .chatbox .message{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    padding: 0px 10px;
+    display: flex;
+}
+body .container .container-chat .chatbox .message .blue{
+    background-color: rgba(0, 0, 255, 0.1);
+    min-width: auto;
+    max-width: 350px;
+    word-break: break-word;
+    padding: 5px 5px;
+}
+body .container .container-chat .chatbox .message .grey{
+    background-color: rgba(255, 255, 255, 0.5);
+    min-width: auto;
+    max-width: 350px;
+    word-break: break-word;
+    padding: 5px 5px;
+}
+body .container .container-chat .chatbox .message span{
+    margin-bottom: 0px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+}
+
+body .container .container-message{
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 5px 10px;
+}
+body .container .container-message form{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 100%;
+}
+body .container .container-message form .left{
+    display: flex;
+    align-items: center;
+}
+body .container .container-message form .left input[type='text']{
+    width: 100%;
+    height: 35px;
+    padding: 0px 10px;
+    outline: none;
+}
+body .container .container-message form .right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body .container .container-message form .right button{
+    background: none;
+    border: none;
+}
+
+
+/* Popup tâches (style) */
+.black-screen{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.black-screen .container{
+    width: 50%;
+    height: 60%;
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 80% 10%;
+}
+.black-screen .container .top{
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 100%;
+}
+.black-screen .container .top .right{
+    display: flex;
+    justify-content: flex-end;
+}
+.black-screen .container .top .right i{
+    cursor: pointer;
+}
+.black-screen .container .top .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.black-screen .container .top .center h1{
+    font-size: 22px;
+}
+
+.black-screen .container .middle table{
+    width: 100%;
+}
+.black-screen .container .middle table tr, .black-screen .container .middle table td, .black-screen .container .middle table th{
+    border: 2px solid #000;
+    border-collapse: collapse;
+    padding: 10px
+}
