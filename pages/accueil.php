@@ -390,11 +390,12 @@ require_once "../traitements/notConnected.php";
                                 $datePlanif = clone $date;
                                 ?>
                                 <div class="ligne" style="background-color: rgb(221, 221, 221);">
+                                <script src="../pages/scripts/script_planification.js"></script>
                                     <?php
                                     for($k=0; $k<$nb_day_per_month; $k++){
                                         $dateIndex = $datePlanif->format("dmY");
                                         ?>
-                                        <div class="detail <?= in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises) ? "grey" : "";?>">
+                                        <div class="detail <?= in_array($datePlanif->format('N') == 6 || $datePlanif->format('N') == 7, $jours_grises) ? "grey" : "";?>" ondblclick="window.location = 'accueil.php?page=planification&popup=ratio&date=<?=$dateIndex;?>&id=<?=$user->getId();?>&projet=<?=$projet->getId();?>'">
                                             <?php
                                             if(isset($affectationByDateAndProject[$dateIndex][$projet->getId()])){
                                                 echo '<p id="ratio_p" style="background: lightblue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 0px">' . number_format($affectationByDateAndProject[$dateIndex][$projet->getId()], 1, ',', '') . "</p>";
@@ -462,12 +463,38 @@ require_once "../traitements/notConnected.php";
         </div>
     </div>
 
-    <!-- Popup du sondage -->
-    <div class="clickSondage">
-        <div class="container">
-            
+    <?php
+
+    if(isset($_GET["popup"]) && $_GET["popup"] == "ratio"){
+        ?>
+        <div id="blackScreen">
+            <div class="content">
+                <div class="content-header">
+                    <h3>Nouveau ratio</h1>
+                    <p onclick="window.location = 'accueil.php?page=planification'">x</p>
+                 </div>
+                <div class="content-content">
+                    <form action="../traitements/planification.php" method="post">
+                        <input type="hidden" name="id" value="<?=$_GET["id"];?>">
+                        <input type="hidden" name="idProjet" value="<?=$_GET["projet"];?>">
+                        <input type="hidden" name="date" value="<?=$_GET["date"];?>">
+                        <input type="number" name="ratio" placeholder="Entrez un ratio" max="<?= 1 - $total;?>" min="<?=0;?>" value="<?= 1 - $total;?>" step="0.1">
+                        <button type="submit" name="send_ratio">OK</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
+        <?php
+    }
+
+    if(isset($_GET["error"]) && $_GET["error"] == "noaccess"){
+        ?>
+        <div class="alert alert-danger" style="position: absolute; bottom: 2%; left: 2%">
+            Vous n'avez pas la permission de modifier le ratio d'un autre utilisateur !
+        </div>
+        <?php
+    }
+    ?>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

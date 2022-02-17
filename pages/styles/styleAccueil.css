@@ -1148,3 +1148,39 @@ body .main_div .bottom_right .classMain div.ligne div.detail:nth-last-child(-n+1
     text-decoration: none;
     color: black;
 }
+
+#blackScreen{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#blackScreen .content{
+    width: 20%;
+    height: 20%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+#blackScreen .content .content-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#blackScreen .content .content-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#blackScreen .content .content-content input{
+    border: 1px solid #000;
+    outline: none;
+}

@@ -1,6 +1,8 @@
 <?php
 require_once "../modeles/Modele.php";
 
+$Projets = new Projets();
+
 $membres = $utilisateur->getUtilisateurs();
 
 $Publication = new Publication();
