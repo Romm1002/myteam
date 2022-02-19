@@ -1,5 +1,6 @@
 <?php
 require_once "../pages/header.php";
+require_once "../traitements/notConnected.php";
 require_once "../traitements/redirection_first_connexion.php";
 
 if(!empty($_GET)){

@@ -1,13 +1,10 @@
 <?php
-require_once "../traitements/header.php";
+require_once "../pages/header.php";
 require_once "../traitements/notConnected.php";
 require_once "../traitements/projets.php";
 require_once "../traitements/redirection_first_connexion.php";
 
-$Projets = new Projets();
-$projet = $Projets->selection_projets_getid($_GET["id"]);
-$chats = $Projets->chat_projet($_GET["id"]);
-$taches = $Projets->taches($_GET["id"]);
+
 ?>
 
 <head>
@@ -25,7 +22,7 @@ $taches = $Projets->taches($_GET["id"]);
                 <i class="fas fa-chevron-circle-left" onclick="window.location = 'accueil.php?page=projets'" title="Retourner à la liste des projets"></i>
             </div>
             <div class="titre">
-                <h1><?=htmlspecialchars($projet["nomProjet"]);?></h1>
+                <h1><?=htmlspecialchars($projet->getNom());?></h1>
             </div>
             <div class="tache">
                 <i class="fas fa-clipboard-list" title="Accéder au carnet des tâches du projet" onclick="openTaches()"></i>
@@ -37,18 +34,18 @@ $taches = $Projets->taches($_GET["id"]);
             </div>
             <div class="participants">
                 <?php
-                foreach($Projets->selectionParticipants($_GET["id"]) as $user){
+                foreach($projet->selectionParticipants($_GET["id"]) as $user){
                     ?>
                     <div class="carte">
                         <div class="photo_profil">
-                            <img src="<?=$user["photoProfil"];?>" alt="Photo de profil" width="35px" height="35px">
+                            <img src="<?=$user->getPhotoProfil();?>" alt="Photo de profil" width="35px" height="35px">
                         </div>
                         <div class="nom_prenom">
                             <div class="prenom">
-                                <p><?=htmlspecialchars($user["prenom"]);?></p>
+                                <p><?=htmlspecialchars($user->getPrenom());?></p>
                             </div>
                             <div class="nom">
-                                <p><?=htmlspecialchars($user["nom"]);?></p>
+                                <p><?=htmlspecialchars($user->getNom());?></p>
                             </div>
                         </div>
                     </div>
@@ -65,15 +62,15 @@ $taches = $Projets->taches($_GET["id"]);
                 <?php
                 foreach($chats as $chat){
                     ?>
-                    <div style="justify-content:<?=$chat["idUtilisateur"] == $_SESSION["idUtilisateur"] ? "flex-start" : "flex-end";?>" class="message">
-                        <span class="<?=$chat["idUtilisateur"] == $_SESSION["idUtilisateur"] ? "blue" : "grey";?>">
+                    <div style="justify-content:<?=$chat->getIdUtilisateur() == $utilisateur->getId() ? "flex-start" : "flex-end";?>" class="message">
+                        <span class="<?=$chat->getIdUtilisateur() == $utilisateur->getId() ? "blue" : "grey";?>">
                             <div class="infos">
-                                <img src="<?=$chat["photoProfil"];?>" alt="Photo de profil" width="25" height="25" style="object-fit: cover">
-                                <?=htmlspecialchars($chat["prenom"]) . " " . htmlspecialchars($chat["nom"]);?>
+                                <img src="<?=$chat->getEnvoyeur()->getPhotoProfil();?>" alt="Photo de profil" width="25" height="25" style="object-fit: cover">
+                                <?=htmlspecialchars($chat->getEnvoyeur()->getPrenom()) . " " . htmlspecialchars($chat->getEnvoyeur()->getNom());?>
                             </div>
                             <hr>
                             <div class="text">
-                                <?=htmlspecialchars($chat["message"]);?>
+                                <?=htmlspecialchars($chat->getContenu());?>
                             </div>
                         </span>
                     </div>
@@ -122,12 +119,12 @@ $taches = $Projets->taches($_GET["id"]);
                     foreach($taches as $tache){
                         ?>
                         <tr>
-                            <td><?=$tache["idTache"];?></td>
-                            <td><?=htmlspecialchars($tache["libelle"]);?></td>
+                            <td><?=$tache->getId();?></td>
+                            <td><?=htmlspecialchars($tache->getLibelle());?></td>
                             <td>
                                 <?php
                                 // Switch qui convertit 0 en "Non" et 1 en "Oui" pour savoir si le tâche est terminée
-                                switch($tache["terminee"]){
+                                switch($tache->getTerminee()){
                                     case 0:
                                         echo "Non";
                                         break;
@@ -142,11 +139,11 @@ $taches = $Projets->taches($_GET["id"]);
                             </td>
                             <td>
                                 <?php
-                                if($tache["terminee"] == 0){
+                                if($tache->getTerminee() == 0){
                                     ?>
-                                    <form method="POST" id="taches">
-                                        <input type="hidden" name="idTache" value="<?=$tache["idTache"];?>">
-                                        <input type="checkbox" name="terminer" value="1">
+                                    <form method="POST" id="form-<?=$tache->getId()?>">
+                                        <input type="hidden" name="idTache" value="<?=$tache->getId();?>">
+                                        <input type="checkbox" name="terminer" value="1" id="<?=$tache->getId()?>">
                                         Terminer
                                     </form>
                                     <?php

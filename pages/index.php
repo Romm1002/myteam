@@ -1,7 +1,6 @@
 <?php
 require_once "../pages/header.php";
 require_once "../traitements/connected.php";
-require_once "../modeles/Modele.php";
 
 $Utilisateurs = new Utilisateurs();
 if(isset($_COOKIE["memory"])){

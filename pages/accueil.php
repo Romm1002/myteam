@@ -1,9 +1,9 @@
 <?php
 require_once "../pages/header.php";
+require_once "../traitements/notConnected.php";
 require_once "../traitements/redirection_first_connexion.php";
 require_once "../traitements/accueil.php";
 require_once "../traitements/planification.php";
-require_once "../traitements/notConnected.php";
 
 ?>
 
@@ -74,68 +74,68 @@ require_once "../traitements/notConnected.php";
                     <?php
                     foreach($publications as $publication){
                         ?>
-                        <div class="carte-publication" style="<?=$publication["typePublication"] == "annonce" ? "background: #739bff" : "";?>" id="publication<?=$publication["idPublication"];?>">
+                        <div class="carte-publication" style="<?=$publication->getType() == "annonce" ? "background: #739bff" : "";?>" id="publication<?=$publication->getId();?>">
                             <div class="publication-header">
                                 <div class="header-left">
-                                    <img src="<?=$publication["photoProfil"];?>" alt="Photo de profil de <?=$utilisateur->getNom() . $utilisateur->getPrenom();?>" width="40" height="40">
-                                    <p><?=htmlspecialchars($publication["nom"]) . " " . htmlspecialchars($publication["prenom"]);?></p>
+                                    <img src="<?=$publication->getUtilisateur()->getPhotoProfil();?>" alt="Photo de profil de <?=$utilisateur->getNom() . $utilisateur->getPrenom();?>" width="40" height="40">
+                                    <p><?=htmlspecialchars($publication->getUtilisateur()->getNom()) . " " . htmlspecialchars($publication->getUtilisateur()->getPrenom());?></p>
                                 </div>
                                 <div class="header-right">
                                     <p><?php 
-                                        echo substr($publication['datePublication'], 8, 2) . "/" . substr($publication["datePublication"], 5, 2) . "/" . substr($publication["datePublication"], 0, 4) . " à " . substr($publication["datePublication"], 11, 2) . "h" . substr($publication["datePublication"], 14, 2);
+                                        echo substr($publication->getDate(), 8, 2) . "/" . substr($publication->getDate(), 5, 2) . "/" . substr($publication->getDate(), 0, 4) . " à " . substr($publication->getDate(), 11, 2) . "h" . substr($publication->getDate(), 14, 2);
                                     ?></p>
                                 </div>
                             </div>
                             <div class="publication-content">
-                                <p><?=htmlspecialchars($publication["contenuPublication"]);?></p>
+                                <p><?=htmlspecialchars($publication->getContenu());?></p>
 
 
                                 <div class="content-actions">
                                     <div class="actions">
                                         <form action="../traitements/like.php" method="post">
                                             <?php
-                                            if($publication["jaime"] == 0){
+                                            if(!$publication->isLiked($utilisateur->getId())){
                                                 ?>
-                                                <button type="submit" name="buttonJaime" value="<?=$publication["idPublication"];?>">J'aime</button>
+                                                <button type="submit" name="buttonJaime" value="<?=$publication->getId();?>">J'aime</button>
                                                 <?php
                                             }else{
                                                 ?>
-                                                <button type="submit" name="buttonJaime" value="<?=$publication["idPublication"];?>">Je n'aime plus</button>
+                                                <button type="submit" name="buttonJaime" value="<?=$publication->getId();?>">Je n'aime plus</button>
                                                 <?php
                                             }
                                             ?>
                                         </form>
                                         <p>&nbsp;&#8226;&nbsp;</p>
-                                        <a id="<?=$publication["idPublication"];?>" href="#">
-                                            <button type="button" onclick="showRepondre('publication-reponse<?=$publication['idPublication'];?>')">Commentaires</button>
+                                        <a id="<?=$publication->getId();?>" href="#">
+                                            <button type="button" onclick="showRepondre('publication-reponse<?=$publication->getId();?>')">Commentaires</button>
                                         </a>
                                     </div>
                                     <div class="jaime">
                                         <i class="far fa-thumbs-up"></i>
-                                        <p><?=$publication["jaime"];?></p>
+                                        <p><?=$publication->getJaime();?></p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="publication-reponses" id="publication-reponse<?=$publication["idPublication"];?>" style="display: none;">
+                            <div class="publication-reponses" id="publication-reponse<?=$publication->getId();?>" style="display: none;">
                                 <hr>
                                 <label for="reponse">Commentaires : </label>
                                 <form action="../traitements/repondre.php" method="POST">
                                     <textarea name="reponse" cols="80" rows="5" placeholder="Laissez un commentaire à cette publication !"></textarea>
-                                    <button type="submit" name="id" value="<?=$publication["idPublication"];?>">Répondre</button>
+                                    <button type="submit" name="id" value="<?=$publication->getId();?>">Répondre</button>
                                 </form>
                                 <hr class="hr2">
                                     <?php
-                                    $reponses = $Publication->reponses($publication["idPublication"]);
-                                    foreach($reponses as $reponse){
+                                    $reponses = $publication->reponses($publication->getId());
+                                    foreach($publication->reponses() as $reponse){
                                         ?>
                                         <div class="reponse">
                                             <div class="reponse-header">
-                                                <img src="<?=$reponse["photoProfil"];?>" alt="Photo de profil" width="40" height="40">
-                                                <h6><?=htmlspecialchars($reponse["nom"]) . " " . htmlspecialchars($reponse["prenom"]);?></h6>
+                                                <img src="<?=$reponse->getUtilisateur()->getPhotoProfil();?>" alt="Photo de profil" width="40" height="40">
+                                                <h6><?=htmlspecialchars($reponse->getUtilisateur()->getNom()) . " " . htmlspecialchars($reponse->getUtilisateur()->getPrenom());?></h6>
                                             </div>
                                             <div class="reponse-content">
-                                                <p><?=htmlspecialchars($reponse["reponse"]);?></p>
+                                                <p><?=htmlspecialchars($reponse->getReponse());?></p>
                                             </div>
                                         </div>
                                         <?php
@@ -210,21 +210,21 @@ require_once "../traitements/notConnected.php";
                                 if($projet->getDateDebut() > $date){
                                     echo "<div class='circle-blue' title='Projet non commencé'></div>";
                                 }
-                                else if($projet["dateDebut"] < $date && $projet["dateFin"] > $date || $projet["dateDebut"] < $date && $projet["dateFin"] == $date || $projet["dateDebut"] == $date && $projet["dateFin"] > $date){
+                                else if($projet->getDateDebut() < $date && $projet->getDateFin() > $date || $projet->getDateDebut() < $date && $projet->getDateFin() == $date || $projet->getDateDebut() == $date && $projet->getDateFin() > $date){
                                     echo "<div class='circle-green' title='Projet en cours'></div>";
                                 }
-                                else if($projet["dateFin"] < $date){
+                                else if($projet->getDateFin() < $date){
                                     echo "<div class='circle-red' title='Projet terminé'></div>";
                                 }
                                 ?>
                             </div>
                         </div>
                         <div class="carte-contenu">
-                            <p><?=htmlspecialchars($projet["descriptionProjet"]);?></p>
-                            <p>Début du projet le : <?=substr($projet["dateDebut"], 8, 2) . "/" . substr($projet["dateDebut"], 5, 2) . "/" . substr($projet["dateDebut"], 0, 4)?></p>
-                            <p>Fin du projet le : <?=substr($projet["dateFin"], 8, 2) . "/" . substr($projet["dateFin"], 5, 2) . "/" . substr($projet["dateFin"], 0, 4)?></p>
+                            <p><?=htmlspecialchars($projet->getDescription());?></p>
+                            <p>Début du projet le : <?=substr($projet->getDateDebut(), 8, 2) . "/" . substr($projet->getDateDebut(), 5, 2) . "/" . substr($projet->getDateDebut(), 0, 4)?></p>
+                            <p>Fin du projet le : <?=substr($projet->getDateFin(), 8, 2) . "/" . substr($projet->getDateFin(), 5, 2) . "/" . substr($projet->getDateFin(), 0, 4)?></p>
                         </div>
-                        <a href="../pages/projets.php?id=<?=$projet["idProjet"];?>">En savoir plus</a>
+                        <a href="../pages/projets.php?id=<?=$projet->getId();?>">En savoir plus</a>
                     </div>
                 </div>
                 <?php
@@ -359,7 +359,7 @@ require_once "../traitements/notConnected.php";
                             <div class="ligne_total">
                             <?php
                                 for($j=0; $j<$nb_day_per_month; $j++){
-                                    $plannifications = $Projets->plannifications($user->getId(), $datePlanif);
+                                    $plannifications = $user->plannifications($datePlanif);
                                     $total = 0;
                                     $dateIndex = $datePlanif->format('dmY');
                                     foreach($plannifications as $plannification){
@@ -445,20 +445,20 @@ require_once "../traitements/notConnected.php";
                 </div>
             </div>
                         
-            <div class="contenu">
-                <form method="post">
-                    <textarea id="textarea" name="nouvellePublication" placeholder="De quoi souhaitez-vous discuter ?"></textarea>
-                    <button type="button" onclick="ajoutHashtag()">Ajouter un hashtag</button>
-                    <button type="submit" onclick="closePublications()">Publier</button>      
-            </div>
+            <form method="post">
+                <div class="contenu">
+                        <textarea id="textarea" name="nouvellePublication" placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                        <button type="button" onclick="ajoutHashtag()">Ajouter un hashtag</button>
+                        <button type="submit" onclick="closePublications()">Publier</button>      
+                </div>
 
-            <div class="interactionsUtilisateur">
-                <input type="radio" name="typePost" class="typePost" id="annonce" value="annonce">
-                <label for="annonce">Créer une annonce</label>
-                <input type="radio" name="typePost" class="typePost" id="projet" checked value="simple">
-                <label for="projet">Créer un post simple</label>
-                </form>
-            </div>  
+                <div class="interactionsUtilisateur">
+                    <input type="radio" name="typePost" class="typePost" id="annonce" value="annonce">
+                    <label for="annonce">Créer une annonce</label>
+                    <input type="radio" name="typePost" class="typePost" id="projet" checked value="simple">
+                    <label for="projet">Créer un post simple</label>
+                </div>  
+            </form>
         </div>
     </div>
 

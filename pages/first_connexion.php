@@ -1,5 +1,4 @@
 <?php
-require_once "../modeles/Modele.php";
 require_once "../traitements/header.php";
 require_once "../traitements/notConnected.php";
 require_once "../traitements/first_connexion.php";
