@@ -12,10 +12,11 @@ $publications = $publication->getPublications();
 // $planification = new Plannifications;
 
 if ($utilisateur->getGrade() == 10){
-    $listProjet = $utilisateur->getProjet();
+    $listProjet = $utilisateur->getProjets();
 }else{
     $listProjet = $utilisateur->getParticipations();
 }
+
 if(empty($_POST["classement"])){
     $filtre = "asc";
 }else{

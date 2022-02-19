@@ -4,22 +4,16 @@ require_once "../traitements/notConnected.php";
 require_once "../traitements/redirection_first_connexion.php";
 require_once "../traitements/accueil.php";
 require_once "../traitements/planification.php";
-
+require_once "../traitements/maintenance.php";
 ?>
 
 <head>
     <link rel="stylesheet" href="../pages/styles/styleAccueil.css">
 </head>
 
-<style>
-    .couleurPerso{
-        background-color: <?=$_SESSION["color"];?>;
-    }
-</style>
-
 <body>
-    <div class="circle1 couleurPerso"></div>
-    <div class="circle2 couleurPerso"></div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
 
     <div id="footer">
         <a href="mentions_legales.php">mentions légales</a>

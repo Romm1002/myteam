@@ -10,6 +10,16 @@ class Modele{
         // return new PDO('mysql:host=ipssisqmyteam.mysql.db;dbname=ipssisqmyteam;charset=UTF8', 'ipssisqmyteam', 'Ipssi2022myteam');
     }
 
+    /*
+     * PARTIE MAINTENANCE
+     */
+
+     public function maintenance(){
+         $requete = $this->getBdd()->prepare("SELECT maintenance FROM maintenance");
+         $requete->execute();
+         return $requete->fetch(PDO::FETCH_ASSOC);
+     }
+
 
     /* 
      * PARTIE PROJET 
