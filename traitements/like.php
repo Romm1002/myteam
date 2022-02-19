@@ -2,7 +2,7 @@
 require_once "../pages/header.php";
 $Publications = new Publication();
 
-if($Publications->recuperationJaimes($_SESSION["idUtilisateur"], $_POST["buttonJaime"]) >= 1){
+if($Publications->recuperationJaimes($_SESSION["idUtilisateur"], $_POST["buttonJaime"]) == 1){
 
     $Publications->removeJaime($_POST["buttonJaime"]);
     header("location:../pages/accueil.php#publication" . $_POST["buttonJaime"]);
