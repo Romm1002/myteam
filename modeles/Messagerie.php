@@ -5,12 +5,16 @@ class Messagerie extends Modele{
     private $receveur;
     private $contenu;
     private $heure;
+    private $envoyeur;
 
-    public function initialiser($idMessage, $idUtilisateur, $contenu, $heure){
+    public function initialiser($idMessage, $idUtilisateur, $contenu, $heure, $envoyeur = null){
         $this->idMessage = $idMessage;
         $this->idUtilisateur = $idUtilisateur;
         $this->contenu = $contenu;
         $this->heure = $heure;
+        if ($envoyeur != null){
+            $this->envoyeur = $envoyeur;
+        }
     }
 
 
@@ -25,6 +29,9 @@ class Messagerie extends Modele{
     }
     public function getContenu(){
         return $this->contenu;
+    }
+    public function getEnvoyeur(){
+        return $this->envoyeur;
     }
  
     // Récupération des informations du contact séléctionné
@@ -46,7 +53,7 @@ class Messagerie extends Modele{
     
     // Permet d'insérer en BDD le message signalé par l'utilisateur
     public function signalerMessage($idMessage, $message, $traite, $idUtilisateur){
-        $requete = $this->getBdd()->prepare("INSERT INTO messages_signales(idMessage, message, traite, idUtilisateur) VALUES(?, ?, ?, ?, ?)");
+        $requete = $this->getBdd()->prepare("INSERT INTO messages_signales(idMessage, message, traite, idUtilisateur) VALUES(?, ?, ?, ?)");
         $requete->execute([$idMessage, $message, $traite, $idUtilisateur]);
     }
 }

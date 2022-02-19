@@ -1,5 +1,5 @@
 <?php
-require_once "../modeles/Modele.php";
+require_once "../pages/header.php";
 require_once "../traitements/notConnected.php";
 require_once "../traitements/redirection_first_connexion.php";
 require_once "../traitements/messagerie.php";

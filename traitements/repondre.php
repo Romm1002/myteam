@@ -1,11 +1,10 @@
 <?php
-require_once "header.php";
-$Publication = new Publication();
+require_once "../pages/header.php";
+$reponse = new Reponses();
 
 if(!empty($_POST["reponse"])){
-    extract($_POST);
 
-    $Publication->repondrePublication($_POST["id"], $reponse, $_SESSION["idUtilisateur"]);
+    $Publication->repondrePublication($_POST["id"], $_POST["reponse"], $utilisateu->getId());
     header("location:../pages/accueil.php#publication" . $_POST["id"]);
 }
 ?>

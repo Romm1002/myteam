@@ -119,14 +119,16 @@ class Utilisateurs extends Modele{
     }
 
     
-    // NE PLUS UTTILISER LA TABLE AFFECTATION MAIS PLANNIFICATION
     public function getParticipations(){
         $listProjet = array();
         $requete = $this->getBdd()->prepare("SELECT * FROM participationprojet LEFT JOIN projets USING(idProjet) WHERE idUtilisateur = ?");
         $requete->execute([$this->idUtilisateur]);
-        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $projet = new Projets;
             $projet->initialiser($value["idProjet"], $value["nomProjet"], $value["descriptionProjet"],  $value["dateDebut"], $value["dateFin"], $value["image"], $value["archive"],);
+            if ($projet->getArchive() == 1){
+                continue;
+            }
             array_push($listProjet, $projet);
         }
         return $listProjet;
@@ -151,5 +153,13 @@ class Utilisateurs extends Modele{
         $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs LEFT JOIN postes ON utilisateurs.idposte = postes.idposte WHERE token = ? AND idUtilisateur = ?");
         $requete->execute([$token, $id]);
         return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Permet de récupérer les participations d'un utilisateur pour chaque jour
+    public function plannifications($date){
+        $requete = $this->getBdd()->prepare('SELECT * FROM plannifications WHERE idUtilisateur = ? AND date = ?');
+        // On a formater la date pour quelle soit la même qu'en BDD
+        $requete->execute([$this->idUtilisateur, $date->format("Y-m-d")]);
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -266,6 +266,9 @@ body .container .container-message form .right button{
     font-size: 22px;
 }
 
+.black-screen .container .middle{
+    overflow-x: auto;
+}
 .black-screen .container .middle table{
     width: 100%;
 }

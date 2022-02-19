@@ -20,7 +20,7 @@ class Modele{
         $evenements = array();
         $requete = $this->getBdd() ->prepare("SELECT * FROM evenements WHERE date = ? AND idUtilisateur = ? ORDER BY heureDebut");
         $requete ->execute([$date, $idUtilisateur]);
-        foreach ($requete-> fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete-> fetchAll(PDO::FETCH_ASSOC) as $value) {
             $evenement = new Evenements;
             $evenement->initialiser($value["designation"], $value["date"], $value["idUtilisateur"], $value["couleur"], $value["heureDebut"], $value["heureFin"], $value["idEvenement"]);
             array_push($evenements, $evenement);
@@ -43,7 +43,7 @@ class Modele{
 
         $requete = $this->getBdd()->prepare("SELECT nom, prenom, photoProfil, idUtilisateur FROM utilisateurs WHERE idUtilisateur != ?");
         $requete->execute([$idUtilisateur]);
-        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $utilisateur = new Utilisateurs;
             $utilisateur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"]);
             array_push($listContact, $utilisateur);
@@ -57,7 +57,7 @@ class Modele{
 
         $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs WHERE (prenom LIKE ? OR nom LIKE ?) AND idUtilisateur != ?");
         $requete->execute(["%" . $s1 . "%", "%" . $s1 . "%", $idUtilisateur]);
-        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $utilisateur = new Utilisateurs;
             $utilisateur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"]);
             array_push($listContact, $utilisateur);
@@ -70,42 +70,59 @@ class Modele{
         $listMessage = array();
         $requete = $this->getBdd()->prepare("SELECT * FROM messagerie WHERE (idUtilisateur = ? AND idReceveur = ?) OR (idUtilisateur = ? AND idReceveur = ?)");
         $requete->execute([$idPersonne1, $idPersonne2, $idPersonne2, $idPersonne1]);
-        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $message = new Messagerie;
             $message->initialiser( $value["idMessage"], $value["idUtilisateur"], $value["contenu"], $value["heure"]);
             array_push($listMessage, $message);
         }
         return $listMessage;
     }
+    
     /*
      * PARTIE UTILISATEUR
      */
-    
     public function getUtilisateurs(){
         $listUtilisateur = array();
         $requete = $this->getBdd()->prepare('SELECT * FROM utilisateurs');
         $requete->execute();
-        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $utilisateur = new Utilisateurs;
             $utilisateur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"], $value["color"]);
             array_push($listUtilisateur, $utilisateur);
         }
         return $listUtilisateur;
     }
+    
     /*
      * PARTIE PROJET
      */
-
     public function getProjets(){
         $listProjet = array();
         $requete = $this->getBdd()->prepare('SELECT * FROM projets');
         $requete->execute();
-        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $projet = new Projets;
             $projet->initialiser($value["idProjet"], $value["nomProjet"], $value["descriptionProjet"],  $value["dateDebut"], $value["dateFin"], $value["image"], $value["archive"],);
             array_push($listProjet, $projet);
         }
         return $listProjet;
+    }
+
+    /*
+     * PARTIE PROJET
+     */
+    public function getPublications(){
+        $listPublication = array();
+        $requete = $this->getBdd()->prepare("SELECT * FROM publications LEFT JOIN utilisateurs USING(idUtilisateur) LEFT JOIN postes USING(idposte) ORDER BY datePublication DESC");
+        $requete->execute();
+        foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
+            $utilisateur = new Utilisateurs;
+            $utilisateur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"]);
+            $publication = new Publication;
+            $publication->initialiser($value["idPublication"], $value["contenuPublication"], $value["datePublication"], $utilisateur, $value["typePublication"], $value["jaime"]);
+            array_push($listPublication, $publication);
+        }
+        return $listPublication;
     }
 }
 
@@ -113,8 +130,12 @@ class Modele{
 
 require_once "../modeles/Utilisateurs.php";
 require_once "../modeles/Publications.php";
+require_once "../modeles/Reponses.php";
 require_once "../modeles/Projets.php";
+require_once "../modeles/Taches.php";
 require_once "../modeles/Messagerie.php";
 require_once "../modeles/Evenements.php";
 require_once "../modeles/Planifications.php";
+
+
 require_once '../traitements/initialiserUtilisateur.php';

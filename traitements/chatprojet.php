@@ -6,7 +6,7 @@ $date = new DateTime();
 
 
 if(!empty($_POST["newMessage"])){
-    $Projets->new_chat($_SESSION['idUtilisateur'], $date->format('Y-m-d H:i:s'), $_POST["newMessage"], $_POST["idProjet"]);
+    $Projets->new_chat($uilisateur->getId(), $date->format('Y-m-d H:i:s'), $_POST["newMessage"], $_POST["idProjet"]);
     header('location:../pages/projets.php?id=' . $_POST['idProjet']);
 }
 
