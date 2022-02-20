@@ -115,6 +115,7 @@ body .container-accueil .accueil-left .left-content ul{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+	padding-left: 0px;
 }
 body .container-accueil .accueil-left .left-content ul a{
     text-decoration: none;

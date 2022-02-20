@@ -8,6 +8,20 @@ class Publication extends Modele{
     private $typePublication;
     private $jaime;
 
+    public function __construct($idPublication = null){
+        if ($idPublication != null){
+            $requete = $this->getBdd()->prepare("SELECT * FROM publications WHERE idPublication = ?");
+            $requete->execute([$idPublication]);
+            $value = $requete->fetch(PDO::FETCH_ASSOC);
+            $this->idPublication = $value["idPublication"];
+            $this->contenuPublication = $value["contenuPublication"];
+            $this->datePublication = $value["datePublication"];
+            $this->utilisateur = $value["utilisateur"];
+            $this->typePublication = $value["typePublication"];
+            $this->jaime = $value["jaime"];
+        }
+    }
+
     public function initialiser($idPublication, $contenuPublication, $datePublication, $utilisateur, $typePublication, $jaime){
         $this->idPublication = $idPublication;
         $this->contenuPublication = $contenuPublication;
@@ -84,13 +98,6 @@ class Publication extends Modele{
 
         $requete = $this->getBdd()->prepare("DELETE FROM jaime WHERE idUtilisateur = ? AND idPublication = ?");
         $requete->execute([$_SESSION["idUtilisateur"], $_POST["buttonJaime"]]);
-    }
-
-    // Récupération du nombre de j'aime
-    public function recuperationJaimes($idUtilisateur, $idPublication){
-        $requete = $this->getBdd()->prepare("SELECT * FROM jaime WHERE idUtilisateur = ? AND idPublication = ?");
-        $requete->execute([$idUtilisateur, $idPublication]);
-        return $requete->rowCount();
     }
 }
 

@@ -1,8 +1,8 @@
 <?php
 require_once "../pages/header.php";
-$Publications = new Publication();
+$Publications = new Publication($_POST["buttonJaime"]);
 
-if($Publications->recuperationJaimes($_SESSION["idUtilisateur"], $_POST["buttonJaime"]) == 1){
+if($Publications->isLiked($utilisateur->getId())){
 
     $Publications->removeJaime($_POST["buttonJaime"]);
     header("location:../pages/accueil.php#publication" . $_POST["buttonJaime"]);

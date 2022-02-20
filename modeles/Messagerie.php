@@ -17,7 +17,6 @@ class Messagerie extends Modele{
         }
     }
 
-
     public function getId(){
         return $this->idMessage;
     }
