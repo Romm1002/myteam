@@ -1,7 +1,8 @@
 <?php
-require_once "../traitements/header.php";
+require_once "../pages/header.php";
 require_once "../traitements/notConnected.php";
 require_once "../traitements/first_connexion.php";
+
 
 
 if($utilisateur->getBoolFirstConnexion() == 0){
@@ -49,6 +50,12 @@ if(isset($_GET["error"])){
             </div>
             <?php
             break;
+        case 2:
+            ?>
+            <div class="alert alert-danger">
+                Le mot de passe doit contenir au minimum une minuscule, une majucule, un chiffre et un caractère spécial.
+            </div>
+            <?php
     }
 }
 ?>

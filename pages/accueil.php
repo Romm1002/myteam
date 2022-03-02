@@ -45,6 +45,9 @@ require_once "../traitements/maintenance.php";
                     <a href="../pages/accueil.php?page=projets">
                         <li>Projets</li>
                     </a>
+                    <a href="../pages/accueil.php?page=conges">
+                        <li>Congés</li>
+                    </a>
                 </ul>
             </div>
             <div class="left-footer">
@@ -68,6 +71,8 @@ require_once "../traitements/maintenance.php";
                         <img src="<?=$utilisateur->getPhotoProfil();?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
+
+                    <p onclick="open_sondage()">Créer un sondage</p>
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
@@ -87,9 +92,16 @@ require_once "../traitements/maintenance.php";
                                 </div>
                             </div>
                             <div class="publication-content">
-                                <p><?=htmlspecialchars($publication->getContenu());?></p>
-
-
+                                <?php
+                                $raccourci = [":)", ":(", ":/", ":')", ":o", "(:", ":D", ";)", ":p"];
+                                $emojis = ["<img src='images/emojis/emo_smile.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_sad.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_droit.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_rire.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_surpris.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_envers.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_smile+.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_clin_oeil.svg' width='17px' height=''17px />", "<img src='images/emojis/emo_langue.svg' width='17px' height=''17px />"];
+                                $censure = ["tg", "tgl", "ta geule", "tageule", "connard", "connasse", "abrutis"];
+                                ?>
+                                <p>
+                                    <?=
+                                        str_replace($raccourci, $emojis, htmlspecialchars($publication->getContenu()));
+                                    ?>
+                                </p>
                                 <div class="content-actions">
                                     <div class="actions">
                                         <form action="../traitements/like.php" method="post">
@@ -427,13 +439,84 @@ require_once "../traitements/maintenance.php";
             </div>
         </section>
                 <?php
+        }else if($_GET["page"] == "conges"){
+            ?>
+            <div class="conges-header">
+                <h1>Mes congés</h1>
+            </div>
+            <div class="conges-content">
+                <table>
+                    <thead>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Commentaire</th>
+                        <th>Statut</th>
+                        <th>Raison</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach($congesParUtilisateur as $conge){
+                            ?>
+                            <tr>
+                                <td><?=$conge["dateDebut"];?></td>
+                                <td><?=$conge["dateFin"];?></td>
+                                <td><?=$conge["commentaire"];?></td>
+                                <td><?=$conge["status"];?></td>
+                                <td style="<?= empty($conge["raison"]) ? "background-color: red" : "" ;?>">
+                                    <?php
+                                    if(empty($conge["raison"])){
+                                        echo "-";
+                                    }else{
+                                        echo $conge["raison"];
+                                    }
+                                    ;?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="conges-footer"></div>
+            <?php
         }
             ?>
         </div>
     </div>
             
 
+    <!-- Pop-up d'un sondage -->
+    <div class="sondage" id="sondage" style="display: none;">
+        <div class="newSondage">
+            <div class="header">
+                <h1>Créer un sondage</h1>
+                <p onclick="close_sondage()">	&#10006;</p>
+            </div>
 
+            <hr>
+            
+            <div class="profil">
+                <img src="<?=$utilisateur->getPhotoProfil();?>" width="40" height="40">
+                <div class="npp">
+                    <p><?=$utilisateur->getPrenom() . " " . $utilisateur->getNom();?></p>
+                    <small><?=$utilisateur->getPoste();?></small>
+                </div>
+            </div>
+
+            <form action="#" method="post">
+                <div class="contenu">
+                    <textarea name="question" placeholder="Question..." required></textarea>
+                </div>
+                <div class="interactionsUtilisateur" id="interactionsUtilisateur">
+                    <button type="button" id="add_choice" class="btn btn-info">Autre choix</button>
+                    <button type="submit" name="envoyer_sondage" class="btn btn-success" value="1">Envoyer</button>
+                </div>
+
+                <div id="choix"></div>
+            </form>
+        </div>
+    </div>
 
     <!-- Pop-up d'une nouvelle publication -->
     <div class="clickPublications" id="clickPublications" style="display: none;">

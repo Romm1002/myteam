@@ -46,7 +46,7 @@ if(!empty($_POST["designation"]) && !empty($_POST["heureDebut"])){
 }
 
 // recupérer les evenement de la date
-$listEvenements = $evenement->evenementsParDate($date,$utilisateur->getId());
+$listEvenements = $utilisateur->evenementsParDate($date,$utilisateur->getId());
 
 //remplissage du tableau calendrier
 $calendrier = [];

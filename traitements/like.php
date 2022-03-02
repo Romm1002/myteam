@@ -4,11 +4,11 @@ $Publications = new Publication($_POST["buttonJaime"]);
 
 if($Publications->isLiked($utilisateur->getId())){
 
-    $Publications->removeJaime($_POST["buttonJaime"]);
+    $Publications->removeJaime($_POST["buttonJaime"], $utilisateur->getId());
     header("location:../pages/accueil.php#publication" . $_POST["buttonJaime"]);
 }else{
 
-    $Publications->jaime($_POST["buttonJaime"]);
+    $Publications->jaime($_POST["buttonJaime"], $utilisateur->getId());
 
     header("location:../pages/accueil.php#publication" . $_POST["buttonJaime"]);
 }

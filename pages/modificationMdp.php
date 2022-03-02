@@ -22,6 +22,12 @@ if(!empty($_GET)){
             Votre mot de passe à bien été modifié !
         </div>
         <?php
+    }else if($_GET["validate"] == 2){
+        ?>
+        <div class="alert alert-danger">
+            Le mot de passe doit contenir, au minimum, une minuscule, une majuscule, un chiffre et un caractère spécial.
+        </div>
+        <?php
     }
 }
 ?>

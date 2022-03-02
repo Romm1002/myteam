@@ -198,11 +198,11 @@ require_once "../traitements/redirection_first_connexion.php";
                                     if(substr($evenement->getHeureDebut(), 0, 2) == $i){
                                         ?>
                                         <td rowspan="<?=substr($evenement->getHeureFin(),0,2) - substr($evenement->getHeureDebut(),0,2) +1 +(substr($evenement->getHeureFin(),3,2)>0 ? 1 : 0) ?>">
-                                            <div class="evenement" style="background-color : <?= !empty($evenement->getCouleur()) ? $evenement->getcouleur() : "";?>">
+                                            <div class="evenement <?= $evenement->getAdmin() ? "evenement-admin" : "";?>" style="background-color : <?= !empty($evenement->getCouleur()) ? $evenement->getcouleur() : "";?>">
                                                 <!-- modifier un evenement -->
                                                 <form action="../traitements/planning.php?date=<?=$date?>" method="POST">
                                                     <input type="hidden" name="modif" value="<?=$evenement->getId();?>">
-                                                    <input type="text" class="editEvenement" id="designation<?=$evenement->getId();?>" name="designation" value="<?=htmlspecialchars($evenement->getDesignation());?>" readonly onclick="editEvenement('designation<?=$evenement->getId();?>')" autocomplete="off">
+                                                    <input type="text" class="editEvenement" id="designation<?=$evenement->getId();?>" name="designation" value="<?=htmlspecialchars($evenement->getDesignation());?>" readonly <?=!$evenement->getAdmin() ? 'onclick="editEvenement(\'designation' . $evenement->getId() . '\')"' : "";?> autocomplete="off">
                                                 </form>
                                                 <p>
                                                     <?php
@@ -212,10 +212,16 @@ require_once "../traitements/redirection_first_connexion.php";
                                                         }
                                                     ?>
                                                 </p>
-                                                <!-- supprimer un evenement -->
+                                                <?php
+                                                if (!$evenement->getAdmin()){
+                                                    ?>
                                                 <form action="../traitements/planning.php?date=<?=$date?>" method="post">
                                                     <button name="supprEvenement" value="<?=$evenement->getId();?>" class="btn-supr">x</button>
                                                 </form>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <!-- supprimer un evenement -->
                                             </div>
                                         </td>
                                         <?php

@@ -162,4 +162,16 @@ class Utilisateurs extends Modele{
         $requete->execute([$this->idUtilisateur, $date->format("Y-m-d")]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+    // renvoi un array de tout les evenements correspondant a la date et l'utilisateur
+    public function evenementsParDate($date){
+        $evenements = array();
+        $requete = $this->getBdd() ->prepare("SELECT * FROM evenements WHERE date = ? AND idUtilisateur = ? ORDER BY heureDebut");
+        $requete ->execute([$date, $this->idUtilisateur]);
+        foreach ($requete-> fetchAll(PDO::FETCH_ASSOC) as $value) {
+            $evenement = new Evenements;
+            $evenement->initialiser($value["designation"], $value["date"], $value["idUtilisateur"], $value["couleur"], $value["admin"], $value["heureDebut"], $value["heureFin"], $value["idEvenement"]);
+            array_push($evenements, $evenement);
+        }
+        return $evenements;
+    }
 }

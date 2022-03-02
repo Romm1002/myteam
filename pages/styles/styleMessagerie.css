@@ -86,76 +86,8 @@ body #container-accueil #accueil-right{
     z-index: -1;
 }
 
-
-body #container-accueil #accueil-left .header{
-	width: 100%;
-}
-body #container-accueil #accueil-left .header a{
-	color: #000;
-	text-decoration: none;
-}
-
-body #container-accueil #accueil-left .filtre{
-	width: 100%;
-	margin-top: 10px;
-}
-body #container-accueil #accueil-left .filtre form{
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-body #container-accueil #accueil-left .filtre form input{
-	border: none;
-	padding: 5px 10px;
-	outline: none;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
-body #container-accueil #accueil-left .filtre form button{
-	border: none;
-	outline: none;
-	background-color: #fff;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	padding-right: 10px;
-}
-
-body #container-accueil #accueil-left .contacts{
-	width: 100%;
-	max-height: 640px;
-	overflow-x: scroll;
-	margin: 20px 0px;
-}
-body #container-accueil #accueil-left .contacts a{
-	width: 100%;
-	margin: 10px 0px;
-}
-body #container-accueil #accueil-left .contacts a .contact{
-	width: 100%;
-	margin: 10px 0px;
-	display: flex;
-	justify-content: space-between;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* definition du style de messagerie.php */
-/*#accueil-left form{
+#accueil-left form{
     display: flex;
     margin: 5px 0px;
 }
@@ -380,4 +312,4 @@ body #container-accueil #accueil-left .contacts a .contact{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:active {
     background: rgb(143, 143, 143);
-}*/
+}

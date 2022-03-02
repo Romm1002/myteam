@@ -14,7 +14,28 @@ if($_POST["send"] == 1){
         if(strlen($_POST["password"]) < 8){
             $erreur++;
             header("location:../pages/first_connexion.php?error=1");
-        }       
+        }
+
+        // On vérifit la force du mdp
+        if( !preg_match("#[0-9]+#", $_POST["password"])){
+            $erreur++;
+            header("location:../pages/first_connexion.php?error=2");
+        }
+    
+        if(!preg_match("#[a-z]+#", $_POST["password"])){
+            $erreur++;
+            header("location:../pages/first_connexion.php?error=2");
+        }
+    
+        if(!preg_match("#[A-Z]+#", $_POST["password"])){
+            $erreur++;
+            header("location:../pages/first_connexion.php?error=2");
+        }
+    
+        if(!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $_POST["password"])){
+            $erreur++;
+            header("location:../pages/first_connexion.php?error=2");
+        }
     }
 
     if($erreur == 0){

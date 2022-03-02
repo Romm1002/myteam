@@ -63,6 +63,9 @@ body .container-accueil .accueil-left{
 body .container-accueil .accueil-left .left-actions{
     width: 100%;
     height: 7%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 body .container-accueil .accueil-left .left-actions a{
     text-decoration: none;
@@ -194,6 +197,7 @@ body .container-accueil .accueil-right .right-header{
     height: 23%;
     display: flex;
     flex-direction: column;
+	align-items: flex-end;
 }
 body .container-accueil .accueil-right .right-header form{
     width: 90%;
@@ -225,6 +229,12 @@ body .container-accueil .accueil-right .right-header form input{
 }
 body .container-accueil .accueil-right .right-header form input:hover{
     background: #EBEBEB;
+}
+body .container-accueil .accueil-right .right-header p#sondage{
+	margin-bottom: 0px;
+	margin-right: 35px;
+	margin-top: 10px;
+	cursor: pointer;
 }
 body .container-accueil .accueil-right .right-header .actions{
     width: 100%;
@@ -357,6 +367,7 @@ body .container-accueil .accueil-right .right-content .carte-publication .public
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions a{
     display: flex;
     align-items: center;
+	text-decoration: none;
 }
 body .container-accueil .accueil-right .right-content .carte-publication .publication-content .content-actions a:nth-child(2){
     margin-left: 5px;
@@ -1208,4 +1219,110 @@ body .main_div .bottom_right .classMain div.ligne div.detail:nth-last-child(-n+1
 #blackScreen .content .content-content input{
     border: 1px solid #000;
     outline: none;
+}
+
+
+body .sondage{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+body .sondage .newSondage{
+	width: 50%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255);
+	padding: 20px;
+}
+body .sondage .newSondage .header{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+body .sondage .newSondage .header h1{
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+body .sondage .newSondage .header p{
+	margin-bottom: 0px;
+	cursor: pointer;
+}
+body .sondage .newSondage .profil{
+	width: 100%;
+	display: flex;
+	margin-bottom: 20px;
+}
+body .sondage .newSondage .profil img{
+    border-radius: 50%;
+    object-fit: cover;
+	margin-right: 10px;
+}
+body .sondage .newSondage .profil .npp p{
+    margin: 0;
+    font-weight: 600;
+    line-height: 20px;
+}
+body .sondage .newSondage form{
+	width: 100%;
+}
+body .sondage .newSondage form .contenu{
+	width: 100%;
+}
+body .sondage .newSondage form .contenu textarea{
+	width: 100%;
+	padding: 0px 10px;
+	border: none;
+	outline: none;
+	resize: none;
+}
+body .sondage .newSondage form .interactionsUtilisateur{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+body .sondage .newSondage form #choix{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	max-height: 250px;
+	overflow-y: scroll;
+}
+body .sondage .newSondage form #choix input{
+	margin: 5px auto;
+}
+
+
+
+
+
+
+body .conges-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+body .conges-header h1{
+    font-size: 30px;
+}
+body .conges-content{
+    width: 100%;
+}
+body .conges-content table tr, body .conges-content table th, body .conges-content table td{
+    border: 2px solid #000;
+    border-collapse: collapse;
+}
+body .conges-content table{
+    width: 100%;
+}
+body .conges-content table th, body .conges-content table td{
+    padding: 10px;
 }

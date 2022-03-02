@@ -9,6 +9,21 @@ class Projets extends Modele{
     private $image;
     private $archive;
 
+    public function __construct($idProjet = null)
+    {
+        if ($idProjet != null){
+            $requete = $this->getBdd()->prepare('SELECT * FROM projets WHERE idProjet = ?');
+            $requete->execute([$idProjet]);
+            $result = $requete->fetch(PDO::FETCH_ASSOC);
+            $this->idProjet = $result["idProjet"];
+            $this->nom = $result["nomProjet"];
+            $this->description = $result["descriptionProjet"];
+            $this->dateDebut = $result["dateDebut"];
+            $this->dateFin = $result["dateFin"];
+            $this->image = $result["image"];
+            $this->archive = $result["archive"];
+        }
+    }
     public function initialiser($idProjet, $nom, $description, $dateDebut, $dateFin, $image, $archive){
         
         $this->idProjet = $idProjet;
@@ -56,38 +71,22 @@ class Projets extends Modele{
         return $listParticipants;
     }
     
-    
-    public function getProjetById($id){
-        $requete = $this->getBdd()->prepare('SELECT * FROM projets WHERE idProjet = ?');
-        $requete->execute([$id]);
-        $result = $requete->fetch(PDO::FETCH_ASSOC);
-        $this->idProjet = $result["idProjet"];
-        $this->nom = $result["nomProjet"];
-        $this->description = $result["descriptionProjet"];
-        $this->dateDebut = $result["dateDebut"];
-        $this->dateFin = $result["dateFin"];
-        $this->image = $result["image"];
-        $this->archive = $result["archive"];
-    }
 
     public function getChatProjet(){
         $listChat = array();
         $requete = $this->getBdd()->prepare('SELECT * FROM chatprojet LEFT JOIN utilisateurs USING(idUtilisateur) WHERE idProjet = ?');
         $requete->execute([$this->idProjet]);
         foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
-            $chat = new Messagerie;
+            $chat = new Chats();
             $envoyeur = new Utilisateurs;
             $envoyeur->initialiser($value["nom"], $value["prenom"], $value["photoProfil"], $value["idUtilisateur"]);
-            $chat->initialiser($value["idMessage"], $value["idUtilisateur"], $value["message"], $value["dateMessage"], $envoyeur);
+            $chat->initialiser($value["idMessage"], $envoyeur, $value["dateMessage"], $value["message"], $value["idProjet"]);
             array_push($listChat, $chat);
         }
         return $listChat;
     }
 
-    public function new_chat($idAuteur, $date, $message, $idProjet){
-        $requete = $this->getBdd()->prepare('INSERT INTO chatprojet(idUtilisateur, dateMessage, message, idProjet) VALUES(?, ?, ?, ?)');
-        $requete->execute([$idAuteur, $date, $message, $idProjet]);
-    }
+    
 
     public function getTaches(){
         $listTache = array();

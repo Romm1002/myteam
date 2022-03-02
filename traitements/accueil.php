@@ -32,3 +32,7 @@ if(!empty($_POST["nouvellePublication"])){
     $publication->newPublication($_POST["nouvellePublication"], $date->format('Y-m-d H:i:s'), $utilisateur->getId(), $_POST["typePost"]);
     header("location:../pages/accueil.php");
 }
+
+// PARTIE CONGES
+$conges = new Conges();
+$congesParUtilisateur = $conges->getCongeParUtilisateur($utilisateur->getId());

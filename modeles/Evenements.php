@@ -8,12 +8,14 @@ class Evenements extends Modele{
     private $heureFin;
     private $idUtilisateur;
     private $couleur;
+    private $admin;
 
-    public function initialiser($designation, $date, $idUtilisateur, $couleur, $heureDebut, $heureFin = null, $id = null ){
+    public function initialiser($designation, $date, $idUtilisateur, $couleur, $admin, $heureDebut, $heureFin = null, $id = null ){
         $this->designation = $designation;
         $this->date = $date;
         $this->idUtilisateur = $idUtilisateur;
         $this->couleur = $couleur;
+        $this->admin = $admin;
         $this->heureDebut = $heureDebut;
         if ($heureFin != null){
             $this->heureFin = $heureFin;
@@ -45,6 +47,9 @@ class Evenements extends Modele{
     }
     public function getCouleur(){
         return $this->couleur;
+    }
+    public function getAdmin(){
+        return $this->admin;
     }
 
     public function setId($id){

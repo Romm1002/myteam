@@ -83,21 +83,21 @@ class Publication extends Modele{
     }
 
     // Permet d'incrémenter un j'aime en BDD si l'utilisateur n'a pas déjà liké
-    public function jaime($idPublication){
+    public function jaime($idPublication, $idUtilisateur){
         $requete = $this->getBdd()->prepare("UPDATE publications SET jaime = ? WHERE idPublication = ?");
         $requete->execute([$this->jaime+1 ,$idPublication]);
 
         $requete = $this->getBdd()->prepare("INSERT INTO jaime(idUtilisateur, idPublication) VALUES(?, ?)");
-        $requete->execute([$_SESSION["idUtilisateur"], $_POST["buttonJaime"]]);
+        $requete->execute([$idUtilisateur, $_POST["buttonJaime"]]);
     }
 
     // Permet de soustraire 1 en BDD si l'utilisateur à déjà liké la publication
-    public function removeJaime($idPublication){
+    public function removeJaime($idPublication, $idUtilisateur){
         $requete = $this->getBdd()->prepare("UPDATE publications SET jaime = ? WHERE idPublication = ?");
         $requete->execute([$this->jaime-1 ,$idPublication]);
 
         $requete = $this->getBdd()->prepare("DELETE FROM jaime WHERE idUtilisateur = ? AND idPublication = ?");
-        $requete->execute([$_SESSION["idUtilisateur"], $_POST["buttonJaime"]]);
+        $requete->execute([$idUtilisateur, $_POST["buttonJaime"]]);
     }
 }
 

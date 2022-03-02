@@ -62,15 +62,15 @@ require_once "../traitements/redirection_first_connexion.php";
                 <?php
                 foreach($chats as $chat){
                     ?>
-                    <div style="justify-content:<?=$chat->getIdUtilisateur() == $utilisateur->getId() ? "flex-start" : "flex-end";?>" class="message">
-                        <span class="<?=$chat->getIdUtilisateur() == $utilisateur->getId() ? "blue" : "grey";?>">
+                    <div style="justify-content:<?=$chat->getUtilisateur()->getId() == $utilisateur->getId() ? "flex-start" : "flex-end";?>" class="message">
+                        <span class="<?=$chat->getUtilisateur()->getId() == $utilisateur->getId() ? "blue" : "grey";?>">
                             <div class="infos">
-                                <img src="<?=$chat->getEnvoyeur()->getPhotoProfil();?>" alt="Photo de profil" width="25" height="25" style="object-fit: cover">
-                                <?=htmlspecialchars($chat->getEnvoyeur()->getPrenom()) . " " . htmlspecialchars($chat->getEnvoyeur()->getNom());?>
+                                <img src="<?=$chat->getUtilisateur()->getPhotoProfil();?>" alt="Photo de profil" width="25" height="25" style="object-fit: cover">
+                                <?=htmlspecialchars($chat->getUtilisateur()->getPrenom()) . " " . htmlspecialchars($chat->getUtilisateur()->getNom());?>
                             </div>
                             <hr>
                             <div class="text">
-                                <?=htmlspecialchars($chat->getContenu());?>
+                                <?=htmlspecialchars($chat->getmessage());?>
                             </div>
                         </span>
                     </div>

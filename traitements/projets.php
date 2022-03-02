@@ -6,7 +6,6 @@ if(isset($_POST["terminer"])){
     $tache->terminer_tache(1, $_POST["idTache"]);
 }
 
-$projet = new Projets();
-$projet->getProjetById($_GET["id"]);
+$projet = new Projets($_GET["id"]);
 $chats = $projet->getChatProjet();
 $taches = $projet->getTaches();

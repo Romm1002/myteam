@@ -10,35 +10,11 @@ if(!empty($_SESSION)){
 
 $erreurs = 0;
 
-function password_strength($password) {
-	$returnVal = True;
 
-	if ( strlen($password) < 8 ) {
-		$returnVal = False;
-	}
-
-	if ( !preg_match("#[0-9]+#", $password) ) {
-		$returnVal = False;
-	}
-
-	if ( !preg_match("#[a-z]+#", $password) ) {
-		$returnVal = False;
-	}
-
-	if ( !preg_match("#[A-Z]+#", $password) ) {
-		$returnVal = False;
-	}
-
-	if ( !preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $password) ) {
-		$returnVal = False;
-	}
-
-	return $returnVal;
-}
 
 // Vérifications pour envoyer le formulaire de connexion // Si les champs ne sont pas vides
 if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
-    if(!empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST["Cmdp"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["datenaiss"])){
+    if(!empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST["Cmdp"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["datenaiss"]) && !empty($_POST['g-recaptcha-response'])){
 
         // Vérification si l'email est valide
         if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
@@ -82,7 +58,7 @@ if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
             $erreurs++;
             header("location:../pages/inscription.php?error=notStrong");
         }
-    
+
         if(!preg_match("#[a-z]+#", $_POST["mdp"])){
             $erreurs++;
             header("location:../pages/inscription.php?error=notStrong");
@@ -127,7 +103,7 @@ if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
             $Utilisateurs->inscription($_POST["nom"], $_POST["prenom"], $_POST["datenaiss"], filter_var($_POST["email"], FILTER_SANITIZE_EMAIL), $mdp, 3, "../pages/images/avatar/photoProfil.jpg", 0);
             header("location:../pages/inscription.php?error=no");
         }catch(Exception $e){
-            header("location:../pages/inscription.php=error=yes");
+            header("location:../pages/inscription.php?error=yes");
         }
     }
 }

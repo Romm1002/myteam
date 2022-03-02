@@ -1,6 +1,7 @@
 <?php
 require_once "../pages/header.php";
 require_once "../traitements/connected.php";
+require_once "../traitements/inscription.php";
 ?>
 
 <head>

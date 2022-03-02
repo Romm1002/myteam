@@ -6,8 +6,8 @@ class Modele{
 
     protected function getBdd(){
         // INITIALISATION DE LA CONNEXION A LA BDD
-        // return new PDO('mysql:host=localhost;dbname=myteam;charset=UTF8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        return new PDO('mysql:host=ipssisqmyteam.mysql.db;dbname=ipssisqmyteam;charset=UTF8', 'ipssisqmyteam', 'Ipssi2022myteam');
+        return new PDO('mysql:host=localhost;dbname=myteam;charset=UTF8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        // return new PDO('mysql:host=ipssisqmyteam.mysql.db;dbname=ipssisqmyteam;charset=UTF8', 'ipssisqmyteam', 'Ipssi2022myteam');
     }
 
     /*
@@ -25,18 +25,7 @@ class Modele{
      * PARTIE PROJET 
      */
 
-    // renvoi un array de tout les evenements correspondant a la date et l'utilisateur
-    public function evenementsParDate($date, $idUtilisateur){
-        $evenements = array();
-        $requete = $this->getBdd() ->prepare("SELECT * FROM evenements WHERE date = ? AND idUtilisateur = ? ORDER BY heureDebut");
-        $requete ->execute([$date, $idUtilisateur]);
-        foreach ($requete-> fetchAll(PDO::FETCH_ASSOC) as $value) {
-            $evenement = new Evenements;
-            $evenement->initialiser($value["designation"], $value["date"], $value["idUtilisateur"], $value["couleur"], $value["heureDebut"], $value["heureFin"], $value["idEvenement"]);
-            array_push($evenements, $evenement);
-        }
-        return $evenements;
-    }
+    
 
     // renvoi un entier de la somme de tout les evenements correspondant a la date et l'utilisateur
     public function nbrEvenements($date,$idUtilisateur){
@@ -102,6 +91,21 @@ class Modele{
         }
         return $listUtilisateur;
     }
+
+    /*
+     * PARTIE CONGE
+     */
+    public function getConges(){
+        $listConge = [];
+        $requete = $this->getBdd()->prepare("SELECT * FROM conges");
+        $requete->execute();
+        foreach($requete->fetchAll(PDO::FETCH_ASSOC) as $value){
+            $conge = new Conges;
+            $conge->initialiser($value["idConge"], $value["dateDebut"], $value["dateFin"], $value["commentaire"], $value["status"], $value["raison"]);
+            array_push($listConge, $conge);
+        }
+        return $listConge;
+    }
     
     /*
      * PARTIE PROJET
@@ -143,9 +147,10 @@ require_once "../modeles/Publications.php";
 require_once "../modeles/Reponses.php";
 require_once "../modeles/Projets.php";
 require_once "../modeles/Taches.php";
+require_once "../modeles/Chats.php";
 require_once "../modeles/Messagerie.php";
 require_once "../modeles/Evenements.php";
 require_once "../modeles/Planifications.php";
-
+require_once "../modeles/Conges.php";
 
 require_once '../traitements/initialiserUtilisateur.php';

@@ -129,6 +129,26 @@
     background-color: rgba(0, 0, 0, 0.171);
     position: relative;
 }
+.evenement-admin{
+    border: solid 1px red;
+}
+.evenement-admin::after{
+    content: 'cet evenement à été ajouté par un administrateur et ne peut pas être modifié.';
+    position: absolute;
+    left: 0;
+    padding: 2px 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out 0.8s;
+    z-index: 100;
+    background-color: lightgray;
+    border-radius: 2px;
+    border: solid 1px grey;
+    box-shadow: 8px 8px 20px -8px rgb(0 0 0 / 75%);
+}
+.evenement-admin:hover::after{
+    opacity: 100;
+    transition: opacity 0.3s ease-in-out 1.8s;
+}
 .editEvenement{
     overflow: visible;
     background-color: rgba(0, 0, 0, 0);

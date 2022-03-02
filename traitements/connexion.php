@@ -11,7 +11,7 @@ $erreurs = 0;
 
 // Vérifications pour envoyer le formulaire de connexion // Si les champs ne sont pas vides
 if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
-    if(!empty($_POST["email"]) && !empty($_POST["mdp"])){
+    if(!empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST['g-recaptcha-response'])){
         
         // Vérification si l'email est valide
         if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
