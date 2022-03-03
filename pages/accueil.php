@@ -452,24 +452,51 @@ require_once "../traitements/maintenance.php";
                         <th>Commentaire</th>
                         <th>Statut</th>
                         <th>Raison</th>
+                        <th></th>
                     </thead>
                     <tbody>
                         <?php
                         foreach($congesParUtilisateur as $conge){
                             ?>
                             <tr>
-                                <td><?=$conge["dateDebut"];?></td>
-                                <td><?=$conge["dateFin"];?></td>
+                                <td><?=substr($conge["dateDebut"], 8, 2) . "/" . substr($conge["dateDebut"], 5, 2) . "/" . substr($conge["dateDebut"], 0, 4);?></td>
+                                <td><?=substr($conge["dateFin"], 8, 2) . "/" . substr($conge["dateFin"], 5, 2) . "/" . substr($conge["dateFin"], 0, 4);?></td>
                                 <td><?=$conge["commentaire"];?></td>
-                                <td><?=$conge["status"];?></td>
-                                <td style="<?= empty($conge["raison"]) ? "background-color: red" : "" ;?>">
+                                <td>
                                     <?php
-                                    if(empty($conge["raison"])){
-                                        echo "-";
-                                    }else{
-                                        echo $conge["raison"];
+                                    switch($conge["status"]){
+                                        case 0:
+                                            echo "En attente";
+                                            break;
+                                        case 1:
+                                            echo "Refusé";
+                                            break;
+                                        case 2:
+                                            echo "Validé";
+                                            break;
                                     }
-                                    ;?>
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        if($conge["status"] != 1){
+                                            echo "-";
+                                        }
+                                    ?>
+                                </td>
+                                <td style="text-align: center;">
+                                    <form action="../traitements/supprimer_conge.php" method="post">
+                                        <input type="hidden" name="conge" value="<?=$conge["idConge"];?>">
+                                        <?php
+                                        if($conge["status"] == 0){
+                                            ?>
+                                            <button type="submit" name="btn-supprimer_conge" value="1">
+                                                <i class="bi bi-x"></i>
+                                            </button>
+                                            <?php
+                                        }
+                                        ?>
+                                    </form>
                                 </td>
                             </tr>
                             <?php
@@ -478,10 +505,61 @@ require_once "../traitements/maintenance.php";
                     </tbody>
                 </table>
             </div>
-            <div class="conges-footer"></div>
+            <div class="conges-footer">
+                <div class="filtres">
+                    <form action="../traitements/filtres.php" method="post" id="formulaireFiltres">
+                        <label for="show-enAttente">Voir les congés en attente</label>
+                        <input type="checkbox" name="show-enAttente">
+                    </form>
+                </div>
+                <button type="button" onclick="open_demande_conge()">Faire une demande de congé</button>
+                <?php
+                if($utilisateur->getGrade() == 6){
+                    ?>
+                    <button type="button">Gérer les congés</button>
+                    <?php
+                }
+                ?>
+            </div>
             <?php
         }
             ?>
+        </div>
+    </div>
+
+    <!-- Modal demande de congé -->
+    <div class="background" id="background" style="display: none;">
+        <div class="demandeConge">
+            <div class="header">
+                <h2>Demande de congé</h2>
+                <i class="bi bi-x" onclick="open_demande_conge()"></i>
+            </div>
+
+            <hr>
+
+            <div class="content">
+                <form action="../traitements/demande_conge.php" method="post">
+                    <div class="inline">
+                        <div class="width-50">
+                            <label for="dateDebut">Date de début</label>
+                            <input type="date" name="dateDebut" required>
+                        </div>
+    
+                        <div class="width-50">
+                            <label for="dateFin">Date de fin</label>
+                            <input type="date" name="dateFin" required>
+                        </div>
+                    </div>
+
+                    <label for="commentaire" style="margin-top: 10px;">Commentaire <i>(optionnel)</i></label>
+                    <textarea name="commentaire" cols="30" rows="5" placeholder="Je pars en vacances..."></textarea>
+
+                    <button type="submit" name="valider_demande" value="1">Valider la demande</button>
+                </form>
+            </div>
+            <div class="footer">
+                <p>Il est possible de supprimer sa demande de congé par la suite à condition qu'elle soit "En attente".</p>
+            </div>
         </div>
     </div>
             
@@ -577,13 +655,49 @@ require_once "../traitements/maintenance.php";
         <?php
     }
 
-    if(isset($_GET["error"]) && $_GET["error"] == "noaccess"){
-        ?>
-        <div class="alert alert-danger" style="position: absolute; bottom: 2%; left: 2%">
-            Vous n'avez pas la permission de modifier le ratio d'un autre utilisateur !
-        </div>
-        <?php
+
+    
+
+    if(isset($_GET["error"])){
+        switch($_GET["error"]){
+            case "noaccess":
+                ?>
+                <div class="alert alert-danger" style="position: absolute; bottom: 2%; left: 2%">
+                    Vous n'avez pas la permission de modifier le ratio d'un autre utilisateur !
+                </div>
+                <?php
+                break;
+            case "0":
+                ?>
+                <div class="alert alert-danger" style="position: absolute; bottom: 2%; left: 2%">
+                    La date de début doit être inférieur à la date de fin !
+                </div>
+                <?php
+                break;
+            case "1":
+                ?>
+                <div class="alert alert-danger" style="position: absolute; bottom: 2%; left: 2%">
+                    Vous ne pouvez pas demander un congé pour un jour déjà passé ou à partir d'aujourd'hui !
+                </div>
+                <?php
+                break;
+            case "2":
+                ?>
+                <div class="alert alert-danger" style="position: absolute; bottom: 2%; left: 2%">
+                    Vous devez indiquer une date de début et une date de fin !
+                </div>
+                <?php
+                break;
+            case "no":
+                ?>
+                <div class="alert alert-success" style="position: absolute; bottom: 2%; left: 2%">
+                    Votre demande de congé à été prise en compte !
+                </div>
+                <?php
+                break;
+        }
     }
+
     ?>
 
 
@@ -591,4 +705,5 @@ require_once "../traitements/maintenance.php";
 
     <script src="../pages/scripts/fonction.js"></script>
     <script src="../pages/scripts/script_overflow.js"></script>
+    <script src="../pages/scripts/scriptConge.js"></script>
 </body>

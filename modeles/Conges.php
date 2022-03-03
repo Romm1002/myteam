@@ -42,5 +42,21 @@ class Conges extends Modele{
         $requete->execute([$idUtilisateur]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getCongeEnAttenteParUtilisateur($idUtilisateur, $statut){
+        $requete = $this->getBdd()->prepare("SELECT * FROM conges WHERE idUtilisateur = ? AND status = ?");
+        $requete->execute([$idUtilisateur, $statut]);
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function supprimerConge($idConge){
+        $requete = $this->getBdd()->prepare("DELETE FROM conges WHERE idConge = ?");
+        $requete->execute([$idConge]);
+    }
+
+    public function nouveauConge($idUtilisateur, $dateDebut, $dateFin, $commentaire, $statut, $raison){
+        $requete = $this->getBdd()->prepare("INSERT INTO conges(idUtilisateur, dateDebut, dateFin, commentaire, status, raison) VALUES(?, ?, ?, ?, ?, ?)");
+        $requete->execute([$idUtilisateur, $dateDebut, $dateFin, $commentaire, $statut, $raison]);
+    }
 }
 ?>
