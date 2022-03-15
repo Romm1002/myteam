@@ -91,21 +91,6 @@ class Modele{
         }
         return $listUtilisateur;
     }
-
-    /*
-     * PARTIE CONGE
-     */
-    public function getConges(){
-        $listConge = [];
-        $requete = $this->getBdd()->prepare("SELECT * FROM conges");
-        $requete->execute();
-        foreach($requete->fetchAll(PDO::FETCH_ASSOC) as $value){
-            $conge = new Conges;
-            $conge->initialiser($value["idConge"], $value["dateDebut"], $value["dateFin"], $value["commentaire"], $value["status"], $value["raison"]);
-            array_push($listConge, $conge);
-        }
-        return $listConge;
-    }
     
     /*
      * PARTIE PROJET

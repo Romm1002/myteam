@@ -3,8 +3,6 @@ require_once "../pages/header.php";
 require_once "../traitements/notConnected.php";
 require_once "../traitements/projets.php";
 require_once "../traitements/redirection_first_connexion.php";
-
-
 ?>
 
 <head>
@@ -98,7 +96,7 @@ require_once "../traitements/redirection_first_connexion.php";
 
     <!-- Popup tâches du projet -->
     <div class="black-screen" id="black-screen" style="display: none;">
-        <div class="container">
+        <div class="container-1">
             <div class="top">
                 <div class="left"></div>
                 <div class="center">
@@ -112,16 +110,21 @@ require_once "../traitements/redirection_first_connexion.php";
                 <table>
                     <th>N°</th>
                     <th>Libellé</th>
-                    <th>Terminée</th>
+                    <th>Attribué à</th>
+                    <th>Date de fin</th>
                     <th>Action</th>
 
                     <?php
                     foreach($taches as $tache){
+                        var_dump($tache);
                         ?>
+                        
                         <tr>
                             <td><?=$tache->getId();?></td>
                             <td><?=htmlspecialchars($tache->getLibelle());?></td>
-                            <td>
+                            <td><?=$tache->getPrenom() . " " . $tache->getNom();?></td>
+                            <td><?=$tache->getTerminee();?></td>
+                            <!-- <td>
                                 <?php
                                 // Switch qui convertit 0 en "Non" et 1 en "Oui" pour savoir si le tâche est terminée
                                 switch($tache->getTerminee()){
@@ -136,7 +139,7 @@ require_once "../traitements/redirection_first_connexion.php";
                                         break;
                                 }
                                 ?>
-                            </td>
+                            </td> -->
                             <td>
                                 <?php
                                 if($tache->getTerminee() == 0){
@@ -160,11 +163,41 @@ require_once "../traitements/redirection_first_connexion.php";
                     ?>
                 </table>
             </div>
+        </div>
+
+        <div class="container-2">
             <div class="bottom">
                 <form action="../traitements/nouvelle_tache.php" method="post">
                     <label for="nouvelle_tache">Nouvelle tâche</label>
                     <input type="text" name="libelle" placeholder="Libelle de la tâche" required>
                     <input type="hidden" name="idProjet" value="<?=$_GET["id"];?>">
+
+                    <label for="attribution">Attribuer la tâche à</label>
+                    <select name="salarie" required>
+                        <option value="none" selected disabled>Selectionner un salarié</option>
+                        <?php
+                        foreach($projet->selectionParticipants($_GET["id"]) as $user){
+                            ?>
+                            <option value="<?=$user->getId();?>"><?=$user->getPrenom() . " " . $user->getNom();?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+
+                    <label for="tache_parent">Tâche parent</label>
+                    <select name="parent">
+                        <option value="none" selected disabled>Selectionner une tâche parent</option>
+                        <?php
+                        foreach($taches as $tache){
+                            ?>
+                            <option value="<?=$tache->getId();?>"><?=$tache->getId();?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+
+                    <label for="date_fin">Date de fin</label>
+                    <input type="date" name="date_fin" required>
                     <button type="submit">OK</button>
                 </form>
             </div>

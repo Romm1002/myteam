@@ -28,6 +28,12 @@ if(!empty($_GET)){
             Le mot de passe doit contenir, au minimum, une minuscule, une majuscule, un chiffre et un caractère spécial.
         </div>
         <?php
+    }else if($_GET["validate"] == 3){
+        ?>
+        <div class="alert alert-danger">
+            Votre mot de passe actuel n'est pas correct.
+        </div>
+        <?php
     }
 }
 ?>
@@ -54,6 +60,10 @@ if(!empty($_GET)){
         </div>
         <div class="container-content">
             <form action="../traitements/modificationMdp.php" method="post">
+                <div class="mdp">
+                    <label for="oldMdp">Mot de passe actuel</label>
+                    <input type="password" name="oldMdp" placeholder="Mot de passe actuel" required>
+                </div>
                 <div class="mdp">
                     <label for="newMdp">Nouveau mot de passe</label>
                     <input type="password" name="newMdp" placeholder="Nouveau mot de passe" required>

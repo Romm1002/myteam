@@ -9,6 +9,12 @@ require_once "../traitements/maintenance.php";
 
 <head>
     <link rel="stylesheet" href="../pages/styles/styleAccueil.css">
+
+    <script src="../pages/scripts/scriptConge.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="../pages/scripts/fonction.js"></script>
+    <!-- integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" -->
+    <script src="../pages/scripts/script_overflow.js"></script>
 </head>
 
 <body>
@@ -456,12 +462,15 @@ require_once "../traitements/maintenance.php";
                     </thead>
                     <tbody>
                         <?php
+                        $compteurCommentaire = 0;
                         foreach($congesParUtilisateur as $conge){
                             ?>
                             <tr>
                                 <td><?=substr($conge["dateDebut"], 8, 2) . "/" . substr($conge["dateDebut"], 5, 2) . "/" . substr($conge["dateDebut"], 0, 4);?></td>
                                 <td><?=substr($conge["dateFin"], 8, 2) . "/" . substr($conge["dateFin"], 5, 2) . "/" . substr($conge["dateFin"], 0, 4);?></td>
-                                <td><?=$conge["commentaire"];?></td>
+                                <td>
+                                    <p style="margin-bottom: 0px; cursor: pointer"><?=$conge["commentaire"];?></p>
+                                </td>
                                 <td>
                                     <?php
                                     switch($conge["status"]){
@@ -506,17 +515,11 @@ require_once "../traitements/maintenance.php";
                 </table>
             </div>
             <div class="conges-footer">
-                <div class="filtres">
-                    <form action="../traitements/filtres.php" method="post" id="formulaireFiltres">
-                        <label for="show-enAttente">Voir les congés en attente</label>
-                        <input type="checkbox" name="show-enAttente">
-                    </form>
-                </div>
                 <button type="button" onclick="open_demande_conge()">Faire une demande de congé</button>
                 <?php
                 if($utilisateur->getGrade() == 6){
                     ?>
-                    <button type="button">Gérer les congés</button>
+                    <button type="button" onclick="open_gestion_conge()">Gérer les congés</button>
                     <?php
                 }
                 ?>
@@ -524,6 +527,51 @@ require_once "../traitements/maintenance.php";
             <?php
         }
             ?>
+        </div>
+    </div>
+
+    <!-- Modal gestion des congés (RH) -->
+    <div class="background-gestionConge" id="background-gestionConge" style="display: none;">
+        <div class="gestionConge">
+            <div class="header">
+                <h2>Gestion des congés</h2>
+                <i class="bi bi-x" onclick="open_gestion_conge()"></i>
+            </div>
+
+            <hr>
+
+            <div class="content">
+                <table>
+                    <thead>
+                        <th>Salarié</th>
+                        <th>Date</th>
+                        <th>Raison</th>
+                        <th>Choix</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach($conges->getConges() as $conge){
+                            $dateDebutConge = substr($conge["dateDebut"], 8, 2) . "/" . substr($conge["dateDebut"], 5, 2) . "/" . substr($conge["dateDebut"], 0, 4);
+                            $dateFinConge = substr($conge["dateFin"], 8, 2) . "/" . substr($conge["dateFin"], 5, 2) . "/" . substr($conge["dateFin"], 0, 4);
+                            ?>
+                            <tr>
+                                <td><?=$conge["nom"] . " " . $conge["prenom"];?></td>
+                                <td>Du <?=$dateDebutConge;?> au <?=$dateFinConge;?></td>
+                                <td style="<?=$conge["raison"] == "" ? "cursor: not-allowed" : "";?>"><?=$conge["raison"];?></td>
+                                <td>
+                                    <a href="../traitements/accepterRefuserConge.php" id="accepterConge">Accepter</a>
+                                    <a href="../traitements/accepterRefuserConge.php" id="refuserConge">Refuser</a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <p>Une fois accepté ou refusé, il est impossible de revenir en arrière.</p>
+            </div>
         </div>
     </div>
 
@@ -614,7 +662,7 @@ require_once "../traitements/maintenance.php";
                 </div>
             </div>
                         
-            <form method="post">
+            <form method="post" id="form-nouvellePublication">
                 <div class="contenu">
                         <textarea id="textarea" name="nouvellePublication" placeholder="De quoi souhaitez-vous discuter ?"></textarea>
                         <button type="button" onclick="ajoutHashtag()">Ajouter un hashtag</button>
@@ -632,7 +680,7 @@ require_once "../traitements/maintenance.php";
     </div>
 
     <?php
-
+    // Modals qui permet d'entrer un ratio dans la planification
     if(isset($_GET["popup"]) && $_GET["popup"] == "ratio"){
         ?>
         <div id="blackScreen">
@@ -697,13 +745,7 @@ require_once "../traitements/maintenance.php";
                 break;
         }
     }
-
     ?>
 
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    <script src="../pages/scripts/fonction.js"></script>
-    <script src="../pages/scripts/script_overflow.js"></script>
-    <script src="../pages/scripts/scriptConge.js"></script>
+    <script src="../ajax/ajax.js"></script>
 </body>

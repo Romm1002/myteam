@@ -234,46 +234,79 @@ body .container .container-message form .right button{
     left: 0%;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
-.black-screen .container{
+.black-screen .container-1{
     width: 50%;
-    height: 60%;
     background-color: rgb(255, 255, 255);
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 10% 80% 10%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
 }
-.black-screen .container .top{
+.black-screen .container-1 .top{
     display: grid;
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 100%;
 }
-.black-screen .container .top .right{
+.black-screen .container-1 .top .right{
     display: flex;
     justify-content: flex-end;
 }
-.black-screen .container .top .right i{
+.black-screen .container-1 .top .right i{
     cursor: pointer;
 }
-.black-screen .container .top .center{
+.black-screen .container-1 .top .center{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.black-screen .container .top .center h1{
+.black-screen .container-1 .top .center h1{
     font-size: 22px;
 }
 
-.black-screen .container .middle{
+.black-screen .container-1 .middle{
     overflow-x: auto;
 }
-.black-screen .container .middle table{
+.black-screen .container-1 .middle table{
     width: 100%;
 }
-.black-screen .container .middle table tr, .black-screen .container .middle table td, .black-screen .container .middle table th{
+.black-screen .container-1 .middle table tr, .black-screen .container-1 .middle table td, .black-screen .container-1 .middle table th{
     border: 2px solid #000;
     border-collapse: collapse;
     padding: 10px
+}
+
+.black-screen .container-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+.black-screen .container-2 .bottom{
+    width: 100%;
+    margin-top: auto;
+}
+.black-screen .container-2 .bottom form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.black-screen .container-2 .bottom form label{
+    margin-top: 10px;
+}
+.black-screen .container-2 .bottom form button{
+    margin-top: 15px;
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 1000px){
+    .black-screen .container{
+        width: 80%;
+    }
 }

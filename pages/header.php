@@ -34,5 +34,18 @@ require_once '../traitements/cookies.php';
 
     <!-- RECAPTCHA -->
     <script src = 'https://www.google.com/recaptcha/api.js' async></script>
+
+    <!-- JQuery AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0HWKSR77M"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E0HWKSR77M');
+    </script>
 </head>
 </html>

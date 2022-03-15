@@ -6,7 +6,5 @@ checkboxes.forEach(checkbox => {
             form.submit();
         }
     });
-    
 });
-
 // Ce script envoie le formulaire lorsqu'une checkbox est cochée

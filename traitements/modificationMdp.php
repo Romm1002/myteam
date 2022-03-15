@@ -4,7 +4,14 @@ require_once "../modeles/Modele.php";
 
 $erreurs = 0;
 
-if(!empty($_POST["newMdp"]) && !empty($_POST["repeatMdp"])){
+if(!empty($_POST["newMdp"]) && !empty($_POST["repeatMdp"]) && !empty($_POST["oldMdp"])){
+
+    // On vérifie que le mot de passe actuel (qui va devenir l'ancien) est bien le bon
+    $password = $utilisateur->connexion($utilisateur->getEmail())['mdp'];
+    if(!password_verify($_POST["oldMdp"], $password)){
+        $erreurs++;
+        header("location:../pages/modificationMdp.php?validate=3");
+    }
 
     // Vérification du mot de passe (identique et longueur)
     if($_POST["newMdp"] != $_POST["repeatMdp"]){
@@ -32,7 +39,7 @@ if(!empty($_POST["newMdp"]) && !empty($_POST["repeatMdp"])){
         header("location:../pages/modificationMdp.php?validate=2");
     }
 
-    if(!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $_POST["password"])){
+    if(!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $_POST["newMdp"])){
         $erreurs++;
         header("location:../pages/modificationMdp.php?validate=2");
     }

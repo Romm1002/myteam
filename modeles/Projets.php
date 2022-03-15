@@ -90,11 +90,11 @@ class Projets extends Modele{
 
     public function getTaches(){
         $listTache = array();
-        $requete = $this->getBdd()->prepare("SELECT * FROM tachesprojet WHERE idProjet = ?");
+        $requete = $this->getBdd()->prepare("SELECT * FROM tachesprojet LEFT JOIN utilisateurs USING(idUtilisateur) WHERE idProjet = ?");
         $requete->execute([$this->idProjet]);
         foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $tache = new Taches;
-            $tache->initialiser($value["idTache"], $value["libelle"], $value["terminee"]);
+            $tache->initialiser($value["idTache"], $value["libelle"], $value["idUtilisateur"], $value["idTacheParent"], $value["dateFin"], $value["terminee"], $value["prenom"], $value["nom"]);
             array_push($listTache, $tache);
         }
         return $listTache;

@@ -3,12 +3,17 @@ require_once "../modeles/Modele.php";
 
 $Projets = new Projets();
 
+$conges = new Conges();
+
 $membres = $utilisateur->getUtilisateurs();
 
 $publication = new Publication();
 
 $publications = $publication->getPublications();
 
+if($utilisateur->getGrade() == 6){
+    $listConge = $conges->getConges();
+}
 // $planification = new Plannifications;
 
 if ($utilisateur->getGrade() == 10){
@@ -34,5 +39,4 @@ if(!empty($_POST["nouvellePublication"])){
 }
 
 // PARTIE CONGES
-$conges = new Conges();
 $congesParUtilisateur = $conges->getCongeParUtilisateur($utilisateur->getId());
