@@ -12,7 +12,7 @@ $publication = new Publication();
 $publications = $publication->getPublications();
 
 if($utilisateur->getGrade() == 6){
-    $listConge = $conges->getConges();
+    $listConge = $conges->getConges(1, 2);
 }
 // $planification = new Plannifications;
 

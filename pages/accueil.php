@@ -490,6 +490,8 @@ require_once "../traitements/maintenance.php";
                                     <?php
                                         if($conge["status"] != 1){
                                             echo "-";
+                                        }else{
+                                            echo $conge["raison"];
                                         }
                                     ?>
                                 </td>
@@ -550,17 +552,17 @@ require_once "../traitements/maintenance.php";
                     </thead>
                     <tbody>
                         <?php
-                        foreach($conges->getConges() as $conge){
+                        foreach($conges->getConges(1, 2) as $conge){
                             $dateDebutConge = substr($conge["dateDebut"], 8, 2) . "/" . substr($conge["dateDebut"], 5, 2) . "/" . substr($conge["dateDebut"], 0, 4);
                             $dateFinConge = substr($conge["dateFin"], 8, 2) . "/" . substr($conge["dateFin"], 5, 2) . "/" . substr($conge["dateFin"], 0, 4);
                             ?>
                             <tr>
                                 <td><?=$conge["nom"] . " " . $conge["prenom"];?></td>
                                 <td>Du <?=$dateDebutConge;?> au <?=$dateFinConge;?></td>
-                                <td style="<?=$conge["raison"] == "" ? "cursor: not-allowed" : "";?>"><?=$conge["raison"];?></td>
+                                <td><?=$conge["raison"];?></td>
                                 <td>
-                                    <a href="../traitements/accepterRefuserConge.php" id="accepterConge">Accepter</a>
-                                    <a href="../traitements/accepterRefuserConge.php" id="refuserConge">Refuser</a>
+                                    <a href="../traitements/accepterConge.php?id=<?=$conge["idConge"];?>" id="accepterConge">Accepter</a>
+                                    <a href="../traitements/tunnelRefuserConge.php?id=<?=$conge["idConge"];?>" id="refuserConge">Refuser</a>
                                 </td>
                             </tr>
                             <?php

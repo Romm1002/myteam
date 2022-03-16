@@ -47,9 +47,9 @@ class Conges extends Modele{
     }
 
     // MÉTHODES
-    public function getConges(){
-        $requete = $this->getBdd()->prepare("SELECT idConge, dateDebut, dateFin, commentaire, status, raison, nom, prenom FROM conges LEFT JOIN utilisateurs USING(idUtilisateur)");
-        $requete->execute();
+    public function getConges($status, $status2){
+        $requete = $this->getBdd()->prepare("SELECT idConge, dateDebut, dateFin, commentaire, status, raison, nom, prenom FROM conges LEFT JOIN utilisateurs USING(idUtilisateur) WHERE status != ? AND status != ?");
+        $requete->execute([$status, $status2]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -79,6 +79,28 @@ class Conges extends Modele{
         try{
             $requete = $this->getBdd()->prepare("INSERT INTO conges(idUtilisateur, dateDebut, dateFin, commentaire, status, raison) VALUES(?, ?, ?, ?, ?, ?)");
             $requete->execute([$idUtilisateur, $dateDebut, $dateFin, $commentaire, $statut, $raison]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // Accepter un congé (RH)
+    public function accepterConge($status, $idConge){
+        try{
+            $requete = $this->getBdd()->prepare("UPDATE conges SET status = ? WHERE idConge = ?");
+            $requete->execute([$status, $idConge]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // Refuser un congé (RH)
+    public function refuserConge($status, $raison, $idConge){
+        try{
+            $requete = $this->getBdd()->prepare("UPDATE conges SET status = ?, raison = ? WHERE idConge = ?");
+            $requete->execute([$status, $raison, $idConge]);
             return true;
         }catch(Exception $e){
             return false;

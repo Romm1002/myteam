@@ -87,6 +87,9 @@ body .container-connexion .connexion-content a{
     font-size: 13px;
     font-weight: bold;
 }
+.rc-anchor-light.rc-anchor-normal{
+    min-width: 200px;
+}
 body .container-connexion .connexion-footer{
     width: 100%;
     height: auto;
