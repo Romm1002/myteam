@@ -66,13 +66,23 @@ class Conges extends Modele{
     }
 
     public function supprimerConge($idConge){
-        $requete = $this->getBdd()->prepare("DELETE FROM conges WHERE idConge = ?");
-        $requete->execute([$idConge]);
+        try{
+            $requete = $this->getBdd()->prepare("DELETE FROM conges WHERE idConge = ?");
+            $requete->execute([$idConge]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     public function nouveauConge($idUtilisateur, $dateDebut, $dateFin, $commentaire, $statut, $raison){
-        $requete = $this->getBdd()->prepare("INSERT INTO conges(idUtilisateur, dateDebut, dateFin, commentaire, status, raison) VALUES(?, ?, ?, ?, ?, ?)");
-        $requete->execute([$idUtilisateur, $dateDebut, $dateFin, $commentaire, $statut, $raison]);
+        try{
+            $requete = $this->getBdd()->prepare("INSERT INTO conges(idUtilisateur, dateDebut, dateFin, commentaire, status, raison) VALUES(?, ?, ?, ?, ?, ?)");
+            $requete->execute([$idUtilisateur, $dateDebut, $dateFin, $commentaire, $statut, $raison]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 }
 ?>

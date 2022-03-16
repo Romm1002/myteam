@@ -30,10 +30,31 @@ class Chats extends Modele{
         return $this->idProjet;
     }
  
-    public function new_chat($idAuteur, $date, $message, $idProjet){
-        $requete = $this->getBdd()->prepare('INSERT INTO chatprojet(idUtilisateur, dateMessage, message, idProjet) VALUES(?, ?, ?, ?)');
-        $requete->execute([$idAuteur, $date, $message, $idProjet]);
+    public function new_chat($idAuteur, $date, $message, $idProjet)
+    {
+        try {
+            $this->dateMessage = $date;
+            $this->message = $message;
+            $this->idProjet = $idProjet;
+            $requete = $this->getBdd()->prepare('INSERT INTO chatprojet(idUtilisateur, dateMessage, message, idProjet) VALUES(?, ?, ?, ?)');
+            $requete->execute([$idAuteur, $date, $message, $idProjet]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
+
+    public function delete_chat($idChat)
+    {
+        try {
+            $requete = $this->getBdd()->prepare('DELETE FROM chatprojet WHERE idMessage = ?');
+            $requete->execute([$idChat]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
     // Récupération des informations du contact séléctionné
     public function recuperationInformationsContact($idAvec){
         $requete = $this->getBdd()->prepare("SELECT nom, prenom, photoProfil, idUtilisateur FROM utilisateurs WHERE idUtilisateur = ?");
@@ -42,6 +63,7 @@ class Chats extends Modele{
         $utilisateur = new Utilisateurs;
         $utilisateur->initialiser($result["nom"], $result["prenom"], $result["photoProfil"], $result["idUtilisateur"]);
         $this->receveur = $utilisateur;
+        return $result;
     }
 }
 ?>

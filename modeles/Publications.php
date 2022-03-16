@@ -52,8 +52,24 @@ class Publication extends Modele{
 
     // Permet de créer une nouvelle publication et de gérer son BG en fonction du type de publication
     public function newPublication($contenu, $date, $idUtilisateur, $typePublication){
-        $requete = $this->getBdd()->prepare("INSERT INTO publications(contenuPublication, datePublication, idUtilisateur, typePublication) VALUES(?, ?, ?, ?)");
-        $requete->execute([$contenu, $date, $idUtilisateur, $typePublication]);
+        try{
+            $requete = $this->getBdd()->prepare("INSERT INTO publications(contenuPublication, datePublication, idUtilisateur, typePublication) VALUES(?, ?, ?, ?)");
+            $requete->execute([$contenu, $date, $idUtilisateur, $typePublication]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // Pour PHPUnit
+    public function deletePublication($idPublication){
+        try{
+            $requete = $this->getBdd()->prepare("DELETE FROM publications WHERE idPublication = ? ORDER BY idPublication DESC LIMIT 1");
+            $requete->execute([$idPublication]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     // Permet l'affichage des commentaires d'une publication
@@ -98,6 +114,18 @@ class Publication extends Modele{
 
         $requete = $this->getBdd()->prepare("DELETE FROM jaime WHERE idUtilisateur = ? AND idPublication = ?");
         $requete->execute([$idUtilisateur, $_POST["buttonJaime"]]);
+    }
+
+    /**
+     * Set the value of idPublication
+     *
+     * @return  self
+     */ 
+    public function setIdPublication($idPublication)
+    {
+        $this->idPublication = $idPublication;
+
+        return $this;
     }
 }
 

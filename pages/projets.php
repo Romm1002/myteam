@@ -111,35 +111,19 @@ require_once "../traitements/redirection_first_connexion.php";
                     <th>N°</th>
                     <th>Libellé</th>
                     <th>Attribué à</th>
+                    <th>Tâche parent (N°)</th>
                     <th>Date de fin</th>
                     <th>Action</th>
 
                     <?php
                     foreach($taches as $tache){
-                        var_dump($tache);
                         ?>
-                        
                         <tr>
                             <td><?=$tache->getId();?></td>
                             <td><?=htmlspecialchars($tache->getLibelle());?></td>
                             <td><?=$tache->getPrenom() . " " . $tache->getNom();?></td>
-                            <td><?=$tache->getTerminee();?></td>
-                            <!-- <td>
-                                <?php
-                                // Switch qui convertit 0 en "Non" et 1 en "Oui" pour savoir si le tâche est terminée
-                                switch($tache->getTerminee()){
-                                    case 0:
-                                        echo "Non";
-                                        break;
-                                    case 1:
-                                        echo "Oui";
-                                        break;
-                                    default:
-                                        echo "Erreur";
-                                        break;
-                                }
-                                ?>
-                            </td> -->
+                            <td><?=$tache->getIdTacheParent();?></td>
+                            <td><?=$tache->getDateFin();?></td>
                             <td>
                                 <?php
                                 if($tache->getTerminee() == 0){

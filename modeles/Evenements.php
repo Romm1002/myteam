@@ -64,13 +64,23 @@ class Evenements extends Modele{
         if($designation != null AND $date != null AND $idUtilisateur != null AND $couleur != null AND $heureDebut != null AND $heureFin != null){
             $this->initialiser($designation, $date, $idUtilisateur, $couleur, $heureDebut, $heureFin);
         }
-        $requete = $this->getBdd()->prepare("INSERT INTO evenements(designation,date,heureDebut,heureFin,idUtilisateur,couleur) VALUES(?,?,?,?,?,?)");
-        $requete ->execute([$this->designation,$this->date,$this->heureDebut,$this->heureFin,$this->idUtilisateur,$this->couleur]);
+        try {
+            $requete = $this->getBdd()->prepare("INSERT INTO evenements(designation,date,heureDebut,heureFin,idUtilisateur,couleur) VALUES(?,?,?,?,?,?)");
+            $requete ->execute([$this->designation,$this->date,$this->heureDebut,$this->heureFin,$this->idUtilisateur,$this->couleur]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public function supprEvenement($idEvenement){
-        $requete = $this->getBdd()->prepare("DELETE FROM evenements WHERE idEvenement = ?");
-        $requete ->execute([$idEvenement]);
+        try {
+            $requete = $this->getBdd()->prepare("DELETE FROM evenements WHERE idEvenement = ?");
+            $requete ->execute([$idEvenement]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
     
     public function modifEvenement($id = null, $designation = null){
@@ -78,7 +88,12 @@ class Evenements extends Modele{
             $this->setId($id);
             $this->setDesignation($designation);
         }
-        $requete = $this->getBdd()->prepare("UPDATE evenements SET designation = ? WHERE idEvenement = ?");
-        $requete->execute([$this->designation, $this->id]);
+        try {
+            $requete = $this->getBdd()->prepare("UPDATE evenements SET designation = ? WHERE idEvenement = ?");
+            $requete->execute([$this->designation, $this->id]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 }

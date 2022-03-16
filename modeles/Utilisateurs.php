@@ -4,6 +4,7 @@ class Utilisateurs extends Modele{
     private $idUtilisateur;
     private $nom;
     private $prenom;
+    private $mdp;
     private $dateNaiss;
     private $email;
     private $couleur;
@@ -11,10 +12,13 @@ class Utilisateurs extends Modele{
     private $photoProfil;
     private $poste;
     private $grade;
+    private $bool;
+    private $token;
+    private $date;
 
-    public function __construct($id = null, $nom = null,$prenom = null,$dateNaiss = null,$email = null, $photoProfil = null, $poste = null, $grade = null)
+    public function __construct($id = null, $nom = null, $prenom = null, $dateNaiss = null, $email = null, $photoProfil = null, $poste = null, $grade = null)
     {
-        if ($id != null && $id != null && $nom != null && $prenom != null && $dateNaiss != null && $email != null &&  $photoProfil != null &&  $poste != null &&  $grade != null){
+        if ($id != null && $id != null && $nom != null && $prenom != null && $dateNaiss != null && $email != null && $photoProfil != null && $poste != null &&  $grade != null){
             $this->idUtilisateur = $id;
             $this->nom = $nom;
             $this->prenom = $prenom;
@@ -59,13 +63,15 @@ class Utilisateurs extends Modele{
         return $this->couleur;
     }
 
-
-
-
     // Permet l'insertion en BDD des données fournies par l'utilisateur lors de l'inscription
     public function inscription($nom, $prenom, $datenaiss, $email, $mdp, $idposte, $photoProfil, $bool){
-        $requete = $this->getBdd()->prepare("INSERT INTO utilisateurs(nom, prenom, datenaiss, email, mdp, idposte, photoProfil, first_connexion) VALUES (?,?,?,?,?,?,?, ?)");
-        $requete->execute([$nom,$prenom,$datenaiss,$email,$mdp,$idposte,$photoProfil, $bool]);
+        try{
+            $requete = $this->getBdd()->prepare("INSERT INTO utilisateurs(nom, prenom, datenaiss, email, mdp, idposte, photoProfil, first_connexion) VALUES (?,?,?,?,?,?,?, ?)");
+            $requete->execute([$nom,$prenom,$datenaiss,$email,$mdp,$idposte,$photoProfil, $bool]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     // Récupération des emails présents en BDD pour savoir si il existe déjà pour l'inscription ou pour savoir si il existe juste pour la connexion
@@ -84,31 +90,51 @@ class Utilisateurs extends Modele{
     
     // Permet la modification des données ci-dessous
     public function updateProfil($nom, $prenom, $email, $couleur){
-        $this->nom = $nom;
-        $this->nom = $prenom;
-        $this->nom = $email;
-        $this->couleur = $couleur;
-        $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET nom = ?, prenom = ?,  email = ?, color = ? WHERE idUtilisateur = ?");
-        $requete->execute([$nom, $prenom, $email, $couleur, $this->idUtilisateur]);
-
+        try{
+            $this->nom = $nom;
+            $this->nom = $prenom;
+            $this->nom = $email;
+            $this->couleur = $couleur;
+            $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET nom = ?, prenom = ?,  email = ?, color = ? WHERE idUtilisateur = ?");
+            $requete->execute([$nom, $prenom, $email, $couleur, $this->idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+        
     }
     
     // Permet la modification de sa photo de profil
     public function updatePhotoProfil($target_file){
-        $requete = $this->getBdd() ->prepare("UPDATE utilisateurs SET photoProfil = ? WHERE idUtilisateur = ?");
-        $requete->execute([$target_file, $this->idUtilisateur]);
+        try{
+            $requete = $this->getBdd() ->prepare("UPDATE utilisateurs SET photoProfil = ? WHERE idUtilisateur = ?");
+            $requete->execute([$target_file, $this->idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
     
     // Permet la modification de son mdp
     public function updateMdp($mdp){
-        $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET mdp = ? WHERE idUtilisateur = ?");
-        $requete->execute([$mdp, $this->idUtilisateur]);
+        try{
+            $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET mdp = ? WHERE idUtilisateur = ?");
+            $requete->execute([$mdp, $this->idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     // Permet le passage du boolean first_connexion à false
     public function update_firstConnexion($bool){
-        $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET first_connexion = ? WHERE idUtilisateur = ?");
-        $requete->execute([$bool, $this->idUtilisateur]);
+        try{
+            $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET first_connexion = ? WHERE idUtilisateur = ?");
+            $requete->execute([$bool, $this->idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     // Permet de récupérer le bool firstconnexion en fonction de la personne connecté
@@ -136,14 +162,24 @@ class Utilisateurs extends Modele{
     
     // Méthode qui permet la supression d'un compte et qui entraine un trigger pour supprimer les données de l'utilisateur dans toutes les tables
     public function supprimer_compte(){
-        $requete = $this->getBdd()->prepare("DELETE FROM utilisateurs WHERE idUtilisateur = ?");
-        $requete->execute([$this->idUtilisateur]);
+        try{
+            $requete = $this->getBdd()->prepare("DELETE FROM utilisateurs WHERE idUtilisateur = ?");
+            $requete->execute([$this->idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     // Permet la création d'un token quand un utilisateur clique sur "se souvenir de moi" à la connexion (cookies)
     public function token($idUtilisateur, $token){
-        $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET token = ? WHERE idUtilisateur = ?");
-        $requete->execute([$token, $idUtilisateur]);
+        try{
+            $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET token = ? WHERE idUtilisateur = ?");
+            $requete->execute([$token, $idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     // Permet la connexion grâce au token (cookies)
@@ -173,5 +209,30 @@ class Utilisateurs extends Modele{
             array_push($evenements, $evenement);
         }
         return $evenements;
+    }
+
+
+    /**
+     * Set the value of idUtilisateur
+     *
+     * @return  self
+     */ 
+    public function setIdUtilisateur($idUtilisateur)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }

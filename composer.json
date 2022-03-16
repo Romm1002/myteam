@@ -1,0 +1,12 @@
+{
+    "name": "romai/myteam-web",
+    "authors": [
+        {
+            "name": "Romain Chaumont",
+            "email": "romain.chaumont@hotmail.fr"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}

@@ -41,19 +41,64 @@ class Messagerie extends Modele{
         $utilisateur = new Utilisateurs;
         $utilisateur->initialiser($result["nom"], $result["prenom"], $result["photoProfil"], $result["idUtilisateur"]);
         $this->receveur = $utilisateur;
+        return $result;
     }
     
     // Permet l'envoi d'un nouveau message
     public function newMessage($idEnvoyeur, $contenu){
-        $this->contenu = $contenu;
-        $requete = $this->getBdd()->prepare("INSERT INTO messagerie(idUtilisateur,idReceveur, contenu, heure) VALUES(?, ?, ?, NOW())");
-        $requete->execute([$idEnvoyeur, $this->receveur->getId(), $this->contenu]);
+        try {
+            $this->contenu = $contenu;
+            $requete = $this->getBdd()->prepare("INSERT INTO messagerie(idUtilisateur,idReceveur, contenu, heure) VALUES(?, ?, ?, NOW())");
+            $requete->execute([$idEnvoyeur, $this->receveur->getId(), $this->contenu]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
+    public function deleteMessage($idMessage){
+        try {
+            $this->idMessage = $idMessage;
+            $requete = $this->getBdd()->prepare("DELETE FROM messagerie WHERE idMessage = ?");
+            $requete->execute([$this->idMessage]);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
     
     // Permet d'insérer en BDD le message signalé par l'utilisateur
-    public function signalerMessage($idMessage, $message, $traite, $idUtilisateur){
-        $requete = $this->getBdd()->prepare("INSERT INTO messages_signales(idMessage, message, traite, idUtilisateur) VALUES(?, ?, ?, ?)");
-        $requete->execute([$idMessage, $message, $traite, $idUtilisateur]);
+    public function signalerMessage($idMessage, $message, $traite, $idUtilisateur, $idSignale){
+        try {
+            $requete = $this->getBdd()->prepare("INSERT INTO messages_signales(idMessage, message, traite, idUtilisateur, idSignale) VALUES(?, ?, ?, ?, ?)");
+            $requete->execute([$idMessage, $message, $traite, $idUtilisateur, $idSignale]);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    public function deleteMessageSignale($idMessage){
+        try {
+            $this->idMessage = $idMessage;
+            $requete = $this->getBdd()->prepare("DELETE FROM messages_signales WHERE idMessage = ?");
+            $requete->execute([$this->idMessage]);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Set the value of idUtilisateur
+     *
+     * @return  self
+     */ 
+    public function setIdUtilisateur($idUtilisateur)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
     }
 }
 ?>

@@ -27,8 +27,24 @@ class Reponses extends Modele{
 
     //Permet d'insérer en BDD la réponse à une publication
     public function newReponse($idPublication, $reponse, $idUtilisateur){
-        $requete = $this->getBdd()->prepare("INSERT INTO reponses(idPublication, reponse, idUtilisateur) VALUES(?, ?, ?)");
-        $requete->execute([$idPublication, $reponse, $idUtilisateur]);
+        try{
+            $requete = $this->getBdd()->prepare("INSERT INTO reponses(idPublication, reponse, idUtilisateur) VALUES(?, ?, ?)");
+            $requete->execute([$idPublication, $reponse, $idUtilisateur]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // Pour PHPUnit
+    public function deleteReponse($idReponse){
+        try{
+            $requete = $this->getBdd()->prepare("DELETE FROM reponses WHERE idReponse = ? ORDER BY idReponse DESC LIMIT 1");
+            $requete->execute([$idReponse]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 }
 ?>
