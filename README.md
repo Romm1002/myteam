@@ -1,1 +1,1 @@
-# myteam
+# MyTeam - Gestion d'entreprise
