@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 17 mars 2022 à 08:24
+-- Généré le : jeu. 17 mars 2022 à 10:17
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -69,6 +69,25 @@ INSERT INTO `affectations` (`idProjet`, `idUtilisateur`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `allowed_ips`
+--
+
+DROP TABLE IF EXISTS `allowed_ips`;
+CREATE TABLE IF NOT EXISTS `allowed_ips` (
+  `idUtilisateur` int(11) NOT NULL,
+  `ip` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `allowed_ips`
+--
+
+INSERT INTO `allowed_ips` (`idUtilisateur`, `ip`) VALUES
+(1, '::1');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `avertissement`
 --
 
@@ -87,6 +106,19 @@ CREATE TABLE IF NOT EXISTS `avertissement` (
 INSERT INTO `avertissement` (`idAvertissement`, `idUtilisateur`, `nombre`) VALUES
 (2, 3, 2),
 (3, 5, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `banned_ips`
+--
+
+DROP TABLE IF EXISTS `banned_ips`;
+CREATE TABLE IF NOT EXISTS `banned_ips` (
+  `idBannedIp` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(255) NOT NULL,
+  PRIMARY KEY (`idBannedIp`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -150,7 +182,16 @@ CREATE TABLE IF NOT EXISTS `conges` (
   `status` int(11) NOT NULL,
   `raison` varchar(255) NOT NULL,
   PRIMARY KEY (`idConge`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `conges`
+--
+
+INSERT INTO `conges` (`idConge`, `idUtilisateur`, `dateDebut`, `dateFin`, `commentaire`, `status`, `raison`) VALUES
+(5, 1, '2022-03-19', '2022-03-20', '', 2, '-'),
+(6, 1, '2022-03-25', '2022-03-29', 'JE PARS A MARBELLA', 2, '-'),
+(7, 1, '2022-03-19', '2022-03-30', 'JE PARS BOIRE UN MALIBU COCO AVEC CORENTIN', 1, 'OK BG');
 
 -- --------------------------------------------------------
 
@@ -221,6 +262,29 @@ CREATE TABLE IF NOT EXISTS `jaime` (
 INSERT INTO `jaime` (`idUtilisateur`, `idPublication`) VALUES
 (1, 8),
 (1, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `logs_connexion`
+--
+
+DROP TABLE IF EXISTS `logs_connexion`;
+CREATE TABLE IF NOT EXISTS `logs_connexion` (
+  `idLog` int(11) NOT NULL AUTO_INCREMENT,
+  `idUtilisateur` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idLog`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `logs_connexion`
+--
+
+INSERT INTO `logs_connexion` (`idLog`, `idUtilisateur`, `date`, `ip`) VALUES
+(1, 1, '2022-03-17 09:30:02', '::1'),
+(2, 1, '2022-03-17 09:46:58', '::1');
 
 -- --------------------------------------------------------
 
@@ -484,7 +548,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `actif` tinyint(1) DEFAULT '1',
   `color` varchar(50) NOT NULL DEFAULT '#007add',
   PRIMARY KEY (`idUtilisateur`)
-) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateurs`
@@ -506,7 +570,8 @@ INSERT INTO `utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `dateNaiss`, `emai
 (34, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmai.fr', '$2y$10$PSrjOk4AmxDML.2bkFMdKuXBBq9FvGCHJkEk/3by2mJZi1GcntzCi', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
 (35, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotma.fr', '$2y$10$Z8.fUrW7ryw6da08y4FG.O0FTnhZ2D45pQdapNEx5lFUS8l0tAXZ2', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
 (36, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@homail.fr', '$2y$10$yB2pq7VQOJIBFVOniLt.v.1QnVcasWbwUszx4yihWJu5KEZ1vj2.u', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(37, 'Chaumont', 'Romain', '2002-02-10', 'romain.cumont@hotmail.fr', '$2y$10$QAgR9fgKDqEYyXcb/9AhOefXwH8OPbF/UhsS1/3mgBkfNe.Ctfr.S', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add');
+(37, 'Chaumont', 'Romain', '2002-02-10', 'romain.cumont@hotmail.fr', '$2y$10$QAgR9fgKDqEYyXcb/9AhOefXwH8OPbF/UhsS1/3mgBkfNe.Ctfr.S', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
+(154, 'CompteTest', 'CompteTest', '2002-02-10', 'test@test.com', '$2y$10$4yKStJxDFoEKF0uZiVOTVO1PI7urjPO.DinrY5lv7CyLEn7O2nNTS', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add');
 
 --
 -- Déclencheurs `utilisateurs`
