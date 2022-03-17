@@ -1,13 +1,8 @@
 <?php
 session_start();
 session_destroy();
-header("location:index.php");
-
-if (isset($_COOKIE['memory'])) {
-    unset($_COOKIE['memory']); 
-    setcookie('memory', null, -1, '/'); 
-    return true;
-} else {
-    return false;
+if(isset($_COOKIE['memory'])){
+    setcookie("memory", "", time() - 3600, "/", "myteam.ipssi-sio.fr", true, true); 
 }
+header("location:index.php");
 ?>
