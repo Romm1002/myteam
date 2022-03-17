@@ -517,9 +517,11 @@ require_once "../traitements/maintenance.php";
                 $ipsAllowed = $Modele->getIpsAllowed();
 
                 if(in_array($_SERVER["REMOTE_ADDR"], $ipsAllowed)){
+                    if($utilisateur->getGrade() == 6){
                     ?>
                     <button type="button" onclick="open_gestion_conge()">Gérer les congés</button>
                     <?php
+                    }
                 }
                 ?>
             </div>
