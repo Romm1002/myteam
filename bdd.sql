@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 17 mars 2022 à 10:17
+-- Généré le : jeu. 17 mars 2022 à 11:01
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `logs_connexion` (
   `date` datetime NOT NULL,
   `ip` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idLog`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `logs_connexion`
@@ -284,7 +284,8 @@ CREATE TABLE IF NOT EXISTS `logs_connexion` (
 
 INSERT INTO `logs_connexion` (`idLog`, `idUtilisateur`, `date`, `ip`) VALUES
 (1, 1, '2022-03-17 09:30:02', '::1'),
-(2, 1, '2022-03-17 09:46:58', '::1');
+(2, 1, '2022-03-17 09:46:58', '::1'),
+(3, 1, '2022-03-17 10:49:11', '::1');
 
 -- --------------------------------------------------------
 
@@ -546,7 +547,6 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `first_connexion` tinyint(1) DEFAULT '1',
   `avertissements` int(11) NOT NULL DEFAULT '0',
   `actif` tinyint(1) DEFAULT '1',
-  `color` varchar(50) NOT NULL DEFAULT '#007add',
   PRIMARY KEY (`idUtilisateur`)
 ) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=utf8;
 
@@ -554,24 +554,24 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `dateNaiss`, `email`, `mdp`, `idposte`, `photoProfil`, `token`, `first_connexion`, `avertissements`, `actif`, `color`) VALUES
-(1, 'admin', 'admin', '2002-02-10', 'admin@myteam.fr', '$2y$10$EFVZjWWkMsqYSd2L9T.MfeAToUG94S5LgUy04/jPMs00aAD/yFfJ6', 4, '../pages/images/avatar/photoProfil.jpg', '67d670d9123e6205f6076edb3a08f2', 0, 3, 0, '#ffffff'),
-(2, 'Accès', 'Utilisateur', '2002-01-10', 'utilisateur@myteam.fr', '$2y$10$sdMmx1kqSZvuYL.q38Igcew1tfStr9nR2ya.v056XuDr.BkPMPzKu', 2, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 0, 1, '#007add'),
-(3, 'Utilisateur', 'Numero1', '2002-10-10', 'numero1@myteam.fr', '$2y$10$MbTxzxavXzLdKU3N/fLEpeMb0i5Cr7QLVFInO.5.ala716MBGrRUe', 5, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 0, 1, '#007add'),
-(4, 'Utilisateur', 'Numero2', '2002-01-01', 'numero2@myteam.fr', '$2y$10$Q.mBzNdb9oHr.HOPwBn4X.r.kx8ABwxiVDm6tPWqtgAEyjLOotl1q', 1, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 0, 0, '#007add'),
-(5, 'Chau', 'Romain', '2002-01-20', 'romain.chaumont@hotmail.fr', '$2y$10$8Queu44GNgfMdN14xLNpdeRmbKK12vKQPr1UqILWpsNIp85jEUTnu', 2, '../pages/images/avatar/photoProfil.jpg', '3a466a5899faa582a805164ff9ffcf', 1, 0, 0, '#007add'),
-(15, 'NOm2', 'Préom', '2022-01-31', 'oibujvhcgh@outlook.fr', '$2a$11$wTdPd.8CmJU0oGDK4hrMoOyF.zuEdQP3YhzgzyY.JEaRs1pRKvhmi', 7, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 6, 0, '#007add'),
-(30, 'test', 'test', '2000-02-02', 'test@mail.fr', '$2a$11$NhnyLGzSaT8uPkCd1vhoPeNzsLB.xqZ0PdojzpJvSdEnRQFcaVx.m', 0, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 4, 0, '#007add'),
-(26, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.rtfeqgf', '$2y$10$d7G0tGvTi82SMT1XniosxObmX1RGiNgGa4wEh9Gx./b6gqkNlWwli', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 0, '#007add'),
-(27, 'Damien', 'Damien', '2000-05-02', 'damien@myteam.fr', '$2y$10$GWgsqSiKuI5JAq4gynwWsuHPNsYa43SEBx0usx0EAM0ZoyXGzcSO2', 2, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 3, 0, '#007add'),
-(31, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.tb', '$2y$10$Oc2OOXyKNRH3ExHQPzsAbex5IiiBxaDgMzwL4WSxeusPvXa2zuBMS', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(32, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.hg', '$2y$10$8KCXD/6lJRmSi9ZryIgmj.LsauwNARMTFOCfu3PFYWpdEJXu8kL0C', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(33, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.sq', '$2y$10$deF2kNlXkfmwU3E0xXSpFOphmH.wLBrkujUYxVomKOIxs1h9P.7XC', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(34, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmai.fr', '$2y$10$PSrjOk4AmxDML.2bkFMdKuXBBq9FvGCHJkEk/3by2mJZi1GcntzCi', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(35, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotma.fr', '$2y$10$Z8.fUrW7ryw6da08y4FG.O0FTnhZ2D45pQdapNEx5lFUS8l0tAXZ2', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(36, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@homail.fr', '$2y$10$yB2pq7VQOJIBFVOniLt.v.1QnVcasWbwUszx4yihWJu5KEZ1vj2.u', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(37, 'Chaumont', 'Romain', '2002-02-10', 'romain.cumont@hotmail.fr', '$2y$10$QAgR9fgKDqEYyXcb/9AhOefXwH8OPbF/UhsS1/3mgBkfNe.Ctfr.S', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add'),
-(154, 'CompteTest', 'CompteTest', '2002-02-10', 'test@test.com', '$2y$10$4yKStJxDFoEKF0uZiVOTVO1PI7urjPO.DinrY5lv7CyLEn7O2nNTS', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1, '#007add');
+INSERT INTO `utilisateurs` (`idUtilisateur`, `nom`, `prenom`, `dateNaiss`, `email`, `mdp`, `idposte`, `photoProfil`, `token`, `first_connexion`, `avertissements`, `actif`) VALUES
+(1, 'admi', 'admi', '2002-02-10', 'admin@myteam.fr', '$2y$10$EFVZjWWkMsqYSd2L9T.MfeAToUG94S5LgUy04/jPMs00aAD/yFfJ6', 4, '../pages/images/avatar/photoProfil.jpg', '67d670d9123e6205f6076edb3a08f2', 0, 3, 0),
+(2, 'Accès', 'Utilisateur', '2002-01-10', 'utilisateur@myteam.fr', '$2y$10$sdMmx1kqSZvuYL.q38Igcew1tfStr9nR2ya.v056XuDr.BkPMPzKu', 2, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 0, 1),
+(3, 'Utilisateur', 'Numero1', '2002-10-10', 'numero1@myteam.fr', '$2y$10$MbTxzxavXzLdKU3N/fLEpeMb0i5Cr7QLVFInO.5.ala716MBGrRUe', 5, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 0, 1),
+(4, 'Utilisateur', 'Numero2', '2002-01-01', 'numero2@myteam.fr', '$2y$10$Q.mBzNdb9oHr.HOPwBn4X.r.kx8ABwxiVDm6tPWqtgAEyjLOotl1q', 1, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 0, 0),
+(5, 'Chau', 'Romain', '2002-01-20', 'romain.chaumont@hotmail.fr', '$2y$10$8Queu44GNgfMdN14xLNpdeRmbKK12vKQPr1UqILWpsNIp85jEUTnu', 2, '../pages/images/avatar/photoProfil.jpg', '3a466a5899faa582a805164ff9ffcf', 1, 0, 0),
+(15, 'NOm2', 'Préom', '2022-01-31', 'oibujvhcgh@outlook.fr', '$2a$11$wTdPd.8CmJU0oGDK4hrMoOyF.zuEdQP3YhzgzyY.JEaRs1pRKvhmi', 7, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 6, 0),
+(30, 'test', 'test', '2000-02-02', 'test@mail.fr', '$2a$11$NhnyLGzSaT8uPkCd1vhoPeNzsLB.xqZ0PdojzpJvSdEnRQFcaVx.m', 0, '../pages/images/avatar/photoProfil.jpg', NULL, 1, 4, 0),
+(26, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.rtfeqgf', '$2y$10$d7G0tGvTi82SMT1XniosxObmX1RGiNgGa4wEh9Gx./b6gqkNlWwli', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 0),
+(27, 'Damien', 'Damien', '2000-05-02', 'damien@myteam.fr', '$2y$10$GWgsqSiKuI5JAq4gynwWsuHPNsYa43SEBx0usx0EAM0ZoyXGzcSO2', 2, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 3, 0),
+(31, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.tb', '$2y$10$Oc2OOXyKNRH3ExHQPzsAbex5IiiBxaDgMzwL4WSxeusPvXa2zuBMS', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(32, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.hg', '$2y$10$8KCXD/6lJRmSi9ZryIgmj.LsauwNARMTFOCfu3PFYWpdEJXu8kL0C', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(33, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmail.sq', '$2y$10$deF2kNlXkfmwU3E0xXSpFOphmH.wLBrkujUYxVomKOIxs1h9P.7XC', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(34, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotmai.fr', '$2y$10$PSrjOk4AmxDML.2bkFMdKuXBBq9FvGCHJkEk/3by2mJZi1GcntzCi', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(35, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@hotma.fr', '$2y$10$Z8.fUrW7ryw6da08y4FG.O0FTnhZ2D45pQdapNEx5lFUS8l0tAXZ2', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(36, 'Chaumont', 'Romain', '2002-02-10', 'romain.chaumont@homail.fr', '$2y$10$yB2pq7VQOJIBFVOniLt.v.1QnVcasWbwUszx4yihWJu5KEZ1vj2.u', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(37, 'Chaumont', 'Romain', '2002-02-10', 'romain.cumont@hotmail.fr', '$2y$10$QAgR9fgKDqEYyXcb/9AhOefXwH8OPbF/UhsS1/3mgBkfNe.Ctfr.S', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1),
+(154, 'CompteTest', 'CompteTest', '2002-02-10', 'test@test.com', '$2y$10$4yKStJxDFoEKF0uZiVOTVO1PI7urjPO.DinrY5lv7CyLEn7O2nNTS', 3, '../pages/images/avatar/photoProfil.jpg', NULL, 0, 0, 1);
 
 --
 -- Déclencheurs `utilisateurs`
