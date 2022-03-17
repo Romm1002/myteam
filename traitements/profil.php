@@ -13,7 +13,7 @@ if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]))
     if(count($erreurs) === 0){
         //aucune erreur, envoie du formulaire
         try{
-            $utilisateur->updateProfil($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["couleur"]);
+            $utilisateur->updateProfil($_POST["nom"], $_POST["prenom"], $_POST["email"]);
             if(!empty($_FILES["pdp"]) && !empty($_FILES["pdp"]["name"])){
                 $allowed =  array('gif','png' ,'jpg');
                 $target_dir = "../pages/images/avatar/";
@@ -25,8 +25,8 @@ if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]))
                     $utilisateur->updatePhotoProfil($target_file);
                 }
             }
-            $_SESSION = $utilisateur->connexion($utilisateur->getEmail());
             header("location:../pages/accueil.php?page=profil&validate=OK");
+            $_SESSION = $utilisateur->connexion($utilisateur->getEmail());
         }catch(Exception $e){
             header("location:../pages/accueil.php?page=profil&validate=NO");
         }

@@ -7,7 +7,6 @@ class Utilisateurs extends Modele{
     private $mdp;
     private $dateNaiss;
     private $email;
-    private $couleur;
     private $idposte;
     private $photoProfil;
     private $poste;
@@ -31,12 +30,11 @@ class Utilisateurs extends Modele{
         }
     }
 
-    public function initialiser($nom, $prenom, $photoProfil, $idUtilisateur, $couleur = null){
+    public function initialiser($nom, $prenom, $photoProfil, $idUtilisateur){
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->photoProfil = $photoProfil;
         $this->idUtilisateur = $idUtilisateur;
-        $this->couleur = $couleur;
     }
 
     public function getNom(){
@@ -59,9 +57,6 @@ class Utilisateurs extends Modele{
     }
     public function getEmail(){
         return $this->email;
-    }
-    public function getCouleur(){
-        return $this->couleur;
     }
 
     // Permet l'insertion en BDD des données fournies par l'utilisateur lors de l'inscription
@@ -100,14 +95,13 @@ class Utilisateurs extends Modele{
     }
     
     // Permet la modification des données ci-dessous
-    public function updateProfil($nom, $prenom, $email, $couleur){
+    public function updateProfil($nom, $prenom, $email){
         try{
             $this->nom = $nom;
             $this->nom = $prenom;
             $this->nom = $email;
-            $this->couleur = $couleur;
-            $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET nom = ?, prenom = ?,  email = ?, color = ? WHERE idUtilisateur = ?");
-            $requete->execute([$nom, $prenom, $email, $couleur, $this->idUtilisateur]);
+            $requete = $this->getBdd()->prepare("UPDATE utilisateurs SET nom = ?, prenom = ?,  email = ? WHERE idUtilisateur = ?");
+            $requete->execute([$nom, $prenom, $email, $this->idUtilisateur]);
             return true;
         }catch(Exception $e){
             return false;

@@ -195,10 +195,6 @@ require_once "../traitements/maintenance.php";
                             <label for="mdp">Mot de passe</label>
                             <a href="../pages/modificationMdp.php">Modifier votre mot de passe</a>
                         </div>
-                        <div class="content-color content-box">
-                            <label for="color">Couleur du profil</label>
-                            <input type="color" name="color">
-                        </div>
                         <div class="content-suppression content-box">
                             <a id="supprimer_compte" href="../traitements/suppression_compte.php">Supprimer mon compte</a>
                         </div>
