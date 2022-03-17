@@ -80,6 +80,12 @@ if(!empty($_GET)){
             Le site est en maintenance. Vous pouvez vous connecter uniquement si vous êtes un administrateur.
         </div>
         <?php
+    }else if($_GET["error"] == "4"){
+        ?>
+        <div class="alert alert-danger">
+            Vous avez été banni, il est impossible de vous connectez.
+        </div>
+        <?php
     }
 }
 

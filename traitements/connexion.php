@@ -1,12 +1,13 @@
 <?php
 require_once "../modeles/Modele.php";
 
-
-
 // Redirection si le membre est déjà connecté
 require_once "connected.php";
 
-$utilisateur = new Utilisateurs;
+$Modele = new Modele();
+$bannedIps = $Modele->getBannedIps();
+
+$utilisateur = new Utilisateurs();
 $erreurs = 0;
 
 // Vérifications pour envoyer le formulaire de connexion // Si les champs ne sont pas vides
@@ -33,6 +34,10 @@ if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
                 $erreurs++;
                 header("location:../pages/index.php?error=2");
                 // l'utilisateur n'a pas été accépté par l'administrateur
+            }elseif(in_array($_SERVER["REMOTE_ADDR"], $bannedIps)){
+                $erreurs++;
+                header("location:../pages/index.php?error=4");
+                // l'utilisateur essaie de se connecter alors qu'il est banni
             }
         }else{
             $erreurs++;
@@ -60,6 +65,11 @@ if(!empty($_POST["envoi"]) && $_POST["envoi"] == 1){
         else{
             header("location:../pages/first_connexion.php");
         }
+
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $date = new DateTime();
+        $dateTime = $date->format("Y-m-d H:i:s");
+        $utilisateur->logConnexion($_SESSION["idUtilisateur"], $dateTime, $ip);
     }
 }
 ?>

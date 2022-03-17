@@ -15,6 +15,7 @@ class Utilisateurs extends Modele{
     private $bool;
     private $token;
     private $date;
+    private $ip;
 
     public function __construct($id = null, $nom = null, $prenom = null, $dateNaiss = null, $email = null, $photoProfil = null, $poste = null, $grade = null)
     {
@@ -86,6 +87,16 @@ class Utilisateurs extends Modele{
         $requete = $this->getBdd()->prepare("SELECT * FROM utilisateurs LEFT JOIN postes ON utilisateurs.idposte = postes.idposte WHERE email = ?");
         $requete->execute([$email]);
         return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function logConnexion($idUtilisateur, $date, $ip){
+        try{
+            $requete = $this->getBdd()->prepare("INSERT INTO logs_connexion(idUtilisateur, date, ip) VALUES(?, ?, ?)");
+            $requete->execute([$idUtilisateur, $date, $ip]);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
     
     // Permet la modification des données ci-dessous
@@ -234,5 +245,13 @@ class Utilisateurs extends Modele{
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * Get the value of ip
+     */ 
+    public function getIp()
+    {
+        return $this->ip;
     }
 }

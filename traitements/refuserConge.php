@@ -1,7 +1,10 @@
 <?php
 require_once "../modeles/Modele.php";
 
-if($utilisateur->getGrade() != 6){
+$Modele = new Modele();
+$ipsAllowed = $Modele->getIpsAllowed();
+
+if(!in_array($_SERVER["REMOTE_ADDR"], $ipsAllowed)){
     header("location:../pages/accueil.php?page=conges");
 }else{
     $Conges = new Conges();

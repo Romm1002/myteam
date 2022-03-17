@@ -517,7 +517,10 @@ require_once "../traitements/maintenance.php";
             <div class="conges-footer">
                 <button type="button" onclick="open_demande_conge()">Faire une demande de congé</button>
                 <?php
-                if($utilisateur->getGrade() == 6){
+                $Modele = new Modele();
+                $ipsAllowed = $Modele->getIpsAllowed();
+
+                if(in_array($_SERVER["REMOTE_ADDR"], $ipsAllowed)){
                     ?>
                     <button type="button" onclick="open_gestion_conge()">Gérer les congés</button>
                     <?php

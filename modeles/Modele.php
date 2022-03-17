@@ -91,6 +91,29 @@ class Modele{
         }
         return $listUtilisateur;
     }
+
+    /*
+     * PARTIE IPS
+     */
+    public function getIpsAllowed(){
+        $listAllowedIps = array();
+        $requete = $this->getBdd()->prepare("SELECT * FROM allowed_ips");
+        $requete->execute();
+        foreach($requete->fetchAll(PDO::FETCH_ASSOC) as $value){
+            array_push($listAllowedIps, $value["ip"]);
+        }
+        return $listAllowedIps;
+    }
+
+    public function getBannedIps(){
+        $listBannedIps = array();
+        $requete = $this->getBdd()->prepare("SELECT * FROM banned_ips");
+        $requete->execute();
+        foreach($requete->fetchAll(PDO::FETCH_ASSOC) as $value){
+            array_push($listBannedIps, $value["ip"]);
+        }
+        return $listBannedIps;
+    }
     
     /*
      * PARTIE PROJET
