@@ -94,7 +94,7 @@ class Projets extends Modele{
         $requete->execute([$this->idProjet]);
         foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $tache = new Taches;
-            $tache->initialiser($value["idTache"], $value["libelle"], $value["idProjet"], $value["idUtilisateur"], $value["idTacheParent"], $value["dateFin"], $value["nom"], $value["prenom"]);
+            $tache->initialiser($value["idTache"], $value["libelle"], $value["idProjet"], $value["idUtilisateur"], $value["idTacheParent"], $value["dateFin"], $value["nom"], $value["prenom"], $value["terminee"]);
             array_push($listTache, $tache);
         }
         return $listTache;

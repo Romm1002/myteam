@@ -11,7 +11,7 @@ class Taches extends Modele{
     private $nom;
     private $prenom;
 
-    public function initialiser($idTache, $libelle, $idProjet, $idUtilisateur, $idTacheParent, $dateFin, $nom, $prenom){
+    public function initialiser($idTache, $libelle, $idProjet, $idUtilisateur, $idTacheParent, $dateFin, $nom, $prenom, $terminee){
         $this->idTache = $idTache;
         $this->libelle = $libelle;
         $this->idProjet = $idProjet;
@@ -20,6 +20,7 @@ class Taches extends Modele{
         $this->dateFin = $dateFin;
         $this->prenom = $prenom;
         $this->nom = $nom;
+        $this->terminee = $terminee;
     }
 
     public function getId(){

@@ -15,6 +15,28 @@ class CongesTest extends TestCase
         $this->assertIsBool(true, $Conges->nouveauConge(1, "2022-02-10", "2022-06-20", "commentaire", 1, "raison"));
     }
 
+    public function testAccepterConge(){
+        $Modele = new Modele();
+        $Conges = new Conges();
+
+        $requete = $Modele->getBdd()->prepare("SELECT * FROM conges ORDER BY idConge DESC LIMIT 1");
+        $requete->execute();
+        $idConge = $requete->fetch(PDO::FETCH_ASSOC)["idConge"];
+
+        $this->assertTrue($Conges->accepterConge(1, $idConge));
+    }
+
+    public function testRefuserConge(){
+        $Modele = new Modele();
+        $Conges = new Conges();
+
+        $requete = $Modele->getBdd()->prepare("SELECT * FROM conges ORDER BY idConge DESC LIMIT 1");
+        $requete->execute();
+        $idConge = $requete->fetch(PDO::FETCH_ASSOC)["idConge"];
+
+        $this->assertTrue($Conges->refuserConge(2, "raison de test", $idConge));
+    } 
+
     public function testSupprimerConge(){
         $Modele = new Modele();
         $Conges = new Conges();
@@ -29,7 +51,7 @@ class CongesTest extends TestCase
     public function testGetConges(){
         $Conges = new Conges();
 
-        $this->assertGreaterThanOrEqual(1, count($Conges->getConges()));
+        $this->assertGreaterThanOrEqual(0, count($Conges->getConges(1, 2)));
     }
 }
 ?>

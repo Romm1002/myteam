@@ -128,7 +128,8 @@ require_once "../traitements/redirection_first_connexion.php";
                                 <?php
                                 if($tache->getTerminee() == 0){
                                     ?>
-                                    <form method="POST" id="form-<?=$tache->getId()?>">
+                                    <form action="../traitements/terminerTache.php?id=<?=$tache->getIdProjet();?>" method="POST" id="form-<?=$tache->getId()?>">
+                                        <input type="hidden" name="idUtilisateur" value="<?=$tache->getIdUtilisateur();?>">
                                         <input type="hidden" name="idTache" value="<?=$tache->getId();?>">
                                         <input type="checkbox" name="terminer" value="1" id="<?=$tache->getId()?>">
                                         Terminer
@@ -136,7 +137,7 @@ require_once "../traitements/redirection_first_connexion.php";
                                     <?php
                                 }else{
                                     ?>
-                                    Aucune action possible
+                                    La tâche est déjà terminée
                                     <?php
                                 }
                                 ?>
@@ -190,3 +191,24 @@ require_once "../traitements/redirection_first_connexion.php";
 </body>
 
 <script src="scripts/scriptTache.js"></script>
+
+<?php
+if(isset($_GET["error"])){
+    switch($_GET["error"]){
+        case 0:
+            ?>
+            <div class="alert alert-success">
+                La tâche à été terminée.
+            </div>
+            <?php
+            break;
+        case 1:
+            ?>
+            <div class="alert alert-danger">
+                La tâche ne vous appartient pas.
+            </div>
+            <?php
+            break;
+    }
+}
+?>

@@ -29,28 +29,3 @@ function showRepondre(id){
         document.getElementById(id).style.display = "none";
     }
 }
-
-// Fonction qui permet d'ouvrir la popup des sondages
-function open_sondage(){
-	document.getElementById("sondage").style.display = "flex";
-}
-// Fonction qui permet la fermeture des sondages
-function close_sondage(){
-	document.getElementById("sondage").style.display = "none";
-}
-
-// Créer un nouveau choix sondage
-var compteur = 1;
-$(document).ready(function() {
-    $('#add_choice').click(function() {
-        $('#choix').append(
-            $('<input>').prop({
-                type: 'text',
-                name: compteur,
-		    placeholder: 'Choix ' + compteur,
-		    id: 'id' + compteur
-            })
-        );
-    compteur++;
-    })
-});

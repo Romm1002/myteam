@@ -77,8 +77,6 @@ require_once "../traitements/maintenance.php";
                         <img src="<?=$utilisateur->getPhotoProfil();?>" width="50" height="50">
                         <input type="text" id="nouvellePublication" placeholder="Commencer un post" readonly onclick="openPublications()">
                     </form>
-
-                    <p onclick="open_sondage()">Créer un sondage</p>
                 </div>
                 <div class="right-content" id="right-content">
                     <a name="top" id="top"></a>
@@ -613,39 +611,6 @@ require_once "../traitements/maintenance.php";
         </div>
     </div>
             
-
-    <!-- Pop-up d'un sondage -->
-    <div class="sondage" id="sondage" style="display: none;">
-        <div class="newSondage">
-            <div class="header">
-                <h1>Créer un sondage</h1>
-                <p onclick="close_sondage()">	&#10006;</p>
-            </div>
-
-            <hr>
-            
-            <div class="profil">
-                <img src="<?=$utilisateur->getPhotoProfil();?>" width="40" height="40">
-                <div class="npp">
-                    <p><?=$utilisateur->getPrenom() . " " . $utilisateur->getNom();?></p>
-                    <small><?=$utilisateur->getPoste();?></small>
-                </div>
-            </div>
-
-            <form action="#" method="post">
-                <div class="contenu">
-                    <textarea name="question" placeholder="Question..." required></textarea>
-                </div>
-                <div class="interactionsUtilisateur" id="interactionsUtilisateur">
-                    <button type="button" id="add_choice" class="btn btn-info">Autre choix</button>
-                    <button type="submit" name="envoyer_sondage" class="btn btn-success" value="1">Envoyer</button>
-                </div>
-
-                <div id="choix"></div>
-            </form>
-        </div>
-    </div>
-
     <!-- Pop-up d'une nouvelle publication -->
     <div class="clickPublications" id="clickPublications" style="display: none;">
         <div class="newPub">
