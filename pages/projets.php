@@ -128,7 +128,7 @@ require_once "../traitements/redirection_first_connexion.php";
                                 <?php
                                 if($tache->getTerminee() == 0){
                                     ?>
-                                    <form action="../traitements/terminerTache.php?id=<?=$tache->getIdProjet();?>" method="POST" id="form-<?=$tache->getId()?>">
+                                    <form action="../traitements/terminerTache.php?id=<?=$tache->getIdProjet();?>&idt=<?=$tache->getId();?>" method="POST" id="form-<?=$tache->getId()?>">
                                         <input type="hidden" name="idUtilisateur" value="<?=$tache->getIdUtilisateur();?>">
                                         <input type="hidden" name="idTache" value="<?=$tache->getId();?>">
                                         <input type="checkbox" name="terminer" value="1" id="<?=$tache->getId()?>">

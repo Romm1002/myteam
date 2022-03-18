@@ -61,6 +61,14 @@ class Taches extends Modele{
             return false;
         }
     }
+
+    // Récupère les tâche parent des tâches afin de gérer une arborescence de fin de tâche
+    public function getTacheParent($idTache){
+            $requete = $this->getBdd()->prepare("SELECT tp.terminee FROM tachesprojet t LEFT JOIN tachesprojet tp ON tp.idTache = t.idTacheParent WHERE t.idTache = ?");
+            $requete->execute([$idTache]);
+            return $requete->fetch(PDO::FETCH_ASSOC);
+            // SELECT * FROM tachesprojet WHERE idTacheParent = ?
+    }
     
     // Création d'une nouvelle tâche
     public function nouvelle_tache($libelle, $idProjet, $idUtilisateur, $idTacheParent, $terminee, $dateFin){
