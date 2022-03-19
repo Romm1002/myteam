@@ -29,11 +29,6 @@ class UtilisateursTest extends TestCase
         $Utilisateurs->initialiser("nom", "prenom", "photo", 1, "couleur");
         $this->assertIsInt(1, $Utilisateurs->getId());
     }
-    public function testGetCouleur(){
-        $Utilisateurs = new Utilisateurs();
-        $Utilisateurs->initialiser("nom", "prenom", "photo", 1, "couleur");
-        $this->assertSame("couleur", $Utilisateurs->getCouleur());
-    }
 
     // ------------------------
     // MÉTHODES
