@@ -118,7 +118,7 @@ require_once "../traitements/redirection_first_connexion.php";
                     <?php
                     foreach($taches as $tache){
                         ?>
-                        <tr>
+                        <tr style="background-color: <?=$tache->getTerminee() == 0 && $tache->getDateFin() < date("Y-m-d") ? "red" : "";?>">
                             <td><?=$tache->getId();?></td>
                             <td><?=htmlspecialchars($tache->getLibelle());?></td>
                             <td><?=$tache->getPrenom() . " " . $tache->getNom();?></td>
@@ -197,18 +197,24 @@ if(isset($_GET["error"])){
     switch($_GET["error"]){
         case 0:
             ?>
-            <div class="alert alert-success">
+            <div class="alert alert-success" style="position: absolute; top: 50px">
                 La tâche à été terminée.
             </div>
             <?php
             break;
         case 1:
             ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" style="position: absolute; top: 50px">
                 La tâche ne vous appartient pas.
             </div>
             <?php
             break;
+        case 2:
+            ?>
+            <div class="alert alert-danger" style="position: absolute; top: 50px">
+                La tâche ne peut pas avoir une date de fin antérieur à la date du jour.
+            </div>
+            <?php
     }
 }
 ?>
