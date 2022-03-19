@@ -71,7 +71,7 @@ class Modele{
         $requete->execute([$idPersonne1, $idPersonne2, $idPersonne2, $idPersonne1]);
         foreach ($requete->fetchAll(PDO::FETCH_ASSOC) as $value) {
             $message = new Messagerie;
-            $message->initialiser( $value["idMessage"], $value["idUtilisateur"], $value["contenu"], $value["heure"]);
+            $message->initialiser($value["idMessage"], $value["idUtilisateur"], $value["contenu"], $value["heure"]);
             array_push($listMessage, $message);
         }
         return $listMessage;

@@ -29,10 +29,11 @@ main{
 img{
     border-radius: 50%;
 }
+
 /* Définition du style de accueil.php */
 body{
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,25 +88,6 @@ body #container-accueil #accueil-right{
 }
 
 /* definition du style de messagerie.php */
-#accueil-left form{
-    display: flex;
-    margin: 5px 0px;
-}
-#accueil-left form input {
-    border-radius: 10px;
-    margin-right: 3px ;
-    padding-left: 3px;
-}
-#accueil-left form button {
-    min-width: 25px;
-    border-radius: 10px;
-}
-
-#liste-contacts{
-    max-height: 65vh;
-    overflow: auto;
-    z-index: 1000;
-}
 #block{
     position: absolute;
     width: 100%;
@@ -114,14 +96,71 @@ body #container-accueil #accueil-right{
     display: none;
 }
 
+#accueil-left a#lien_retour i{
+    font-size: 30px;
+    color: #000;
+}
+#accueil-left a#lien_retour i:hover{
+    color: var(--blue1);
+}
+
+#accueil-left form{
+    width: 100%;
+    display: flex;
+    margin: 5px 0px;
+}
+#accueil-left form input {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 5px 15px;
+    width: 80%;
+    height: 35px;
+}
+#accueil-left form button{
+    width: 10%;
+    min-width: 35px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 35px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#accueil-left form button i{
+    font-size: 20px;
+    color: #000;
+}
+#accueil-left form button i:hover{
+    color: var(--blue1);
+}
+
+#liste-contacts{
+    max-height: 65vh;
+    overflow: auto;
+    z-index: 1000;
+}
+#liste-contacts a{
+    text-decoration: none;
+}
+
 .contacts{
     display: flex;
-    min-height: 50px;
-    margin: 10px 0px;
+    align-items: center;
+    margin: 15px 0px;
 }
 .contacts img{
     margin-right: 10px;
 }
+.contacts p{
+    color: #000;
+    word-break: break-word;
+}
+
 #btn-contact{
     height: 30px;
     width: 30px;
@@ -137,6 +176,8 @@ body #container-accueil #accueil-right{
 }
 
 .no-get{
+    display: flex;
+    align-items: center;
     width: 60vw;
     max-width: 100%;
     height: 100%;
@@ -153,9 +194,11 @@ body #container-accueil #accueil-right{
 
 .reseau-header{
     display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 .reseau-header img{
-    margin: 0px 10px 10px 0px;
+    margin-right: 10px;
 }
 
 .reseau-content{
@@ -180,20 +223,17 @@ body #container-accueil #accueil-right{
     max-width: 80%;
     padding: 5px;
     margin: 3px;
-    border-radius: 15px;
+    border-radius: 10px;
     text-align: center;
     word-break: break-word;
 }
 .envoye p{
     background: linear-gradient(0.45turn, rgba(46, 255, 255, 47%), rgba(37, 95, 144, 58%));
-    box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, 30%);
     border-bottom-right-radius: 0px;
 }
 .recus p{
     background: linear-gradient(0.45turn, rgba(255, 255, 255, 35%), rgba(135, 134, 134, 50%));
-    box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, 30%);
     border-bottom-left-radius: 0px;
-
 }
 
 .reseau-footer{
@@ -203,19 +243,48 @@ body #container-accueil #accueil-right{
 }
 .reseau-footer form{
     display: flex;
+    justify-content: space-between;
 }
-.reseau-footer form input{
+.reseau-footer form #form1{
+    width: 100%;
+    display: flex;
+}
+.reseau-footer form #form1 input{
     width: 80%;
-    border-radius: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     padding-left: 3px;
+    padding: 5px 15px;
+    border: none;
+    outline: none;
+    height: 35px;
 }
-.reseau-footer form button{
-    width: 10%;
-    border-radius: 10px;
+.reseau-footer form #form1 button{
+    background-color: #fff;
+    padding-right: 15px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border: none;
+    outline: none;
+    height: 35px;
+    display: flex;
+    align-items: center;
 }
+.reseau-footer form #form1 button:hover{
+    color: var(--blue1);
+}
+
 .reseau-footer form button#signaler{
+    width: 50px;
     background-color: rgb(189, 52, 52);
     color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    transition: 0.5s ease-in-out background;
+}
+.reseau-footer form button#signaler:hover{
+    background: rgb(158, 44, 44);
 }
 
 .warn-message-background{
@@ -228,17 +297,48 @@ body #container-accueil #accueil-right{
     align-items: center;
 }
 .warn-message-background .warn-message{
-        background-color: #fff;
-        padding: 10px;
+    background-color: #fff;
+    padding: 20px;
+    width: 30%;
+    min-width: 15%;
 }
-.warn-message-background .warn-message i{
+.warn-message-background .warn-message .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.warn-message-background .warn-message .header p{
+    font-size: 20px;
+}
+.warn-message-background .warn-message .header i{
+    font-size: 20px;
     cursor: pointer;
 }
-.warn-message-background .warn-message table, .warn-message-background .warn-message th, .warn-message-background .warn-message tr, .warn-message-background .warn-message td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 10px;
+.warn-message-background .warn-message .header i:hover{
+    color: red;
 }
+.warn-message-background .warn-message hr{
+    margin: 10px 0px;
+}
+.warn-message-background .warn-message table{
+    width: 100%;
+}
+.warn-message-background .warn-message tr td{
+    border: 2px solid #000;
+    border-collapse: collapse;
+    padding: 10px 15px;
+}
+.warn-message-background .warn-message tr td button{
+    background-color: #fff;
+    border: none;
+    outline: none;
+    color: rgb(184, 30, 30);
+}
+.warn-message-background .warn-message tr td:nth-last-child(-n+1){
+    display: flex;
+    justify-content: center;
+}
+
 
 /* responsive */
 @media screen and (max-width: 1100px){

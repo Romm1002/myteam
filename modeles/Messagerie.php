@@ -32,6 +32,9 @@ class Messagerie extends Modele{
     public function getEnvoyeur(){
         return $this->envoyeur;
     }
+    public function getHeure(){
+        return $this->heure;
+    }
  
     // Récupération des informations du contact séléctionné
     public function recuperationInformationsContact($idAvec){

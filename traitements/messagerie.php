@@ -26,5 +26,5 @@ if(!empty($_POST["newMessage"])){
 
 // Permet d'insérer en BDD les messages signalés
 if(!empty($_POST["contenuMessage"])){
-    $Messagerie->signalerMessage($_POST["idMessage"], $_POST["contenuMessage"], 0, $_SESSION["idUtilisateur"]);
+    $Messagerie->signalerMessage($_POST["idMessage"], $_POST["contenuMessage"], 0, $_SESSION["idUtilisateur"], $_POST["idReceveur"]);
 }

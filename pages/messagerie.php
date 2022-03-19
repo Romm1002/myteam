@@ -4,28 +4,35 @@ require_once "../traitements/notConnected.php";
 require_once "../traitements/redirection_first_connexion.php";
 require_once "../traitements/messagerie.php";
 require_once "header.php";
-
 ?>
+
 <head>
     <link rel="stylesheet" href="../pages/styles/styleMessagerie.css">
 </head>
+
 <body>
     <main>
         <div class="circle1"></div>
         <div class="circle2"></div>
         
         <div id="container-accueil">
+            <!-- Reponsive -->
             <div id="block" onclick="afficherContacts()"></div>
 
             <div id="accueil-left">
-                <a href="accueil.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
+                <!-- retour -->
+                <a id="lien_retour" href="accueil.php">
+                    <i class="bi bi-arrow-left-short"></i>
+                </a>
+
                 <!-- fonction recherche -->
                 <form method="POST">
-                    <div>
-                        <input type="text" name="filtreRecherche" placeholder="Rechercher...">
-                    </div>
-                    <button type="submit">&#10004;</button>
+                    <input type="text" name="filtreRecherche" placeholder="Rechercher...">
+                    <button type="submit">
+                        <i class="bi bi-check2"></i>
+                    </button>
                 </form>
+
                 <!-- liste des contacts -->
                 <div id="liste-contacts">
                 <?php
@@ -34,7 +41,17 @@ require_once "header.php";
                         <a href="messagerie.php?avec=<?=$contact->getId();?>#bottom">
                             <div class="contacts">
                                 <img src="<?=$contact->getPhotoProfil();?>" alt="Photo de profil" width="40" height="40">
-                                <p><?=htmlspecialchars($contact->getPrenom()) . " " . htmlspecialchars($contact->getNom());?></p>
+                                <?php
+                                if(strlen($contact->getPrenom() . " " . $contact->getNom()) >= 20){
+                                    ?>
+                                    <p title="<?=$contact->getPrenom() . " " . $contact->getNom();?>"><?=str_replace(substr($contact->getPrenom() . " " . $contact->getNom(), 14), "...", $contact->getPrenom() . " " . $contact->getNom());?></p>
+                                    <?php
+                                }else{
+                                    ?>
+                                    <p title="<?=$contact->getPrenom() . " " . $contact->getNom();?>"><?=htmlspecialchars($contact->getPrenom()) . " " . htmlspecialchars($contact->getNom());?></p>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </a>
                         <?php
@@ -83,8 +100,10 @@ require_once "header.php";
 
                         <div class="reseau-footer">
                             <form method="POST">
-                                <input type="text" name="newMessage" placeholder="Votre message...">
-                                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                                <div id="form1">
+                                    <input type="text" name="newMessage" placeholder="Votre message...">
+                                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                                </div>
                                 <button type="button" id="signaler" title="Signaler un message" onclick="open_warn_message()"><i class="fas fa-exclamation-circle"></i></button>
                             </form>
                         </div>
@@ -99,11 +118,14 @@ require_once "header.php";
 
     <div class="warn-message-background" id="warn-message-background" style="display: none;">
         <div class="warn-message">
-        <i class="fas fa-times" onclick="close_menu_signaler()"></i>
-            <table>
-                <th>Message</th>
-                <th>Action</th>
+            <div class="header">
+                <p>Signaler un message</p>
+                <i class="fas fa-times" onclick="close_menu_signaler()"></i>
+            </div>
 
+            <hr>
+
+            <table>
                 <?php
                 foreach($conversation as $message){
                     if($message->getIdUtilisateur() == $utilisateur->getId()){
@@ -116,6 +138,7 @@ require_once "header.php";
                                 <?=htmlspecialchars($message->getContenu());?>
                                 <input type="hidden" name="contenuMessage" value="<?=$message->getContenu();?>">
                                 <input type="hidden" name="idMessage" value="<?=$message->getId();?>">
+                                <input type="hidden" name="idReceveur" value="<?=$_GET["avec"];?>">
                             </td>
                             <td>
                                 <button type="submit" name="signaler" value="1">Signaler</button>
