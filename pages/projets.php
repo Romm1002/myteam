@@ -205,7 +205,7 @@ if(isset($_GET["error"])){
         case 1:
             ?>
             <div class="alert alert-danger" style="position: absolute; top: 50px">
-                La tâche ne vous appartient pas.
+                La tâche ne vous appartient pas ou la tâche parent associé n'est pas terminée.
             </div>
             <?php
             break;
