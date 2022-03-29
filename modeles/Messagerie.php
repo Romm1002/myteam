@@ -92,16 +92,16 @@ class Messagerie extends Modele{
         }
     }
 
-    /**
-     * Set the value of idUtilisateur
-     *
-     * @return  self
-     */ 
-    public function setIdUtilisateur($idUtilisateur)
-    {
-        $this->idUtilisateur = $idUtilisateur;
+    // /**
+    //  * Set the value of idUtilisateur
+    //  *
+    //  * @return  self
+    //  */ 
+    // public function setIdUtilisateur($idUtilisateur)
+    // {
+    //     $this->idUtilisateur = $idUtilisateur;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
 ?>

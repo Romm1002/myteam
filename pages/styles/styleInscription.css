@@ -83,7 +83,6 @@ body .container-inscription .inscription-content form .form-ligne label, body .c
     font-weight: 500;
 }
 body .container-inscription .inscription-content form .form-ligne input, body .container-inscription .inscription-content form .form-ligne-solo input{
-    min-width: 200px;
     width: 100%;
     max-width: 100%;
     height: 38px;
@@ -159,20 +158,11 @@ body .container-inscription .inscription-footer button{
 
     body .container-inscription{
         width: 75%;
-        height: 75%;
         padding: 20px;
     }
 
     body .container-inscription .inscription-header h1{
         font-size: 25px;
-    }
-
-    body .container-inscription .inscription-content form .form-ligne{
-        flex-direction: column;
-    }
-
-    body .container-inscription .inscription-content form .form-ligne input, body .container-inscription .inscription-content form .form-ligne-solo input{
-        width: 200%;
     }
 
     body .container-inscription .inscription-content form .form-ligne img#mdp1{

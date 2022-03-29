@@ -4,16 +4,10 @@ class Utilisateurs extends Modele{
     private $idUtilisateur;
     private $nom;
     private $prenom;
-    private $mdp;
-    private $dateNaiss;
     private $email;
-    private $idposte;
     private $photoProfil;
     private $poste;
     private $grade;
-    private $bool;
-    private $token;
-    private $date;
     private $ip;
 
     public function __construct($id = null, $nom = null, $prenom = null, $dateNaiss = null, $email = null, $photoProfil = null, $poste = null, $grade = null)
