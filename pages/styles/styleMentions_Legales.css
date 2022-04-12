@@ -21,28 +21,45 @@ p{
 body{
     background: linear-gradient(to left, var(--blue1) 50%, var(--blue2));
     width: 100%;
-    height: auto;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-main{
-    width: 100%;
-    max-width: 1500px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-body img#logoMYTeam{
+img{
     position: absolute;
-    top: 5%;
+    top: 1%;
     left: 3%;
+    cursor: pointer;
 }
 
-body .circle1, .circle2{
+.block{
+    margin: 80px 0px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    padding: 30px 50px;
+    max-width: 900px;
+}
+.block a{
+    text-decoration: none;
+    color: #fff;
+}
+.block hr{
+    height: 2px;
+    background-color: #fff;
+}
+.block .titre{
+    text-align: center;
+}
+.block .bt{
+    text-align: center;
+    margin: 50px 0;
+}
+.block .bt p{
+    font-size: 16px;
+}
+/* body .circle1, .circle2{
     background: white;
     background: linear-gradient(to right bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .3));
     height: 10rem;
@@ -57,8 +74,9 @@ body .circle1{
 body .circle2{
     bottom: 5%;
     left: 18%;
-}
-.mentions_legales{
+} */
+
+/* .mentions_legales{
     width: 50%;
     min-height: 75vh;
     max-height: 75vh;
@@ -145,4 +163,4 @@ body .mentions_legales .texte p{
     .mentions_legales{
         width: 90%;
     }
-}
+} */

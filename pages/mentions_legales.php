@@ -11,207 +11,133 @@ require_once "header.php";
 </head>
 
 <body>
-    <main>
-        <img id="logoMYTeam" src="images/logoMYTEAM/logo.svg" alt="Logo MYTeam">
-
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-
-        <?php
-        if (empty($_GET)) {
-        ?>
-            <div class="mentions_legales">
-                <div>
-                    <a href="accueil.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
-                </div>
-                <div class="title">
-                    <h1>
-                        MENTIONS LÉGALES
-                    </h1>
-                </div>
-
-                <div class="zones">
-                    <div class="zone">
-                        <div class="illustration">
-                            <img src="images/mentions_legales/img1.png" alt="Image 1">
-                        </div>
-                        <div class="texte">Mes donn&#233es personelles.</div>
-                        <div class="action">
-                            <a href="mentions_legales.php?ml=dp">></a>
-                        </div>
-                    </div>
-
-                    <div class="zone">
-                        <div class="illustration">
-                            <img src="images/mentions_legales/img2.png" alt="Image 2">
-                        </div>
-                        <div class="texte">Pourquoi MYTeam collecte mes informations ?</div>
-                        <div class="action">
-                            <a href="mentions_legales.php?ml=pourquoi">></a>
-                        </div>
-                    </div>
-                    <div class="zone">
-                        <div class="illustration">
-                            <img src="images/mentions_legales/img3.png" alt="Image 3">
-                        </div>
-                        <div class="texte">Quels moyens sont utilis&#233s pour collecter mes donn&#233es ?</div>
-                        <div class="action">
-                            <a href="mentions_legales.php?ml=moyens">></a>
-                        </div>
-                    </div>
-                    <div class="zone">
-                        <div class="illustration">
-                            <img src="images/mentions_legales/img4.png" alt="Image 4">
-                        </div>
-                        <div class="texte">Que deviennent mes donn&#233es ?</div>
-                        <div class="action">
-                            <a href="mentions_legales.php?ml=dp2">></a>
-                        </div>
-                    </div>
-                    <div class="zone">
-                        <div class="illustration">
-                            <img src="images/mentions_legales/img5.png" alt="Image 5">
-                        </div>
-                        <div class="texte">Quels sont mes droits vis-&#224-vis de mes donn&#233es ?</div>
-                        <div class="action">
-                            <a href="mentions_legales.php?ml=droits">></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-        }
-
-        if (!empty($_GET)) {
-            switch ($_GET["ml"]) {
-                case "dp":
-            ?>
-                    <div class="mentions_legales" style="padding: 0px 30px;">
-                        <a href="mentions_legales.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
-                        <div class="title">
-                            <h1>Mes donn&#233es personnelles.</h1>
-                        </div>
-
-                        <div class="texte">
-                            <h1>Qu&#39est-ce qu&#39une donn&#233e personnelle ?</h1>
-                            <p>Une donn&#233e personnelle est toute information se rapportant &#38 une personne physique identifi&#233e ou identifiable. Mais, parce qu’elles concernent des personnes, celles-ci doivent en conserver la maîtrise.</p>
-                        </div>
-                        <div class="texte">
-                            <h1>Quelles sont mes donn&#233es personnelles collect&#233es ?</h1>
-                            <p>MYTeam peut &#234tre amen&#233 &#38 collecter vos nom, pr&#233nom, adresse email, mot de passe ainsi que vos date de naissance.</p>
-                        </div>
-                        <div class="texte">
-                            <h1>Qui est responsable du traitement sur mes donn&#233es ?</h1>
-                            <p>Le responsable de traitement est la personne, l’autorit&#233 publique ou l’organisme qui d&#233termine les finalit&#233s c’est-&#38-dire &#38 quoi servent les donn&#233es et les moyens.</p>
-                            <p>Romain Chaumont est l&#39unique responsable de traitement de MYTeam.</p>
-                        </div>
-                    </div>
-                <?php
-                    break;
-
-                case "pourquoi":
-                ?>
-                    <div class="mentions_legales" style="padding: 0px 30px;">
-                        <a href="mentions_legales.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
-                        <div class="title">
-                            <h1>Pourquoi MYTeam collecte mes informations ?</h1>
-                        </div>
-
-                        <div class="texte">
-                            <h1>Identit&#233 des personnes</h1>
-                            <p>Nom, pr&#233nom, adresse de courrier &#233lectronique, date de naissance, code interne de traitement permettant l’identification du client.</p>
-                            <p>Ces donn&#233es seront conserv&#233es pendant 3 ans apres le dernier contact ou la fin de la relation professionelle.</p>
-                        </div>
-                    </div>
-                <?php
-                    break;
-
-                case "moyens":
-                ?>
-                    <div class="mentions_legales" style="padding: 0px 30px;">
-                        <a href="mentions_legales.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
-                        <div class="title">
-                            <h1>Quels moyens sont utilis&#233s pour collecter mes donn&#233es ?</h1>
-                        </div>
-
-                        <div class="texte">
-                            <h1>Sur le site MYTeam</h1>
-                            <p>Sur notre site, par le biais de nos formulaires en ligne, vous allez &#234tre amen&#233 &#38 nous fournir des informations. Une information sur vos droits relatifs &#38 la loi informatique et libert&#233 est pr&#233cis&#233e sur chaque formulaire.</p>
-                        </div>
-                    </div>
-                <?php
-                    break;
-
-                case "dp2":
-                ?>
-                    <div class="mentions_legales" style="padding: 0px 30px;">
-                        <a href="mentions_legales.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
-                        <div class="title">
-                            <h1>Que deviennent mes donn&#233es ?</h1>
-                        </div>
-
-                        <div class="texte">
-                            <h1>S&#233curit&#233</h1>
-                            <p>MYTeam est attentif &#38 la s&#233curit&#233 de vos donn&#233es personnelles et met en œuvre toutes les mesures techniques et organisationnelles appropri&#233es au regard de la nature, de la port&#233e et du contexte des donn&#233es que vous nous communiquez.</p>
-                            <p>Ces mesures visent &#38 pr&#233server la s&#233curit&#233 de vos donn&#233es et emp&#234cher toute destruction, perte, alt&#233ration, divulgation, intrusion ou acc&#xE8s non autoris&#233 &#38 ces donn&#233es, de mani&#xE8re accidentelle ou illicite.</p>
-                            <p>Vos donn&#233es personnelles sont stock&#233es sur des serveurs s&#233curis&#233s, accessibles &#38 un nombre limit&#233 de personnes ayant des droits d&#39acc&#xE8s sp&#233cifiques &#38 ces syst&#xE8mes.</p>
-                        </div>
-                    </div>
-                <?php
-                    break;
-
-                case "droits":
-                ?>
-                    <div class="mentions_legales" style="padding: 0px 30px;">
-                        <a href="mentions_legales.php"><i class="fas fa-arrow-circle-left"></i> Retour</a>
-                        <div class="title">
-                            <h1>Quels sont mes droits vis-&#224-vis de mes donn&#233es ?</h1>
-                        </div>
-
-                        <div class="texte">
-                            <h1>D&#39un droit d&#39acc&#xE8s :</h1>
-                            <p>Le droit pour toute personne d&#39obtenir la communication de toutes les informations la concernant d&#233tenues par MYTeam.</p>
-                        </div>
-                        <div class="texte">
-                            <h1>D&#39un droit de rectification :</h1>
-                            <p>Le droit pour toute personne d&#39obtenir la rectification des informations inexactes la concernant d&#233tenues par MYTeam.</p>
-                        </div>
-                        <div class="texte">
-                            <h1>D&#39un droit d&#39opposition :</h1>
-                            <p>Le droit d&#39opposition s&#39exerce soit au moment de la collecte d&#39informations, soit plus tard, en s&#39adressant au responsable du fichier. Il se d&#233cline en deux possibilit&#233s :</p>
-                            <p>
-                                Le droit pour toute personne &#38 s&#39opposer, pour des motifs l&#233gitimes, &#38 figurer dans un fichier. C’est le droit de suppression.<br />
-                                Le droit pour toute personne &#38 s’opposer, pour des motifs l&#233gitimes, &#38 un traitement bas&#233 sur l’int&#233r&#234t l&#233gitime de MYTeam.<br />
-                                En mati&#xE8re de prospection commerciale, toute personne peut s&#39opposer &#38 tout moment &#38 ce que ses donn&#233es soient diffus&#233es, transmises ou conserv&#233es. Ce droit peut s&#39exercer sans avoir &#38 justifier d&#39un motif l&#233gitime.
-                            </p>
-                        </div>
-                        <div class="texte">
-                            <h1>D&#39un droit de d&#233finir des directives relatives au sort de mes donn&#233es &#38 caract&#xE8re personnel apr&#xE8s mon d&#233c&#xE8s.</h1>
-                            <p>En l&#39absence de directives ou de mention contraire dans lesdites directives, les h&#233ritiers de la personne concern&#233e peuvent apr&#xE8s son d&#233c&#xE8s exercer les droits sur les donn&#233es personnelles du d&#233funt.</p>
-                        </div>
-                        <div class="texte">
-                            <h1>D&#39un droit de limitation du traitement.</h1>
-                            <p>C&#39est le droit de faire suspendre un traitement le temps qu&#39une v&#233rification puisse avoir lieu (v&#233rifier l&#39exactitude des donn&#233es personnelles, v&#233rifier si les motifs l&#233gitimes donn&#233s par la personne pr&#233valent sur ceux du responsable de traitement dans le cas d&#39une demande d&#39opposition etc.)</p>
-                        </div>
-                        <div class="texte">
-                            <h1>D&#39un droit de portabilit&#233.</h1>
-                            <p>La personne a le droit d&#39obtenir que ses donn&#233es &#38 caract&#xE8re personnel soient transmises dans un format structur&#233</p>
-                            <p>
-                                A elle-m&#234me<br />
-                                Directement d&#39un responsable du traitement &#38 un autre, lorsque cela est techniquement possible
-                            </p>
-                        </div>
-                        <div class="texte">
-                            <h1>D&#39un droit d&#39introduire une r&#233clamation aupr&#xE8s d&#39une autorit&#233 de contrôle.</h1>
-                            <p>Pour plus d&#39informations concernant l&#39exercice de vos droits : <br /> <a href="https://www.cnil.fr/fr/comprendre-vos-droits" target="_blank" rel="noreferrer noopener">https://www.cnil.fr/fr/comprendre-vos-droits</a></p>
-                        </div>
-                    </div>
-        <?php
-                    break;
-            }
-        }
-        ?>
-    </main>
+    <img src="images/logoMYTEAM/logo.svg" alt="Logo MYTeam" onclick="window.location = 'index.php'">
+    <div class="block">
+        <div class="titre b0">
+            <h1>Conditions générales d'utilisation</h1>
+        </div>
+        <hr>
+        <div class="bt b1">
+            <h2>Article 1 : Objet</h2>
+            <p>
+                Les présentes CGU ou Conditions Générales d’Utilisation encadrent juridiquement l’utilisation des services du site <u>www.myteam.ipssi-sio.fr</u> (ci-après dénommé « Stories Helper »).
+                <br>
+                Constituant le contrat entre la société La Stories Helper, l’Utilisateur, l’accès au site doit être précédé de l’acceptation de ces CGU. L’accès à cette plateforme signifie l’acceptation des présentes CGU.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b2">
+            <h2>Article 2 : Mentions légales</h2>
+            <p>
+            L’édition du site <u>www.myteam.ipssi-sio.fr</u> est assurée par la société MYTeam EURL inscrite au RCS sous le numéro 685 564 857, dont le siège social est localisé au 15 2 bis avenue de Paris, 78000, Versailles, France Métropolitaine.
+            <br><br>
+            L’hébergeur du site <u>www.myteam.ipssi-sio.fr</u> est la société OVH, dont le siège social est localisé au 2 rue Kellermann, 59100 Roubaix, France.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b3">
+            <h2>Article 3 : Accès au site</h2>
+            <p>
+            Le site <u>www.myteam.ipssi-sio.fr</u> permet d’accéder gratuitement aux services suivants :
+            <br><br>
+            Discussions générales et privés en temps réel.
+            Consulter ses projets en tant qu'utilisateur et à tous les projets en tant qu'administrateur.
+            Planification de ratio et de tâches.
+            Le site est accessible gratuitement depuis n’importe où par tout utilisateur disposant d’un accès à Internet. Tous les frais nécessaires pour l’accès aux services (matériel informatique, connexion Internet…) sont à la charge de l’utilisateur.
+            <br><br>
+            L’accès aux services dédiés aux membres s’effectue à l’aide d’un identifiant et d’un mot de passe.
+            <br><br>
+            Pour des raisons de maintenance ou autres, l’accès au site peut être interrompu ou suspendu par l’éditeur sans préavis ni justification.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b4">
+            <h2>Article 4 : Collecte des données</h2>
+            <p>
+            Pour la création du compte de l’Utilisateur, la collecte des informations au moment de l’inscription sur le site est nécessaire et obligatoire. Conformément à la loi n°78-17 du 6 janvier relative à l’informatique, aux fichiers et aux libertés, la collecte et le traitement d’informations personnelles s’effectuent dans le respect de la vie privée.
+            <br><br>
+            Suivant la loi Informatique et Libertés en date du 6 janvier 1978, articles 39 et 40, l’Utilisateur dispose du droit d’accéder, de rectifier, de supprimer et d’opposer ses données personnelles. L’exercice de ce droit s’effectue par :
+            <br><br>
+            Les informations liées à l'organisation concernée.
+            Son profil utilisateur.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b5">
+            <h2>Article 5 : Propriété intellectuelle</h2>
+            <p>
+            Les marques, logos ainsi que les contenus du site <u>www.myteam.ipssi-sio.fr</u> (illustrations graphiques, textes…) sont protégés par le Code de la propriété intellectuelle et par le droit d’auteur.
+            <br><br>
+            La reproduction et la copie des contenus par l’Utilisateur requièrent une autorisation préalable du site. Dans ce cas, toute utilisation à des usages commerciaux ou à des fins publicitaires est proscrite.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b6">
+            <h2>Article 6 : Responsabilité</h2>
+            <p>
+            Bien que les informations publiées sur le site soient réputées fiables, le site se réserve la faculté d’une non-garantie de la fiabilité des sources. Les informations diffusées sur le site <u>www.myteam.ipssi-sio.fr</u> sont présentées à titre purement informatif et sont sans valeur contractuelle. En dépit des mises à jour régulières, la responsabilité du site ne peut être engagée en cas de modification des dispositions administratives et juridiques apparaissant après la publication. Il en est de même pour l’utilisation et l’interprétation des informations communiquées sur la plateforme.
+            <br><br>
+            Le site décline toute responsabilité concernant les éventuels virus pouvant infecter le matériel informatique de l’Utilisateur après l’utilisation ou l’accès à ce site.
+            <br><br>
+            Le site ne peut être tenu pour responsable en cas de force majeure ou du fait imprévisible et insurmontable d’un tiers. La garantie totale de la sécurité et la confidentialité des données n’est pas assurée par le site.
+            <br><br>
+            Cependant, le site s’engage à mettre en œuvre toutes les méthodes requises pour le faire au mieux.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b7">
+            <h2>Article 7 : Liens hypertextes</h2>
+            <p>
+            Le site peut être constitué de liens hypertextes. En cliquant sur ces derniers, l’Utilisateur sortira de la plateforme. Cette dernière n’a pas de contrôle et ne peut pas être tenue responsable du contenu des pages web relatives à ces liens.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b8">
+            <h2>Article 8 : Cookies</h2>
+            <p>
+            Lors des visites sur le site, l’installation automatique d’un cookie sur le logiciel de navigation de l’Utilisateur peut survenir.
+            <br><br>
+            Les cookies correspondent à de petits fichiers déposés temporairement sur le disque dur de l’ordinateur de l’Utilisateur. Ces cookies sont nécessaires pour assurer l’accessibilité et la navigation sur le site. Ces fichiers ne comportent pas d’informations personnelles et ne peuvent pas être utilisés pour l’identification d’une personne.
+            <br><br>
+            L’information présente dans les cookies est utilisée pour améliorer les performances de navigation sur le site <u>www.storieshelper.ipssi-sio.fr</u>.
+            <br><br>
+            En naviguant sur le site, l’Utilisateur accepte les cookies. Leur désactivation peut s’effectuer via les paramètres du logiciel de navigation. 
+            </p>
+        </div>
+        <hr>
+        <div class="bt b9">
+            <h2>Article 9 : Publication par l'Utilisateur</h2>
+            <p>
+            Le site MYTeam permet aux membres de publier des commentaires.
+            <br><br>
+            Dans ses publications, le membre est tenu de respecter les règles de droit en vigueur.
+            <br><br>
+            Le site dispose du droit d’exercer une modération à priori sur les publications et peut refuser leur mise en ligne sans avoir à fournir de justification.
+            <br><br>
+            Le membre garde l’intégralité de ses droits de propriété intellectuelle. Toutefois, toute publication sur le site implique la délégation du droit non exclusif et gratuit à la société éditrice de représenter, reproduire, modifier, adapter, distribuer et diffuser la publication n’importe où et sur n’importe quel support pour la durée de la propriété intellectuelle. Cela peut se faire directement ou par l’intermédiaire d’un tiers autorisé. Cela concerne notamment le droit d’utilisation de la publication sur le web et sur les réseaux de téléphonie mobile.
+            <br><br>
+            À chaque utilisation, l’éditeur s’engage à mentionner le nom du membre à proximité de la publication.
+            <br><br>
+            L’Utilisateur est tenu responsable de tout contenu qu’il met en ligne. L’Utilisateur s’engage à ne pas publier de contenus susceptibles de porter atteinte aux intérêts de tierces personnes. Toutes procédures engagées en justice par un tiers lésé à l’encontre du site devront être prises en charge par l’Utilisateur.
+            <br><br>
+            La suppression ou la modification par le site du contenu de l’Utilisateur peut s’effectuer à tout moment, pour n’importe quelle raison et sans préavis.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b10">
+            <h2>Article 10 : Durée du contrat</h2>
+            <p>
+            Le présent contrat est valable pour une durée indéterminée. Le début de l’utilisation des services du site marque l’application du contrat à l’égard de l’Utilisateur.
+            </p>
+        </div>
+        <hr>
+        <div class="bt b11">
+            <h2>Article 11 : Droit applicable et juridiction compétente</h2>
+            <p>
+            Le présent contrat est soumis à la législation française. L’absence de résolution à l’amiable des cas de litige entre les parties implique le recours aux tribunaux français compétents pour régler le contentieux.
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>
